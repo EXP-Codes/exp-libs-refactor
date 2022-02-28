@@ -14,8 +14,8 @@ import java.security.SecureRandom;
  */
 public final class PDFUtils {
 
-	// 此处有命令注入问题，待修改
-	// 最后一个 %s 可以通过 ; 执行多条命令被命令行注入
+    // 此处有命令注入问题，待修改
+    // 最后一个 %s 可以通过 ; 执行多条命令被命令行注入
     private static final String URL2PDF_COMMAND_TEMPLATE = "mkdir -p /tmp/pdf && "
             + "google-chrome --headless --disable-gpu --print-to-pdf=/tmp/pdf/%s --hide-scrollbars '%s'";
 

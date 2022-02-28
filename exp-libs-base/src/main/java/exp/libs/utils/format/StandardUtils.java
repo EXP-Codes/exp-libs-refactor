@@ -13,68 +13,68 @@ package exp.libs.utils.format;
  */
 public final class StandardUtils {
 
-	/** 私有化构造函数. */
-	private StandardUtils() {}
-	
-	/**
-	 * <PRE>
-	 * 根据实际需要的容量，返回构造Map的标准容量(使得Map的搜索性能最优)。
-	 * 	返回值为大于 actualSize 的 2^n (不超过2^30 -1, 即int最大值)
-	 * </PRE>
-	 * 
-	 * @param actualSize 实际容量
-	 * @return 标准容量
-	 */
-	public static int getMapSize(int actualSize) {
-		boolean isGet = false;
-		int size = 2;
-		
-		for(int i = 1; i < 30; i++) {
-			size = size<<1;
-			if(size >= actualSize) {
-				isGet = true;
-				break;
-			}
-		}
-		
-		if(isGet == false) {
-			size = actualSize;
-		}
-		return size;
-	}
-	
-	/**
-	 * <PRE>
-	 * 把dos内容转换为符合unix标准内容。
-	 * 	(实则上不是dos也能转换为unix)
-	 * </PRE>
-	 * 
-	 * @param dos dos内容
-	 * @return 符合unix标准内容
-	 */
-	public static String dos2unix(String dos) {
-		String unix = "";
-		if(dos != null) {
-			unix = dos.replace("\r", "").replace('\\', '/');
-		}
-		return unix;
-	}
-	
-	/**
-	 * <PRE>
-	 * unix内容转换为符合dos标准内容。
-	 * 	(实则上不是unix也能转换为dos)
-	 * </PRE>
-	 * 
-	 * @param unix unix内容
-	 * @return 符合dos标准内容
-	 */
-	public static String unix2dos(String unix) {
-		String dos = "";
-		if(unix != null) {
-			dos = unix.replace("\r", "").replace("\n", "\r\n").replace('/', '\\');
-		}
-		return dos;
-	}
-	
+    /** 私有化构造函数. */
+    private StandardUtils() {}
+    
+    /**
+     * <PRE>
+     * 根据实际需要的容量，返回构造Map的标准容量(使得Map的搜索性能最优)。
+     *     返回值为大于 actualSize 的 2^n (不超过2^30 -1, 即int最大值)
+     * </PRE>
+     * 
+     * @param actualSize 实际容量
+     * @return 标准容量
+     */
+    public static int getMapSize(int actualSize) {
+        boolean isGet = false;
+        int size = 2;
+        
+        for(int i = 1; i < 30; i++) {
+            size = size<<1;
+            if(size >= actualSize) {
+                isGet = true;
+                break;
+            }
+        }
+        
+        if(isGet == false) {
+            size = actualSize;
+        }
+        return size;
+    }
+    
+    /**
+     * <PRE>
+     * 把dos内容转换为符合unix标准内容。
+     *     (实则上不是dos也能转换为unix)
+     * </PRE>
+     * 
+     * @param dos dos内容
+     * @return 符合unix标准内容
+     */
+    public static String dos2unix(String dos) {
+        String unix = "";
+        if(dos != null) {
+            unix = dos.replace("\r", "").replace('\\', '/');
+        }
+        return unix;
+    }
+    
+    /**
+     * <PRE>
+     * unix内容转换为符合dos标准内容。
+     *     (实则上不是unix也能转换为dos)
+     * </PRE>
+     * 
+     * @param unix unix内容
+     * @return 符合dos标准内容
+     */
+    public static String unix2dos(String unix) {
+        String dos = "";
+        if(unix != null) {
+            dos = unix.replace("\r", "").replace("\n", "\r\n").replace('/', '\\');
+        }
+        return dos;
+    }
+    
 }
