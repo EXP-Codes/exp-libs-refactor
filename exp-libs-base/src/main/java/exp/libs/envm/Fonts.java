@@ -271,290 +271,290 @@ public enum Fonts {
     Lucida_Sans("Lucida Sans", "Lucida Sans"), 
 
     /** 字体: Lucida Sans Typewriter */
-	Lucida_Sans_Typewriter("Lucida Sans Typewriter", "Lucida Sans Typewriter"), 
+    Lucida_Sans_Typewriter("Lucida Sans Typewriter", "Lucida Sans Typewriter"), 
 
-	/** 字体: Lucida Sans Unicode */
-	Lucida_Sans_Unicode("Lucida Sans Unicode", "Lucida Sans Unicode"), 
+    /** 字体: Lucida Sans Unicode */
+    Lucida_Sans_Unicode("Lucida Sans Unicode", "Lucida Sans Unicode"), 
 
-	/** 字体: Malgun Gothic */
-	Malgun_Gothic("Malgun Gothic", "Malgun Gothic"), 
+    /** 字体: Malgun Gothic */
+    Malgun_Gothic("Malgun Gothic", "Malgun Gothic"), 
 
-	/** 字体: Mangal */
-	Mangal("Mangal", "Mangal"), 
+    /** 字体: Mangal */
+    Mangal("Mangal", "Mangal"), 
 
-	/** 字体: Marlett */
-	Marlett("Marlett", "Marlett"), 
+    /** 字体: Marlett */
+    Marlett("Marlett", "Marlett"), 
 
-	/** 字体: Meiryo */
-	Meiryo("Meiryo", "Meiryo"), 
+    /** 字体: Meiryo */
+    Meiryo("Meiryo", "Meiryo"), 
 
-	/** 字体: Meiryo UI */
-	Meiryo_UI("Meiryo UI", "Meiryo UI"), 
+    /** 字体: Meiryo UI */
+    Meiryo_UI("Meiryo UI", "Meiryo UI"), 
 
-	/** 字体: Microsoft Himalaya */
-	Microsoft_Himalaya("Microsoft Himalaya", "Microsoft Himalaya"), 
+    /** 字体: Microsoft Himalaya */
+    Microsoft_Himalaya("Microsoft Himalaya", "Microsoft Himalaya"), 
 
-	/** 字体: 微软正黑体 */
-	Microsoft_JhengHei("微软正黑体", "Microsoft JhengHei"), 
+    /** 字体: 微软正黑体 */
+    Microsoft_JhengHei("微软正黑体", "Microsoft JhengHei"), 
 
-	/** 字体: Microsoft New Tai Lue */
-	Microsoft_New_Tai_Lue("Microsoft New Tai Lue", "Microsoft New Tai Lue"), 
+    /** 字体: Microsoft New Tai Lue */
+    Microsoft_New_Tai_Lue("Microsoft New Tai Lue", "Microsoft New Tai Lue"), 
 
-	/** 字体: Microsoft PhagsPa */
-	Microsoft_PhagsPa("Microsoft PhagsPa", "Microsoft PhagsPa"), 
+    /** 字体: Microsoft PhagsPa */
+    Microsoft_PhagsPa("Microsoft PhagsPa", "Microsoft PhagsPa"), 
 
-	/** 字体: Microsoft Sans Serif */
-	Microsoft_Sans_Serif("Microsoft Sans Serif", "Microsoft Sans Serif"), 
+    /** 字体: Microsoft Sans Serif */
+    Microsoft_Sans_Serif("Microsoft Sans Serif", "Microsoft Sans Serif"), 
 
-	/** 字体: Microsoft Tai Le */
-	Microsoft_Tai_Le("Microsoft Tai Le", "Microsoft Tai Le"), 
+    /** 字体: Microsoft Tai Le */
+    Microsoft_Tai_Le("Microsoft Tai Le", "Microsoft Tai Le"), 
 
-	/** 字体: Microsoft Uighur */
-	Microsoft_Uighur("Microsoft Uighur", "Microsoft Uighur"), 
+    /** 字体: Microsoft Uighur */
+    Microsoft_Uighur("Microsoft Uighur", "Microsoft Uighur"), 
 
-	/** 字体: 微软雅黑 */
-	Microsoft_YaHei("微软雅黑", "Microsoft YaHei"), 
+    /** 字体: 微软雅黑 */
+    Microsoft_YaHei("微软雅黑", "Microsoft YaHei"), 
 
-	/** 字体: Microsoft Yi Baiti */
-	Microsoft_Yi_Baiti("Microsoft Yi Baiti", "Microsoft Yi Baiti"), 
+    /** 字体: Microsoft Yi Baiti */
+    Microsoft_Yi_Baiti("Microsoft Yi Baiti", "Microsoft Yi Baiti"), 
 
-	/** 字体: 细明体 */
-	MingLiU("细明体", "MingLiU"), 
+    /** 字体: 细明体 */
+    MingLiU("细明体", "MingLiU"), 
 
-	/** 字体: MingLiU-ExtB */
-	MingLiU_ExtB("MingLiU-ExtB", "MingLiU-ExtB"), 
+    /** 字体: MingLiU-ExtB */
+    MingLiU_ExtB("MingLiU-ExtB", "MingLiU-ExtB"), 
 
-	/** 字体: MingLiU_HKSCS */
-	MingLiU_HKSCS("MingLiU_HKSCS", "MingLiU_HKSCS"), 
+    /** 字体: MingLiU_HKSCS */
+    MingLiU_HKSCS("MingLiU_HKSCS", "MingLiU_HKSCS"), 
 
-	/** 字体: MingLiU_HKSCS-ExtB */
-	MingLiU_HKSCS_ExtB("MingLiU_HKSCS-ExtB", "MingLiU_HKSCS-ExtB"), 
+    /** 字体: MingLiU_HKSCS-ExtB */
+    MingLiU_HKSCS_ExtB("MingLiU_HKSCS-ExtB", "MingLiU_HKSCS-ExtB"), 
 
-	/** 字体: Miriam */
-	Miriam("Miriam", "Miriam"), 
+    /** 字体: Miriam */
+    Miriam("Miriam", "Miriam"), 
 
-	/** 字体: Miriam Fixed */
-	Miriam_Fixed("Miriam Fixed", "Miriam Fixed"), 
+    /** 字体: Miriam Fixed */
+    Miriam_Fixed("Miriam Fixed", "Miriam Fixed"), 
 
-	/** 字体: Mongolian Baiti */
-	Mongolian_Baiti("Mongolian Baiti", "Mongolian Baiti"), 
+    /** 字体: Mongolian Baiti */
+    Mongolian_Baiti("Mongolian Baiti", "Mongolian Baiti"), 
 
-	/** 字体: Monospaced */
-	Monospaced("Monospaced", "Monospaced"), 
+    /** 字体: Monospaced */
+    Monospaced("Monospaced", "Monospaced"), 
 
-	/** 字体: Monotype Corsiva */
-	Monotype_Corsiva("Monotype Corsiva", "Monotype Corsiva"), 
+    /** 字体: Monotype Corsiva */
+    Monotype_Corsiva("Monotype Corsiva", "Monotype Corsiva"), 
 
-	/** 字体: MoolBoran */
-	MoolBoran("MoolBoran", "MoolBoran"), 
+    /** 字体: MoolBoran */
+    MoolBoran("MoolBoran", "MoolBoran"), 
 
-	/** 字体: MS Gothic */
-	MS_Gothic("MS Gothic", "MS Gothic"), 
+    /** 字体: MS Gothic */
+    MS_Gothic("MS Gothic", "MS Gothic"), 
 
-	/** 字体: MS Mincho */
-	MS_Mincho("MS Mincho", "MS Mincho"), 
+    /** 字体: MS Mincho */
+    MS_Mincho("MS Mincho", "MS Mincho"), 
 
-	/** 字体: MS PGothic */
-	MS_PGothic("MS PGothic", "MS PGothic"), 
+    /** 字体: MS PGothic */
+    MS_PGothic("MS PGothic", "MS PGothic"), 
 
-	/** 字体: MS PMincho */
-	MS_PMincho("MS PMincho", "MS PMincho"), 
+    /** 字体: MS PMincho */
+    MS_PMincho("MS PMincho", "MS PMincho"), 
 
-	/** 字体: MS Reference Sans Serif */
-	MS_Reference_Sans_Serif("MS Reference Sans Serif", "MS Reference Sans Serif"), 
+    /** 字体: MS Reference Sans Serif */
+    MS_Reference_Sans_Serif("MS Reference Sans Serif", "MS Reference Sans Serif"), 
 
-	/** 字体: MS Reference Specialty */
-	MS_Reference_Specialty("MS Reference Specialty", "MS Reference Specialty"), 
+    /** 字体: MS Reference Specialty */
+    MS_Reference_Specialty("MS Reference Specialty", "MS Reference Specialty"), 
 
-	/** 字体: MS UI Gothic */
-	MS_UI_Gothic("MS UI Gothic", "MS UI Gothic"), 
+    /** 字体: MS UI Gothic */
+    MS_UI_Gothic("MS UI Gothic", "MS UI Gothic"), 
 
-	/** 字体: MT Extra */
-	MT_Extra("MT Extra", "MT Extra"), 
+    /** 字体: MT Extra */
+    MT_Extra("MT Extra", "MT Extra"), 
 
-	/** 字体: MV Boli */
-	MV_Boli("MV Boli", "MV Boli"), 
+    /** 字体: MV Boli */
+    MV_Boli("MV Boli", "MV Boli"), 
 
-	/** 字体: Narkisim */
-	Narkisim("Narkisim", "Narkisim"), 
+    /** 字体: Narkisim */
+    Narkisim("Narkisim", "Narkisim"), 
 
-	/** 字体: Nina */
-	Nina("Nina", "Nina"), 
+    /** 字体: Nina */
+    Nina("Nina", "Nina"), 
 
-	/** 字体: 新宋体 */
-	NSimSun("新宋体", "NSimSun"), 
+    /** 字体: 新宋体 */
+    NSimSun("新宋体", "NSimSun"), 
 
-	/** 字体: Nyala */
-	Nyala("Nyala", "Nyala"), 
+    /** 字体: Nyala */
+    Nyala("Nyala", "Nyala"), 
 
-	/** 字体: Palatino Linotype */
-	Palatino_Linotype("Palatino Linotype", "Palatino Linotype"), 
+    /** 字体: Palatino Linotype */
+    Palatino_Linotype("Palatino Linotype", "Palatino Linotype"), 
 
-	/** 字体: Plantagenet Cherokee */
-	Plantagenet_Cherokee("Plantagenet Cherokee", "Plantagenet Cherokee"), 
+    /** 字体: Plantagenet Cherokee */
+    Plantagenet_Cherokee("Plantagenet Cherokee", "Plantagenet Cherokee"), 
 
-	/** 字体: 新细明体 */
-	PMingLiU("新细明体", "PMingLiU"), 
+    /** 字体: 新细明体 */
+    PMingLiU("新细明体", "PMingLiU"), 
 
-	/** 字体: PMingLiU-ExtB */
-	PMingLiU_ExtB("PMingLiU-ExtB", "PMingLiU-ExtB"), 
+    /** 字体: PMingLiU-ExtB */
+    PMingLiU_ExtB("PMingLiU-ExtB", "PMingLiU-ExtB"), 
 
-	/** 字体: Raavi */
-	Raavi("Raavi", "Raavi"), 
+    /** 字体: Raavi */
+    Raavi("Raavi", "Raavi"), 
 
-	/** 字体: Rod */
-	Rod("Rod", "Rod"), 
+    /** 字体: Rod */
+    Rod("Rod", "Rod"), 
 
-	/** 字体: Sakkal Majalla */
-	Sakkal_Majalla("Sakkal Majalla", "Sakkal Majalla"), 
+    /** 字体: Sakkal Majalla */
+    Sakkal_Majalla("Sakkal Majalla", "Sakkal Majalla"), 
 
-	/** 字体: SansSerif */
-	SansSerif("SansSerif", "SansSerif"), 
+    /** 字体: SansSerif */
+    SansSerif("SansSerif", "SansSerif"), 
 
-	/** 字体: Segoe Condensed */
-	Segoe_Condensed("Segoe Condensed", "Segoe Condensed"), 
+    /** 字体: Segoe Condensed */
+    Segoe_Condensed("Segoe Condensed", "Segoe Condensed"), 
 
-	/** 字体: Segoe Print */
-	Segoe_Print("Segoe Print", "Segoe Print"), 
+    /** 字体: Segoe Print */
+    Segoe_Print("Segoe Print", "Segoe Print"), 
 
-	/** 字体: Segoe Script */
-	Segoe_Script("Segoe Script", "Segoe Script"), 
+    /** 字体: Segoe Script */
+    Segoe_Script("Segoe Script", "Segoe Script"), 
 
-	/** 字体: Segoe UI */
-	Segoe_UI("Segoe UI", "Segoe UI"), 
+    /** 字体: Segoe UI */
+    Segoe_UI("Segoe UI", "Segoe UI"), 
 
-	/** 字体: Segoe UI Light */
-	Segoe_UI_Light("Segoe UI Light", "Segoe UI Light"), 
+    /** 字体: Segoe UI Light */
+    Segoe_UI_Light("Segoe UI Light", "Segoe UI Light"), 
 
-	/** 字体: Segoe UI Semibold */
-	Segoe_UI_Semibold("Segoe UI Semibold", "Segoe UI Semibold"), 
+    /** 字体: Segoe UI Semibold */
+    Segoe_UI_Semibold("Segoe UI Semibold", "Segoe UI Semibold"), 
 
-	/** 字体: Segoe UI Symbol */
-	Segoe_UI_Symbol("Segoe UI Symbol", "Segoe UI Symbol"), 
+    /** 字体: Segoe UI Symbol */
+    Segoe_UI_Symbol("Segoe UI Symbol", "Segoe UI Symbol"), 
 
-	/** 字体: Serif */
-	Serif("Serif", "Serif"), 
+    /** 字体: Serif */
+    Serif("Serif", "Serif"), 
 
-	/** 字体: Shonar Bangla */
-	Shonar_Bangla("Shonar Bangla", "Shonar Bangla"), 
+    /** 字体: Shonar Bangla */
+    Shonar_Bangla("Shonar Bangla", "Shonar Bangla"), 
 
-	/** 字体: Shruti */
-	Shruti("Shruti", "Shruti"), 
+    /** 字体: Shruti */
+    Shruti("Shruti", "Shruti"), 
 
-	/** 字体: 黑体 */
-	SimHei("黑体", "SimHei"), 
+    /** 字体: 黑体 */
+    SimHei("黑体", "SimHei"), 
 
-	/** 字体: Simplified Arabic */
-	Simplified_Arabic("Simplified Arabic", "Simplified Arabic"), 
+    /** 字体: Simplified Arabic */
+    Simplified_Arabic("Simplified Arabic", "Simplified Arabic"), 
 
-	/** 字体: Simplified Arabic Fixed */
-	Simplified_Arabic_Fixed("Simplified Arabic Fixed", "Simplified Arabic Fixed"), 
+    /** 字体: Simplified Arabic Fixed */
+    Simplified_Arabic_Fixed("Simplified Arabic Fixed", "Simplified Arabic Fixed"), 
 
-	/** 字体: 宋体 */
-	SimSun("宋体", "SimSun"), 
+    /** 字体: 宋体 */
+    SimSun("宋体", "SimSun"), 
 
-	/** 字体: SimSun-ExtB */
-	SimSun_ExtB("SimSun-ExtB", "SimSun-ExtB"), 
+    /** 字体: SimSun-ExtB */
+    SimSun_ExtB("SimSun-ExtB", "SimSun-ExtB"), 
 
-	/** 字体: 华文彩云 */
-	STCaiyun("华文彩云", "STCaiyun"), 
+    /** 字体: 华文彩云 */
+    STCaiyun("华文彩云", "STCaiyun"), 
 
-	/** 字体: 华文仿宋 */
-	STFangsong("华文仿宋", "STFangsong"), 
+    /** 字体: 华文仿宋 */
+    STFangsong("华文仿宋", "STFangsong"), 
 
-	/** 字体: 华文黑体 */
-	STHeiti("华文黑体", "STHeiti"), 
+    /** 字体: 华文黑体 */
+    STHeiti("华文黑体", "STHeiti"), 
 
-	/** 字体: 华文细黑 */
-	STHeiti_Light("华文细黑", "STHeiti Light"), 
+    /** 字体: 华文细黑 */
+    STHeiti_Light("华文细黑", "STHeiti Light"), 
 
-	/** 字体: 华文琥珀 */
-	STHupo("华文琥珀", "STHupo"), 
+    /** 字体: 华文琥珀 */
+    STHupo("华文琥珀", "STHupo"), 
 
-	/** 字体: 华文楷体 */
-	STKaiti("华文楷体", "STKaiti"), 
+    /** 字体: 华文楷体 */
+    STKaiti("华文楷体", "STKaiti"), 
 
-	/** 字体: 华文隶书 */
-	STLiti("华文隶书", "STLiti"), 
+    /** 字体: 华文隶书 */
+    STLiti("华文隶书", "STLiti"), 
 
-	/** 字体: 华文宋体 */
-	STSong("华文宋体", "STSong"), 
+    /** 字体: 华文宋体 */
+    STSong("华文宋体", "STSong"), 
 
-	/** 字体: 华文细黑 */
-	STXihei("华文细黑", "STXihei"), 
+    /** 字体: 华文细黑 */
+    STXihei("华文细黑", "STXihei"), 
 
-	/** 字体: 华文行楷 */
-	STXingkai("华文行楷", "STXingkai"), 
+    /** 字体: 华文行楷 */
+    STXingkai("华文行楷", "STXingkai"), 
 
-	/** 字体: 华文新魏 */
-	STXinwei("华文新魏", "STXinwei"), 
+    /** 字体: 华文新魏 */
+    STXinwei("华文新魏", "STXinwei"), 
 
-	/** 字体: 华文中宋 */
-	STZhongsong("华文中宋", "STZhongsong"), 
+    /** 字体: 华文中宋 */
+    STZhongsong("华文中宋", "STZhongsong"), 
 
-	/** 字体: Sylfaen */
-	Sylfaen("Sylfaen", "Sylfaen"), 
+    /** 字体: Sylfaen */
+    Sylfaen("Sylfaen", "Sylfaen"), 
 
-	/** 字体: Symbol */
-	Symbol("Symbol", "Symbol"), 
+    /** 字体: Symbol */
+    Symbol("Symbol", "Symbol"), 
 
-	/** 字体: Tahoma */
-	Tahoma("Tahoma", "Tahoma"), 
+    /** 字体: Tahoma */
+    Tahoma("Tahoma", "Tahoma"), 
 
-	/** 字体: Times New Roman */
-	Times_New_Roman("Times New Roman", "Times New Roman"), 
+    /** 字体: Times New Roman */
+    Times_New_Roman("Times New Roman", "Times New Roman"), 
 
-	/** 字体: Traditional Arabic */
-	Traditional_Arabic("Traditional Arabic", "Traditional Arabic"), 
+    /** 字体: Traditional Arabic */
+    Traditional_Arabic("Traditional Arabic", "Traditional Arabic"), 
 
-	/** 字体: Trebuchet MS */
-	Trebuchet_MS("Trebuchet MS", "Trebuchet MS"), 
+    /** 字体: Trebuchet MS */
+    Trebuchet_MS("Trebuchet MS", "Trebuchet MS"), 
 
-	/** 字体: Tunga */
-	Tunga("Tunga", "Tunga"), 
+    /** 字体: Tunga */
+    Tunga("Tunga", "Tunga"), 
 
-	/** 字体: Utsaah */
-	Utsaah("Utsaah", "Utsaah"), 
+    /** 字体: Utsaah */
+    Utsaah("Utsaah", "Utsaah"), 
 
-	/** 字体: Vani */
-	Vani("Vani", "Vani"), 
+    /** 字体: Vani */
+    Vani("Vani", "Vani"), 
 
-	/** 字体: Verdana */
-	Verdana("Verdana", "Verdana"), 
+    /** 字体: Verdana */
+    Verdana("Verdana", "Verdana"), 
 
-	/** 字体: Vijaya */
-	Vijaya("Vijaya", "Vijaya"), 
+    /** 字体: Vijaya */
+    Vijaya("Vijaya", "Vijaya"), 
 
-	/** 字体: Vrinda */
-	Vrinda("Vrinda", "Vrinda"), 
+    /** 字体: Vrinda */
+    Vrinda("Vrinda", "Vrinda"), 
 
-	/** 字体: Webdings */
-	Webdings("Webdings", "Webdings"), 
+    /** 字体: Webdings */
+    Webdings("Webdings", "Webdings"), 
 
-	/** 字体: Wingdings */
-	Wingdings("Wingdings", "Wingdings"), 
+    /** 字体: Wingdings */
+    Wingdings("Wingdings", "Wingdings"), 
 
-	/** 字体: Wingdings 2 */
-	Wingdings_2("Wingdings 2", "Wingdings 2"), 
+    /** 字体: Wingdings 2 */
+    Wingdings_2("Wingdings 2", "Wingdings 2"), 
 
-	/** 字体: Wingdings 3 */
-	Wingdings_3("Wingdings 3", "Wingdings 3"), 
+    /** 字体: Wingdings 3 */
+    Wingdings_3("Wingdings 3", "Wingdings 3"), 
 
-	/** 字体: 幼圆 */
-	YouYuan("幼圆", "YouYuan"), 
+    /** 字体: 幼圆 */
+    YouYuan("幼圆", "YouYuan"), 
 
-	/** 字体: ZWAdobeF */
-	ZWAdobeF("ZWAdobeF", "ZWAdobeF"), 
+    /** 字体: ZWAdobeF */
+    ZWAdobeF("ZWAdobeF", "ZWAdobeF"), 
 
-	;
-	
-	public String CH;
-	
-	public String EN;
-	
-	private Fonts(String ch, String en) {
-		this.CH = ch;
-		this.EN = en;
-	}
-	
+    ;
+    
+    public String CH;
+    
+    public String EN;
+    
+    private Fonts(String ch, String en) {
+        this.CH = ch;
+        this.EN = en;
+    }
+    
 }
