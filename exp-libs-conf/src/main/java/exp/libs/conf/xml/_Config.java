@@ -1,4 +1,4 @@
-package exp.libs.xml;
+package exp.libs.conf.xml;
 
 import exp.libs.envm.Charset;
 import exp.libs.utils.format.XmlUtils;

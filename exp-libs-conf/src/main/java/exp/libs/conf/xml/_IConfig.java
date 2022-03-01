@@ -1,4 +1,4 @@
-package exp.libs.xml;
+package exp.libs.conf.xml;
 
 import exp.libs.warp.db.redis.bean.RedisBean;
 import exp.libs.warp.db.sql.bean.DataSourceBean;

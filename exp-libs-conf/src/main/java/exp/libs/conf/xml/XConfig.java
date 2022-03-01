@@ -1,4 +1,4 @@
-package exp.libs.xml;
+package exp.libs.conf.xml;
 
 import exp.libs.utils.os.ThreadUtils;
 import exp.libs.utils.other.StrUtils;

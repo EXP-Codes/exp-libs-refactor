@@ -1,4 +1,4 @@
-package exp.libs.xml;
+package exp.libs.conf.xml;
 
 import java.util.HashMap;
 import java.util.Iterator;

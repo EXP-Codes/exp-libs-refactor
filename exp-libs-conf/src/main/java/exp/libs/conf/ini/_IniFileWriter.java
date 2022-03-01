@@ -16,7 +16,7 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package exp.libs.ini;
+package exp.libs.conf.ini;
 
 import org.dtools.ini.*;
 
