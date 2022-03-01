@@ -2,7 +2,7 @@ package exp.libs.utils.num;
 
 import java.util.UUID;
 
-import exp.libs.utils.base.ThreadUtils;
+import exp.libs.utils.concurrent.ThreadUtils;
 import exp.libs.utils.time.TimeUtils;
 
 /**

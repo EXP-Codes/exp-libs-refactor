@@ -1,6 +1,6 @@
 package exp.libs.utils.num;
 
-import exp.libs.utils.base.StrUtils;
+import exp.libs.utils.str.StrUtils;
 
 
 /**

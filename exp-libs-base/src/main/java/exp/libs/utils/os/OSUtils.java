@@ -1,9 +1,9 @@
 package exp.libs.utils.os;
 
-import exp.libs.utils.base.PathUtils;
-import exp.libs.utils.base.StrUtils;
-import exp.libs.utils.io.FileUtils;
-import exp.libs.utils.io.JarUtils;
+import exp.libs.utils.other.PathUtils;
+import exp.libs.utils.str.StrUtils;
+import exp.libs.utils.file.FileUtils;
+import exp.libs.utils.file.JarUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
