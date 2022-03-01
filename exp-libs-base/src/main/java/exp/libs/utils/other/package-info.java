@@ -1,5 +1,4 @@
-package exp.libs.utils.other;
-
 /**
  * 其它工具
  */
+package exp.libs.utils.other;

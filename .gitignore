@@ -3,6 +3,7 @@
 **/logs/*
 **/log/*
 *.log
+*.iml
 
 # Compiled class file
 *.class
