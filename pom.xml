@@ -11,12 +11,14 @@
         <module>exp-libs-base</module>
         <module>exp-libs-net</module>
         <module>exp-libs-crypt</module>
+        <module>exp-libs-conf</module>
     </modules>
 
     <!--包为 pom，即父子聚合项目-->
     <packaging>pom</packaging>
 
     <properties>
+        <modules.version>2.0.0-SNAPSHOT</modules.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -57,7 +59,7 @@
                 </configuration>
             </plugin>
 
-            <!-- 生成 javadoc 包 -->
+            <!-- 生成 javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
