@@ -10,6 +10,7 @@
     <modules>
         <module>exp-libs-base</module>
         <module>exp-libs-net</module>
+        <module>exp-libs-crypt</module>
     </modules>
 
     <!--包为 pom，即父子聚合项目-->
