@@ -193,8 +193,8 @@ public class ObjUtils {
             out.writeObject(serialObject);
             out.close();
             
-            ByteArrayInputStream bin = new ByteArrayInputStream(baos.toByteArray());
-            ObjectInputStream in = new ObjectInputStream(bin);
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            ObjectInputStream in = new ObjectInputStream(bais);
             newObj = in.readObject();
             in.close();
             
@@ -437,12 +437,10 @@ public class ObjUtils {
             return isOk;
         }
         
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(
-                    new FileOutputStream(outFilePath));
+        try (FileOutputStream fos = new FileOutputStream(outFilePath);
+            ObjectOutputStream oos = new ObjectOutputStream(fos); ) {
             oos.writeObject(o);
             oos.flush();
-            oos.close();
             isOk = true;
             
         } catch (Exception e) {
@@ -458,12 +456,10 @@ public class ObjUtils {
      */
     public static Object unSerializable(String inFilePath) {
         Object o = null;
-        try {
-            ObjectInputStream ois = new ObjectInputStream(
-                    new FileInputStream(inFilePath));
+        try (FileInputStream fis = new FileInputStream(inFilePath);
+             ObjectInputStream ois = new ObjectInputStream(fis); ) {
             o = ois.readObject();
-            ois.close();
-            
+
         } catch (Exception e) {
             log.debug("从外存文件反序列化对象失败: [{}]", inFilePath, e);
         }
@@ -481,20 +477,13 @@ public class ObjUtils {
             return bytes;
         }
         
-        ByteArrayOutputStream baos = null;
-        ObjectOutputStream oos = null;
-        try {
-            baos = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(baos);
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+             ObjectOutputStream oos = new ObjectOutputStream(baos); ) {
             oos.writeObject(object);
             bytes = baos.toByteArray();
             
         } catch (Exception e) {
             log.debug("序列化对象为字节数组失败", e);
-            
-        } finally {
-            IOUtils.close(oos);
-            IOUtils.close(baos);
         }
         return bytes;
 
@@ -511,19 +500,13 @@ public class ObjUtils {
             return object;
         }
         
-        ByteArrayInputStream bais = null;
-        ObjectInputStream ois = null;
-        try {
-            bais = new ByteArrayInputStream(bytes);
-            ois = new ObjectInputStream(bais);
+        try (ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+             ObjectInputStream ois = new ObjectInputStream(bais); ) {
             object = ois.readObject();
             
         } catch (Exception e) {
             log.debug("从字节数组反序列化对象失败", e);
             
-        } finally {
-            IOUtils.close(ois);
-            IOUtils.close(bais);
         }
         return object;
     }
