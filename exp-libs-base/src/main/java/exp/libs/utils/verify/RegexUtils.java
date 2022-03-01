@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import exp.libs.utils.other.StrUtils;
+import exp.libs.utils.base.StrUtils;
 
 /**
  * <PRE>
@@ -22,7 +22,52 @@ public class RegexUtils {
 
     /** 私有化构造方法 */
     protected RegexUtils() {}
-    
+
+    /**
+     * <PRE>
+     * 为正则表达式中所有特殊字符添加前置反斜杠, 使其转义为普通字符
+     *
+     * 	[ \ ] -> [ \\ ]
+     * 	[ ( ] -> [ \( ]
+     *  [ ) ] -> [ \) ]
+     *  [ [ ] -> [ \[ ]
+     *  [ ] ] -> [ \] ]
+     *  [ { ] -> [ \{ ]
+     *  [ } ] -> [ \} ]
+     *  [ + ] -> [ \+ ]
+     *  [ - ] -> [ \- ]
+     *  [ . ] -> [ \. ]
+     *  [ * ] -> [ \* ]
+     *  [ ? ] -> [ \? ]
+     *  [ ^ ] -> [ \^ ]
+     *  [ $ ] -> [ \$ ]
+     * </PRE>
+     *
+     * @param regex 正则表达式
+     * @return 转义后的正则表达式
+     */
+    public static String escapeCharacters(final String regex) {
+        String str = "";
+        if(regex != null) {
+            str = regex;
+            str = str.replace("\\", "\\\\");
+            str = str.replace("(", "\\(");
+            str = str.replace(")", "\\)");
+            str = str.replace("[", "\\[");
+            str = str.replace("]", "\\]");
+            str = str.replace("{", "\\{");
+            str = str.replace("}", "\\}");
+            str = str.replace("+", "\\+");
+            str = str.replace("-", "\\-");
+            str = str.replace(".", "\\.");
+            str = str.replace("*", "\\*");
+            str = str.replace("?", "\\?");
+            str = str.replace("^", "\\^");
+            str = str.replace("$", "\\$");
+        }
+        return str;
+    }
+
     /**
      * 完全匹配
      * @param str 被匹配字符串
@@ -158,5 +203,5 @@ public class RegexUtils {
         }
         return list;
     }
-    
+
 }

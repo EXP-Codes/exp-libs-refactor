@@ -1,8 +1,8 @@
 package exp.libs.envm;
 
 import exp.libs.utils.num.BODHUtils;
-import exp.libs.utils.other.RandomUtils;
-import exp.libs.utils.other.StrUtils;
+import exp.libs.utils.base.RandomUtils;
+import exp.libs.utils.base.StrUtils;
 
 import java.awt.Color;
 import java.util.Arrays;

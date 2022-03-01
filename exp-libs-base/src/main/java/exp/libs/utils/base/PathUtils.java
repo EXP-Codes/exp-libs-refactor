@@ -1,4 +1,4 @@
-package exp.libs.utils.other;
+package exp.libs.utils.base;
 
 import java.io.File;
 import java.io.IOException;

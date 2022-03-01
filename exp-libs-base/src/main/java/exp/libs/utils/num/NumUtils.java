@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import exp.libs.envm.Regex;
-import exp.libs.utils.other.StrUtils;
+import exp.libs.utils.base.StrUtils;
 
 /**
  * <PRE>

@@ -1,4 +1,4 @@
-package exp.libs.utils.other;
+package exp.libs.utils.base;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import exp.libs.envm.Delimiter;
-import exp.libs.utils.format.ESCUtils;
 import exp.libs.utils.verify.RegexUtils;
 import exp.libs.utils.verify.VerifyUtils;
 
@@ -544,8 +543,8 @@ public class StrUtils {
         String[] ss = null;
         
         if(isNotEmpty(bgnDelmiter) && isNotEmpty(endDelmiter)) {
-            String regex = concat(ESCUtils.toRegexESC(bgnDelmiter), 
-                    "([\\s\\S]*?)", ESCUtils.toRegexESC(endDelmiter));
+            String regex = concat(RegexUtils.escapeCharacters(bgnDelmiter),
+                    "([\\s\\S]*?)", RegexUtils.escapeCharacters(endDelmiter));
             List<String> subs = RegexUtils.findBrackets(s, regex);
             ss = new String[subs.size()];
             subs.toArray(ss);
@@ -818,5 +817,5 @@ public class StrUtils {
         }
         return inRange;
     }
-    
+
 }

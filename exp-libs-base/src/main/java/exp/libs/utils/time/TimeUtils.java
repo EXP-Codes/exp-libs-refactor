@@ -537,5 +537,5 @@ public class TimeUtils {
         zero = zero - HOUR_UNIT * offset;
         return zero;
     }
-    
+
 }

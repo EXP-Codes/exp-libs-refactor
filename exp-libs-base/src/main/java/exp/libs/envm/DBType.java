@@ -1,6 +1,6 @@
 package exp.libs.envm;
 
-import exp.libs.utils.other.StrUtils;
+import exp.libs.utils.base.StrUtils;
 
 /**
  * <PRE>

@@ -1,4 +1,4 @@
-package exp.libs.utils.other;
+package exp.libs.utils.base;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -17,14 +17,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import exp.libs.utils.time.TimeUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import exp.libs.envm.DateFormat;
-import exp.libs.utils.io.IOUtils;
-import exp.libs.utils.time.TimeUtils;
+import sun.misc.IOUtils;
 
 /**
  * <PRE>
@@ -527,5 +527,5 @@ public class ObjUtils {
         }
         return object;
     }
-    
+
 }

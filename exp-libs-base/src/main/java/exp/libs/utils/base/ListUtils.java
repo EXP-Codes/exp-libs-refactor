@@ -1,4 +1,4 @@
-package exp.libs.utils.other;
+package exp.libs.utils.base;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -544,5 +544,5 @@ public class ListUtils {
         }
         return last;
     }
-    
+
 }
