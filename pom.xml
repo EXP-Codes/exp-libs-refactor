@@ -17,17 +17,29 @@
         <module>exp-libs-ext</module>
     </modules>
 
-    <!--包为 pom，即父子聚合项目-->
+    <!-- 父项目打包为 pom，即父子聚合项目 -->
     <packaging>pom</packaging>
 
     <properties>
         <modules.version>2.0.0-SNAPSHOT</modules.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <!-- 声明子模块引入依赖包的版本（不会继承，但子模块引用这些依赖时可以不写版本号） -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>exp.libs</groupId>
+                <artifactId>exp-libs-base</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 声明子模块需要继承的依赖包 -->
     <dependencies>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -51,7 +63,7 @@
 
     <build>
         <plugins>
-
+            <!-- 编译 maven 工程 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
