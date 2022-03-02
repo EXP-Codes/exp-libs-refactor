@@ -14,6 +14,7 @@
         <module>exp-libs-conf</module>
         <module>exp-libs-ui</module>
         <module>exp-libs-db</module>
+        <module>exp-libs-ext</module>
     </modules>
 
     <!--包为 pom，即父子聚合项目-->
