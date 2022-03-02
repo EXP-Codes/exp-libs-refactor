@@ -30,10 +30,10 @@ import java.util.Map;
  * @author    EXP: 272629724@qq.com
  * @since     jdk版本：jdk1.6
  */
-public class Template {
+public class FileTemplate {
 	
 	/** 日志器 */
-	private final static Logger log = LoggerFactory.getLogger(Template.class);
+	private final static Logger log = LoggerFactory.getLogger(FileTemplate.class);
 	
 	/**
 	 * 默认编码
@@ -81,7 +81,7 @@ public class Template {
 	 * 					1. 磁盘文件路径, 如:	./src/main/resources/foo/bar/test.txt
 	 * 					2. jar包内文件路径, 如: /foo/bar/test.txt
 	 */
-	public Template(String tplFilePath) {
+	public FileTemplate(String tplFilePath) {
 		this(tplFilePath, DEFAULT_CHARSET);
 	}
 	
@@ -92,7 +92,7 @@ public class Template {
 	 * 					2. jar包内文件路径, 如: /foo/bar/test.txt
 	 * @param charset 文件内容编码
 	 */
-	public Template(String tplFilePath, String charset) {
+	public FileTemplate(String tplFilePath, String charset) {
 		this.charset = (CharsetUtils.isVaild(charset) ? charset : DEFAULT_CHARSET);
 		this.tplContent = read(tplFilePath, this.charset);
 		this.content = tplContent;
