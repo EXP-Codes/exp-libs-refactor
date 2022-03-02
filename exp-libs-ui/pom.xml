@@ -25,14 +25,14 @@
             <artifactId>beauty-eye</artifactId>
             <version>3.7</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/beauty-eye-3.7.jar</systemPath>
+            <systemPath>${project.basedir}/libs/beauty-eye-3.7.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.realpersist</groupId>
             <artifactId>schemaeditor</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/schemaeditor-1.0.0.jar</systemPath>
+            <systemPath>${project.basedir}/libs/schemaeditor-1.0.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.googlecode.sarasvati.thirdparty.eclipse</groupId>

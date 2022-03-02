@@ -1,18 +1,13 @@
 package exp.libs.conf.xml;
 
 import exp.libs.envm.Charset;
-import exp.libs.utils.format.XmlUtils;
-import exp.libs.utils.io.FileUtils;
-import exp.libs.utils.io.JarUtils;
+import exp.libs.utils.file.FileUtils;
+import exp.libs.utils.file.JarUtils;
 import exp.libs.utils.num.NumUtils;
 import exp.libs.utils.os.OSUtils;
 import exp.libs.utils.other.BoolUtils;
 import exp.libs.utils.other.PathUtils;
-import exp.libs.utils.other.StrUtils;
-import exp.libs.warp.db.redis.bean.RedisBean;
-import exp.libs.warp.db.sql.bean.DataSourceBean;
-import exp.libs.warp.net.mq.jms.bean.JmsBean;
-import exp.libs.warp.net.sock.bean.SocketBean;
+import exp.libs.utils.str.StrUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -45,7 +40,7 @@ class _Config implements _IConfig {
 	
 	/**
 	 * 构造函数
-	 * @param configName 配置器名称
+	 * @param name 配置器名称
 	 */
 	protected _Config(String name) {
 		this.name = name;
@@ -193,11 +188,11 @@ class _Config implements _IConfig {
 		return confFiles;
 	}
 	
-	protected String toXPath(String xName, String xId) {
+	public String toXPath(String xName, String xId) {
 		return xTree.toXPath(xName, xId);
 	}
 	
-	private XNode findXNode(String xPath) {
+	public XNode findXNode(String xPath) {
 		XNode node = xTree.findXNode(xPath);
 		return (node == null ? NULL_XNODE : node);
 	}
@@ -292,98 +287,4 @@ class _Config implements _IConfig {
 		return getAttributes(toXPath(xName, xId));
 	}
 	
-	@Override
-	public DataSourceBean getDataSourceBean(String dsId) {
-		DataSourceBean ds = new DataSourceBean();
-		if(StrUtils.isEmpty(dsId)) {
-			return ds;
-		}
-		
-		String xPath = toXPath("datasource", dsId);
-		XNode xNode = findXNode(xPath);
-		if(xNode != NULL_XNODE) {
-			ds.setId(dsId);
-			ds.setDriver(xNode.getChildVal("driver"));
-			ds.setIp(xNode.getChildVal("ip"));
-			ds.setPort(NumUtils.toInt(xNode.getChildVal("port")));
-			ds.setUsername(xNode.getChildVal("username"));
-			ds.setPassword(xNode.getChildVal("password"));
-			ds.setName(xNode.getChildVal("name"));
-			ds.setCharset(xNode.getChildVal("charset"));
-			ds.setMaximumActiveTime(NumUtils.toLong(xNode.getChildVal("maximum-active-time"), -1));
-			ds.setHouseKeepingTestSql(xNode.getChildVal("house-keeping-test-sql"));
-			ds.setHouseKeepingSleepTime(NumUtils.toLong(xNode.getChildVal("house-keeping-sleep-time"), -1));
-			ds.setSimultaneousBuildThrottle(NumUtils.toInt(xNode.getChildVal("simultaneous-build-throttle"), -1));
-			ds.setMaximumConnectionCount(NumUtils.toInt(xNode.getChildVal("maximum-connection-count"), -1));
-			ds.setMinimumConnectionCount(NumUtils.toInt(xNode.getChildVal("minimum-connection-count"), -1));
-			ds.setMaximumNewConnections(NumUtils.toInt(xNode.getChildVal("maximum-new-connections"), -1));
-			ds.setPrototypeCount(NumUtils.toInt(xNode.getChildVal("prototype-count"), -1));
-			ds.setMaximumConnectionLifetime(NumUtils.toLong(xNode.getChildVal("maximum-connection-lifetime"), -1));
-			ds.setTestBeforeUse(BoolUtils.toBool(xNode.getChildVal("test-before-use"), false));
-			ds.setTestAfterUse(BoolUtils.toBool(xNode.getChildVal("test-after-use"), false));
-			ds.setTrace(BoolUtils.toBool(xNode.getChildVal("trace"), true));
-		}
-		return ds;
-	}
-	
-	@Override
-	public RedisBean getRedisBean(String redisId) {
-		RedisBean rb = new RedisBean();
-		if(StrUtils.isEmpty(redisId)) {
-			return rb;
-		}
-		
-		String xPath = toXPath("redis", redisId);
-		XNode xNode = findXNode(xPath);
-		if(xNode != NULL_XNODE) {
-			rb.setId(redisId);
-			rb.setCluster(BoolUtils.toBool(xNode.getChildVal("cluster"), false));
-			rb.addSockets(xNode.getChildVal("sockets"));
-			rb.setPassword(xNode.getChildVal("password"));
-			rb.setTimeout(NumUtils.toInt(xNode.getChildVal("timeout"), 0));
-			rb.setMaxTotal(NumUtils.toInt(xNode.getChildVal("maxTotal"), 0));
-			rb.setMaxIdle(NumUtils.toInt(xNode.getChildVal("maxIdle"), 0));
-			rb.setMaxWaitMillis(NumUtils.toLong(xNode.getChildVal("maxWaitMillis"), -1));
-			rb.setTestOnBorrow(BoolUtils.toBool(xNode.getChildVal("testOnBorrow"), true));
-		}
-		return rb;
-	}
-	
-	@Override
-	public SocketBean getSocketBean(String sockId) {
-		SocketBean sb = new SocketBean();
-		if(StrUtils.isEmpty(sockId)) {
-			return sb;
-		}
-		
-		String xPath = toXPath("socket", sockId);
-		XNode xNode = findXNode(xPath);
-		if(xNode != NULL_XNODE) {
-			sb.setId(sockId);
-			sb.setIp(xNode.getChildVal("ip"));
-			sb.setPort(NumUtils.toInt(xNode.getChildVal("port")));
-			sb.setUsername(xNode.getChildVal("username"));
-			sb.setPassword(xNode.getChildVal("password"));
-			sb.setCharset(xNode.getChildVal("charset"));
-			sb.setReadCharset(xNode.getChildVal("readCharset"));
-			sb.setWriteCharset(xNode.getChildVal("writeCharset"));
-			sb.setBufferSize(NumUtils.toInt(xNode.getChildVal("bufferSize"), -1));
-			sb.setReadBufferSize(NumUtils.toInt(xNode.getChildVal("readBufferSize"), -1));
-			sb.setWriteBufferSize(NumUtils.toInt(xNode.getChildVal("writeBufferSize"), -1));
-			sb.setDelimiter(xNode.getChildVal("delimiter"));
-			sb.setReadDelimiter(xNode.getChildVal("readDelimiter"));
-			sb.setWriteDelimiter(xNode.getChildVal("writeDelimiter"));
-			sb.setOvertime(NumUtils.toInt(xNode.getChildVal("overtime"), -1));
-			sb.setMaxConnectionCount(NumUtils.toInt(xNode.getChildVal("maxConnectionCount"), -1));
-			sb.setExitCmd(xNode.getChildVal("exitCmd"));
-		}
-		return sb;
-	}
-	
-	@Override
-	public JmsBean getJmsBean(String jmsId) {
-		// TODO
-		return new JmsBean();
-	}
-
 }

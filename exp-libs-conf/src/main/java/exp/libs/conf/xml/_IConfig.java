@@ -1,9 +1,5 @@
 package exp.libs.conf.xml;
 
-import exp.libs.warp.db.redis.bean.RedisBean;
-import exp.libs.warp.db.sql.bean.DataSourceBean;
-import exp.libs.warp.net.mq.jms.bean.JmsBean;
-import exp.libs.warp.net.sock.bean.SocketBean;
 import org.dom4j.Element;
 
 import java.util.List;
@@ -62,13 +58,5 @@ interface _IConfig {
 	public Map<String, String> getAttributes(String xPath);
 	
 	public Map<String, String> getAttributes(String xName, String xId);
-	
-	public DataSourceBean getDataSourceBean(String dsId);
-	
-	public RedisBean getRedisBean(String redisId);
-	
-	public SocketBean getSocketBean(String sockId);
-	
-	public JmsBean getJmsBean(String jmsId);
 	
 }

@@ -1,6 +1,6 @@
 package exp.libs.conf.xml;
 
-import exp.libs.utils.other.StrUtils;
+import exp.libs.utils.str.StrUtils;
 import org.dom4j.Element;
 
 import java.util.*;

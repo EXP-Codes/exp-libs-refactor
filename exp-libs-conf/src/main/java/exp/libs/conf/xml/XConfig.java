@@ -1,11 +1,7 @@
 package exp.libs.conf.xml;
 
-import exp.libs.utils.os.ThreadUtils;
-import exp.libs.utils.other.StrUtils;
-import exp.libs.warp.db.redis.bean.RedisBean;
-import exp.libs.warp.db.sql.bean.DataSourceBean;
-import exp.libs.warp.net.mq.jms.bean.JmsBean;
-import exp.libs.warp.net.sock.bean.SocketBean;
+import exp.libs.utils.concurrent.ThreadUtils;
+import exp.libs.utils.str.StrUtils;
 import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -138,8 +134,7 @@ public class XConfig implements Runnable, _IConfig {
 	 * @param timeMillis 刷新间隔
 	 */
 	public void reflash(long timeMillis) {
-		reflashTime = (timeMillis < MIN_REFLASH_TIME ? 
-				MIN_REFLASH_TIME : timeMillis);
+		reflashTime = (timeMillis < MIN_REFLASH_TIME ? MIN_REFLASH_TIME : timeMillis);
 		
 		if(!isInit) {
 			synchronized (tLock) {
@@ -653,98 +648,6 @@ public class XConfig implements Runnable, _IConfig {
 	public Map<String, String> getAttributes(String xName, String xId) {
 		String xPath = config.toXPath(xName, xId);
 		return getAttributes(xPath);
-	}
-
-	/**
-	 * 获取固定格式配置对象 - 数据源.
-	 * @param dsId 数据源标签的id属性值
-	 * @return 若无效则返回默认数据源对象 (绝对不返回null)
-	 */
-	@Override
-	public DataSourceBean getDataSourceBean(String dsId) {
-		DataSourceBean ds = null;
-		if(isReflash && reflashing) {
-			synchronized (rLock) {
-				ds = config.getDataSourceBean(dsId);
-			}
-		} else {
-			Object obj = nearValues.get(dsId);
-			if(obj == null) {
-				obj = config.getDataSourceBean(dsId);
-				nearValues.put(dsId, obj);
-			}
-			ds = ((DataSourceBean) obj).clone();
-		}
-		return ds;
-	}
-
-	/**
-	 * 获取固定格式配置对象 - Redis数据源.
-	 * @param redisId 数据源标签的id属性值
-	 * @return 若无效则返回默认数据源对象 (绝对不返回null)
-	 */
-	@Override
-	public RedisBean getRedisBean(String redisId) {
-		RedisBean rb = null;
-		if(isReflash && reflashing) {
-			synchronized (rLock) {
-				rb = config.getRedisBean(redisId);
-			}
-		} else {
-			Object obj = nearValues.get(redisId);
-			if(obj == null) {
-				obj = config.getRedisBean(redisId);
-				nearValues.put(redisId, obj);
-			}
-			rb = ((RedisBean) obj).clone();
-		}
-		return rb;
-	}
-	
-	/**
-	 * 获取固定格式配置对象 - socket.
-	 * @param sockId socket标签的id属性值
-	 * @return 若无效则返回默认socket对象 (绝对不返回null)
-	 */
-	@Override
-	public SocketBean getSocketBean(String sockId) {
-		SocketBean sb = null;
-		if(isReflash && reflashing) {
-			synchronized (rLock) {
-				sb = config.getSocketBean(sockId);
-			}
-		} else {
-			Object obj = nearValues.get(sockId);
-			if(obj == null) {
-				obj = config.getSocketBean(sockId);
-				nearValues.put(sockId, obj);
-			}
-			sb = ((SocketBean) obj).clone();
-		}
-		return sb;
-	}
-
-	/**
-	 * 获取固定格式配置对象 - jms.
-	 * @param jmsId jms标签的id属性值
-	 * @return 若无效则返回默认jms对象 (绝对不返回null)
-	 */
-	@Override
-	public JmsBean getJmsBean(String jmsId) {
-		JmsBean jb = null;
-		if(isReflash && reflashing) {
-			synchronized (rLock) {
-				jb = config.getJmsBean(jmsId);
-			}
-		} else {
-			Object obj = nearValues.get(jmsId);
-			if(obj == null) {
-				obj = config.getJmsBean(jmsId);
-				nearValues.put(jmsId, obj);
-			}
-			jb = ((JmsBean) obj).clone();
-		}
-		return jb;
 	}
 
 }

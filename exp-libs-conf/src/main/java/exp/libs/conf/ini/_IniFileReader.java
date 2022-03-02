@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 package exp.libs.conf.ini;
 
 import org.dtools.ini.*;
@@ -171,7 +170,7 @@ class _IniFileReader {
     static String getSectionName( String line ) {
         
         if( !isSection(line) ) {
-            throw new FormatException( "getSectionName(String) is unable to " + 
+            throw new FormatException( "getSectionName(String) is unable to " +
                     "return the name of the section as the given string (\"" +
                     line + "\" is not a section." );
         }

@@ -1,10 +1,14 @@
 package exp.libs.conf.xml;
 
-import exp.libs.utils.other.StrUtils;
+import exp.libs.utils.str.StrUtils;
+import org.dom4j.Attribute;
 import org.dom4j.Element;
-import org.dom4j.tree.DefaultAttribute;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
-import java.util.*;
 
 public class XNode {
 
@@ -81,9 +85,9 @@ public class XNode {
 		}
 		
 		@SuppressWarnings("unchecked")
-		Iterator<DefaultAttribute> attributeIts = element.attributeIterator();
+		Iterator<Attribute> attributeIts = element.attributeIterator();
 		while(attributeIts.hasNext()) {
-			DefaultAttribute attribute = attributeIts.next();
+			Attribute attribute = attributeIts.next();
 			attributes.put(attribute.getName(), attribute.getText().trim());
 		}
 		
