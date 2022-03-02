@@ -12,6 +12,7 @@
         <module>exp-libs-net</module>
         <module>exp-libs-crypt</module>
         <module>exp-libs-conf</module>
+        <module>exp-libs-ui</module>
     </modules>
 
     <!--包为 pom，即父子聚合项目-->
