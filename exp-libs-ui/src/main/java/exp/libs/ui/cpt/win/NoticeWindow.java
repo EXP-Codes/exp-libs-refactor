@@ -1,7 +1,7 @@
 package exp.libs.ui.cpt.win;
 
-import exp.libs.utils.os.ThreadUtils;
 
+import exp.libs.utils.concurrent.ThreadUtils;
 
 /**
  * <PRE>
