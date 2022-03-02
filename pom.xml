@@ -15,6 +15,7 @@
         <module>exp-libs-ui</module>
         <module>exp-libs-db</module>
         <module>exp-libs-ext</module>
+        <module>exp-libs-task</module>
     </modules>
 
     <!-- 父项目打包为 pom，即父子聚合项目 -->
