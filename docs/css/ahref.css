@@ -1,0 +1,41 @@
+/************** deafault css******************/
+
+.green-a {
+    background: #4ECB8C;
+    display: inline-block;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.blue-a {
+    background: #1759C7;
+    display: inline-block;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.pink-a {
+    background: #FFBBFF;
+    display: inline-block;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.yellow-a {
+    background: #C7AB17;
+    display: inline-block;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+}
