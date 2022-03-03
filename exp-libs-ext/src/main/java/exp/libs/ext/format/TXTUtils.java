@@ -1,9 +1,9 @@
 package exp.libs.ext.format;
 
+import exp.libs.encode.CompressUtils;
 import exp.libs.envm.Charset;
 import exp.libs.envm.FileType;
-import exp.libs.utils.encode.CompressUtils;
-import exp.libs.utils.io.FileUtils;
+import exp.libs.utils.file.FileUtils;
 import exp.libs.utils.num.BODHUtils;
 import exp.libs.utils.num.UnitUtils;
 import org.slf4j.Logger;

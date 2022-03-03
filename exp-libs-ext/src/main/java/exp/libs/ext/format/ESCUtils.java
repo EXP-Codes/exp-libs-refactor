@@ -3,7 +3,7 @@ package exp.libs.ext.format;
 import exp.libs.envm.DateFormat;
 import exp.libs.utils.num.NumUtils;
 import exp.libs.utils.other.ObjUtils;
-import exp.libs.utils.other.StrUtils;
+import exp.libs.utils.str.StrUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
@@ -513,7 +513,7 @@ public class ESCUtils {
 	
 	/**
 	 * 把普通字符串转换成CSV格式字符串
-	 * @param s 普通字符串
+	 * @param str 普通字符串
 	 * @return CSV格式字符串
 	 */
 	private static String _toCSV(String str) {
