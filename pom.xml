@@ -40,7 +40,22 @@
             </dependency>
             <dependency>
                 <groupId>exp.libs</groupId>
+                <artifactId>exp-libs-net</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>exp.libs</groupId>
+                <artifactId>exp-libs-crypt</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>exp.libs</groupId>
                 <artifactId>exp-libs-conf</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>exp.libs</groupId>
+                <artifactId>exp-libs-ui</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
@@ -50,7 +65,12 @@
             </dependency>
             <dependency>
                 <groupId>exp.libs</groupId>
-                <artifactId>exp-libs-ui</artifactId>
+                <artifactId>exp-libs-ext</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>exp.libs</groupId>
+                <artifactId>exp-libs-task</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>

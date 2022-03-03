@@ -21,6 +21,10 @@
         </dependency>
         <dependency>
             <groupId>exp.libs</groupId>
+            <artifactId>exp-libs-ext</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>exp.libs</groupId>
             <artifactId>exp-libs-db</artifactId>
         </dependency>
         <dependency>
