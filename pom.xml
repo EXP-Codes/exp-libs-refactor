@@ -16,6 +16,7 @@
         <module>exp-libs-db</module>
         <module>exp-libs-ext</module>
         <module>exp-libs-task</module>
+        <module>exp-libs-version</module>
     </modules>
 
     <!-- 父项目打包为 pom，即父子聚合项目 -->
@@ -35,6 +36,26 @@
             <dependency>
                 <groupId>exp.libs</groupId>
                 <artifactId>exp-libs-base</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>exp.libs</groupId>
+                <artifactId>exp-libs-conf</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>exp.libs</groupId>
+                <artifactId>exp-libs-db</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>exp.libs</groupId>
+                <artifactId>exp-libs-ui</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>exp.libs</groupId>
+                <artifactId>exp-libs-version</artifactId>
                 <version>${modules.version}</version>
             </dependency>
         </dependencies>
