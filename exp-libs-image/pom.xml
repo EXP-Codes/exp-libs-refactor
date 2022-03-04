@@ -13,6 +13,7 @@
 
     <properties>
         <zxing.version>3.4.1</zxing.version>
+        <imageio.version>1.4.0</imageio.version>
     </properties>
 
     <dependencies>
@@ -37,12 +38,12 @@
         <dependency>
             <groupId>com.github.jai-imageio</groupId>
             <artifactId>jai-imageio-core</artifactId>
-            <version>1.4.0</version>
+            <version>${imageio.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.jai-imageio</groupId>
             <artifactId>jai-imageio-jpeg2000</artifactId>
-            <version>1.4.0</version>
+            <version>${imageio.version}</version>
         </dependency>
     </dependencies>
 
