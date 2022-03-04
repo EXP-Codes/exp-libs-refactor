@@ -16,7 +16,7 @@ import java.util.Set;
  * 使用样例:
  * 
  * final String SET_IN_REDIS_KEY = "set在Redis中的键名（自定义且需唯一）";
- * {@link #RedisClient} redis = new RedisClient("127.0.0.1", 6379);	// redis连接客户端（支持单机/集群）
+ * {@link RedisClient} redis = new RedisClient("127.0.0.1", 6379);	// redis连接客户端（支持单机/集群）
  * 
  * RedisSet&lt;自定义对象&gt; set = new RedisSet&lt;自定义对象&gt;(SET_IN_REDIS_KEY, redis);
  * set.add(element);

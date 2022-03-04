@@ -16,7 +16,7 @@ import java.util.List;
  * 使用样例:
  * 
  * final String LIST_IN_REDIS_KEY = "list在Redis中的键名（自定义且需唯一）";
- * {@link #RedisClient} redis = new RedisClient("127.0.0.1", 6379);	// redis连接客户端（支持单机/集群）
+ * {@link RedisClient} redis = new RedisClient("127.0.0.1", 6379);	// redis连接客户端（支持单机/集群）
  * 
  * RedisList&lt;自定义对象&gt; list = new RedisList&lt;自定义对象&gt;(LIST_IN_REDIS_KEY, redis);
  * list.add(element);
