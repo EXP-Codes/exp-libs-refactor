@@ -24,6 +24,14 @@
             <artifactId>exp-libs-crypt</artifactId>
         </dependency>
 
+        <!-- JVM 代理器构件 -->
+        <dependency>
+            <groupId>exp.libs</groupId>
+            <artifactId>jvm-agent</artifactId>
+            <version>1.0</version>
+            <optional>true</optional>
+        </dependency>
+
         <!-- JSON 构件 -->
         <dependency>
             <groupId>net.sf.json-lib</groupId>
