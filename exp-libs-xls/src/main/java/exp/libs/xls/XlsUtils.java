@@ -2,6 +2,7 @@ package exp.libs.xls;
 
 import exp.libs.utils.str.StrUtils;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.*;
 
 
 /**
@@ -28,8 +29,7 @@ public class XlsUtils {
 	 * @param fontSize 字体大小, 如: (short) 9
 	 * @return 单元格格式
 	 */
-	public static CellStyle getCellStyle(Excel excel, 
-			String fontName, short fontSize) {
+	public static CellStyle getCellStyle(Excel excel, String fontName, short fontSize) {
 		return getCellStyle(excel, fontName, fontSize,
 				HSSFColor.HSSFColorPredefined.AUTOMATIC.getIndex(), true);
 	}
