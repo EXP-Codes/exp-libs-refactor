@@ -1,4 +1,4 @@
-package exp.libs.ext.os;
+package exp.libs.ext.other;
 
 import exp.libs.jvm.JVMAgent;
 import org.slf4j.Logger;

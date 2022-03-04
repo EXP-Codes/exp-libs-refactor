@@ -1,5 +1,4 @@
-package exp.libs.ext.os;
-
+package exp.libs.utils.os;
 
 import exp.libs.utils.file.FileFlowReader;
 import exp.libs.utils.file.FileUtils;

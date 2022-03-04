@@ -1,9 +1,8 @@
-package exp.libs.ext.os;
+package exp.libs.utils.os;
 
 import exp.libs.envm.Charset;
 import exp.libs.utils.concurrent.ThreadUtils;
 import exp.libs.utils.io.IOUtils;
-import exp.libs.utils.os.OSUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

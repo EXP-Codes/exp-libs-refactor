@@ -56,20 +56,17 @@ public final class CEPUtils {
 	/**
 	 * 声明变量失败提示关键字
 	 */
-	public final static String DECLARE_VARIABLE_ERROR = 
-			"Declare Variable Error : ";
+	public final static String DECLARE_VARIABLE_ERROR = "Declare Variable Error : ";
 	
 	/**
 	 * 注册函数失败提示关键字
 	 */
-	public final static String REGISTER_FUNCTION_ERROR = 
-			"Register Function Error : ";
+	public final static String REGISTER_FUNCTION_ERROR = "Register Function Error : ";
 	
 	/**
 	 * 解析表达式/函数失败提示关键字
 	 */
-	public final static String PARSE_EXPRESSION_ERROR = 
-			"Parse Expression Error : ";
+	public final static String PARSE_EXPRESSION_ERROR = "Parse Expression Error : ";
 	
 	/**
 	 * 执行计算发生异常得到的返回值.
@@ -90,21 +87,18 @@ public final class CEPUtils {
 	/**
 	 * 由内部定义的常用函数表名称
 	 */
-	private final static List<String> innerFunNames = 
-			new LinkedList<String>();
+	private final static List<String> innerFunNames = new LinkedList<String>();
 	
 	/**
 	 * 自定义的函数表名称
 	 */
-	private final static List<String> customFunNames = 
-			new LinkedList<String>();
+	private final static List<String> customFunNames = new LinkedList<String>();
 	
 	/**
 	 * 编译时解析得到的函数表.用于自动注册.
 	 * 函数默认名 -> 函数类路径
 	 */
-	private final static Map<String, String> allFunsMap = 
-			new HashMap<String, String>();
+	private final static Map<String, String> allFunsMap = new HashMap<String, String>();
 	
 	/**
 	 * 初始化 CepUtils:
@@ -142,13 +136,15 @@ public final class CEPUtils {
 	 * @param variableName 变量名称
 	 * @param value 变量值
 	 */
-	public static void declare(String variableName, Object value) {
+	public static void declare(String variableName, Object value) throws Exception {
 		try {
 			jep.addVariable(getVarCallName(variableName), value);
 			
 		} catch (Exception e) {
 			log.error(DECLARE_VARIABLE_ERROR.concat("{}"), variableName, e);
 		}
+
+		throw new Exception("ss");
 	}
 	
 	/**
