@@ -270,7 +270,21 @@ public class DBUtils {
 			}
 		}
 	}
-	
+
+	/**
+	 * 提交数据库变更
+	 * @param conn 数据库连接
+	 */
+	public static void commit(Connection conn) {
+		if(conn != null) {
+			try {
+				conn.commit();
+			} catch (SQLException e) {
+				log.error("提交数据库变更失败.", e);
+			}
+		}
+	}
+
 	/**
 	 * 关闭数据库连接
 	 * @param conn 数据库连接
