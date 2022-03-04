@@ -21,6 +21,10 @@ import java.util.*;
  */
 public class JavaUtils {
 
+	/** 获取当前运行的JDK版本号 */
+	protected final static String JDK_VER =
+			System.getProperty("java.version").toUpperCase();
+
 	/** Java关键字数组 */
 	private final static String[] JAVA_KEY_WORDS = {
 			"abstract", "assert", "boolean", "break", "byte",
@@ -41,7 +45,39 @@ public class JavaUtils {
 	
 	/** 私有化构造函数 */
 	protected JavaUtils() {}
-	
+
+	/**
+	 * 获取当前运行的JDK版本号
+	 * @return 当前运行的JDK版本号
+	 */
+	public static String getJdkVersion() {
+		return JDK_VER;
+	}
+
+	/**
+	 * 检测当前运行的版本是否为JDK1.6
+	 * @return true:是; false:否
+	 */
+	public static boolean isJDK16() {
+		return JDK_VER.startsWith("1.6");
+	}
+
+	/**
+	 * 检测当前运行的版本是否为JDK1.7
+	 * @return true:是; false:否
+	 */
+	public static boolean isJDK17() {
+		return JDK_VER.startsWith("1.7");
+	}
+
+	/**
+	 * 检测当前运行的版本是否为JDK1.8
+	 * @return true:是; false:否
+	 */
+	public static boolean isJDK18() {
+		return JDK_VER.startsWith("1.8");
+	}
+
 	/**
 	 * 检查单词是否为java关键字
 	 * 

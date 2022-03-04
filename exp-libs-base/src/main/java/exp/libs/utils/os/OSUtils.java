@@ -43,10 +43,6 @@ public final class OSUtils {
 	protected final static String OS_ENCODING = 
 			System.getProperty("sun.jnu.encoding").toUpperCase();
 	
-	/** 获取当前运行的JDK版本号 */
-	protected final static String JDK_VER = 
-			System.getProperty("java.version").toUpperCase();
-	
 	/**
 	 * 程序入口命令.
 	 *  用于判断程序运行环境：
@@ -134,45 +130,50 @@ public final class OSUtils {
 	}
 	
 	/**
-	 * 获取当前运行的JDK版本号
-	 * @return 当前运行的JDK版本号
-	 */
-	public static String getJdkVersion() {
-		return JDK_VER;
-	}
-	
-	/**
-	 * 检测当前运行的版本是否为JDK1.6
-	 * @return true:是; false:否
-	 */
-	public static boolean isJDK16() {
-		return JDK_VER.startsWith("1.6");
-	}
-	
-	/**
-	 * 检测当前运行的版本是否为JDK1.7
-	 * @return true:是; false:否
-	 */
-	public static boolean isJDK17() {
-		return JDK_VER.startsWith("1.7");
-	}
-	
-	/**
-	 * 检测当前运行的版本是否为JDK1.8
-	 * @return true:是; false:否
-	 */
-	public static boolean isJDK18() {
-		return JDK_VER.startsWith("1.8");
-	}
-	
-	/**
 	 * 检查当前程序是否通过tomcat启动
 	 * @return true:通过tomcat启动; false:通过main启动
 	 */
 	public static boolean isRunByTomcat() {
 		return RUN_BY_TOMCAT;
 	}
-	
+
+	/**
+	 * <PRE>
+	 * 把 dos 内容转换为符合 unix 标准内容。
+	 * 	(实则上不是 dos 也能转换为 unix)
+	 * </PRE>
+	 *
+	 * @param dos dos内容
+	 * @return 符合unix标准内容
+	 */
+	public static String dos2unix(String dos) {
+		String unix = "";
+		if(dos != null) {
+			unix = dos.replace("\r", "").
+					replace('\\', '/');
+		}
+		return unix;
+	}
+
+	/**
+	 * <PRE>
+	 * unix 内容转换为符合 dos 标准内容。
+	 * 	(实则上不是 unix 也能转换为 dos)
+	 * </PRE>
+	 *
+	 * @param unix unix内容
+	 * @return 符合dos标准内容
+	 */
+	public static String unix2dos(String unix) {
+		String dos = "";
+		if(unix != null) {
+			dos = unix.replace("\r", "").
+					replace("\n", "\r\n").
+					replace('/', '\\');
+		}
+		return dos;
+	}
+
 	/**
 	 * 复制文本到剪切板
 	 * @param txt 文本内容
