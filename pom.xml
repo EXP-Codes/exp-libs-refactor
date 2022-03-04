@@ -18,6 +18,7 @@
         <module>exp-libs-task</module>
         <module>exp-libs-version</module>
         <module>exp-libs-log</module>
+        <module>exp-libs-image</module>
     </modules>
 
     <!-- 父项目打包为 pom，即父子聚合项目 -->

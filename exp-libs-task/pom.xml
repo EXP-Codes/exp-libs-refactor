@@ -20,6 +20,7 @@
             <artifactId>exp-libs-base</artifactId>
         </dependency>
 
+        <!-- 计划任务调度构件 -->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>

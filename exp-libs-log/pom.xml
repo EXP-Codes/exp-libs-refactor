@@ -22,7 +22,7 @@
             <artifactId>exp-libs-base</artifactId>
         </dependency>
 
-        <!-- logback 依赖，若不需要可以 exclusion -->
+        <!-- logback 构件，若不需要可以 exclusion -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
@@ -42,7 +42,7 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- log4j2 依赖，若不需要可以 exclusion -->
+        <!-- log4j2 构件，若不需要可以 exclusion -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>

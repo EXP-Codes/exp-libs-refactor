@@ -20,11 +20,14 @@
             <artifactId>exp-libs-base</artifactId>
         </dependency>
 
+        <!-- Apache 编/解码构件 -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.15</version>
         </dependency>
+
+        <!-- Apache 解/压缩构件 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>

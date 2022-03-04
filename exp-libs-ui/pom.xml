@@ -20,6 +20,7 @@
             <artifactId>exp-libs-base</artifactId>
         </dependency>
 
+        <!-- swing 美瞳构件 -->
         <dependency>
             <groupId>org.jb2011.lnf</groupId>
             <artifactId>beauty-eye</artifactId>
@@ -27,12 +28,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/beauty-eye-3.7.jar</systemPath>
         </dependency>
+
+        <!-- swing 绘图构件 -->
         <dependency>
-            <groupId>com.realpersist</groupId>
-            <artifactId>schemaeditor</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/schemaeditor-1.0.0.jar</systemPath>
+            <groupId>jgraph</groupId>
+            <artifactId>jgraph</artifactId>
+            <version>5.13.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.sarasvati.thirdparty.eclipse</groupId>
@@ -40,9 +41,11 @@
             <version>3.8.1</version>
         </dependency>
         <dependency>
-            <groupId>jgraph</groupId>
-            <artifactId>jgraph</artifactId>
-            <version>5.13.0.0</version>
+            <groupId>com.realpersist</groupId>
+            <artifactId>schemaeditor</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/schemaeditor-1.0.0.jar</systemPath>
         </dependency>
     </dependencies>
 
