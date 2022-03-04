@@ -12,6 +12,8 @@
     <artifactId>exp-libs-log</artifactId>
 
     <properties>
+        <logback.version>1.2.10</logback.version>
+        <log4j2.version>2.17.2</log4j2.version>
     </properties>
 
     <dependencies>
@@ -20,21 +22,38 @@
             <artifactId>exp-libs-base</artifactId>
         </dependency>
 
+        <!-- logback 依赖，若不需要可以 exclusion -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.3.0-alpha14</version>
+            <version>${logback.version}</version>
+            <optional>true</optional>
         </dependency>
-        <dependency>
+        <dependency>    <!-- 与 slf4j 搭配必须，实现了 Slf4j 的 API -->
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-access</artifactId>
-            <version>1.3.0-alpha14</version>
+            <version>${logback.version}</version>
+            <optional>true</optional>
         </dependency>
-        <dependency>
+        <dependency>    <!-- 支持自定义配置路径；同时与 servlet 搭配必须，实现了 HTTP-Access 的 API -->
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.3.0-alpha14</version>
-            <scope>test</scope>
+            <version>${logback.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- log4j2 依赖，若不需要可以 exclusion -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

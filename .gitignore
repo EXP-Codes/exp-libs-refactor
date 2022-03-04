@@ -1,7 +1,6 @@
 **/.idea/*
 **/target/*
 **/logs/*
-**/log/*
 *.log
 *.iml
 
