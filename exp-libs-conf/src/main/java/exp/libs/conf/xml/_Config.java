@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-class _Config implements _IConfig {
+public class _Config implements _IConfig {
 
 	/** 日志器 */
 	protected final static Logger log = LoggerFactory.getLogger(_Config.class);
@@ -47,7 +47,7 @@ class _Config implements _IConfig {
 		this.confFiles = new LinkedList<String[]>();
 		this.xTree = new _XTree();
 	}
-	
+
 	@Override
 	public String NAME() {
 		return name;

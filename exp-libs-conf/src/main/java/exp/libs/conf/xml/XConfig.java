@@ -66,36 +66,36 @@ import java.util.*;
 public class XConfig implements Runnable, _IConfig {
 
 	/** 日志器 */
-	protected final static Logger log = LoggerFactory.getLogger(_Config.class);
+	public final static Logger log = LoggerFactory.getLogger(_Config.class);
 	
 	public final static XNode NULL_XNODE = _Config.NULL_XNODE;
-	
-	private final static long MIN_REFLASH_TIME = 10000L;
-	
-	private final static long DEFAULT_REFLASH_TIME = 60000L;
-	
-	private String name;
-	
-	private _Config config;
+
+	protected final static long MIN_REFLASH_TIME = 10000L;
+
+	protected final static long DEFAULT_REFLASH_TIME = 60000L;
+
+	protected String name;
+
+	protected _Config config;
 	
 	private boolean isInit;
 	
 	private boolean isRun;
 	
-	private boolean isReflash;
-	
-	private boolean reflashing;
-	
-	private long reflashTime;
+	protected boolean isReflash;
+
+	protected boolean reflashing;
+
+	protected long reflashTime;
 	
 	/** 线程锁 */
-	private byte[] tLock;
+	protected byte[] tLock;
 	
 	/** 刷新锁 */
-	private byte[] rLock;
+	protected byte[] rLock;
 	
 	/** 保存最近查找过的配置值（用于快速检索重复配置） */
-	private Map<String, Object> nearValues;
+	protected Map<String, Object> nearValues;
 	
 	/**
 	 * 构造函数

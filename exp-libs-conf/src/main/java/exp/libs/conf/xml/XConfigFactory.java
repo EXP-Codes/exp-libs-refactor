@@ -64,7 +64,7 @@ final public class XConfigFactory {
 	}
 	
 	/**
-	 * 获取默认的xml配置加载器
+	 * 获取默认的 xml 配置加载器
 	 * @return 默认的xml配置加载器
 	 */
 	public static XConfig getDefaultConfig() {
