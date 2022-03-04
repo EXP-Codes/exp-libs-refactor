@@ -1,8 +1,7 @@
-package exp.libs.ext.xls;
+package exp.libs.xls;
 
 import exp.libs.utils.str.StrUtils;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.*;
 
 
 /**

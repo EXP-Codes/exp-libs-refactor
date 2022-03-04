@@ -19,6 +19,7 @@
         <module>exp-libs-version</module>
         <module>exp-libs-log</module>
         <module>exp-libs-image</module>
+        <module>exp-libs-xls</module>
     </modules>
 
     <!-- 父项目打包为 pom，即父子聚合项目 -->
