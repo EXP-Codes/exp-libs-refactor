@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * <PRE>
- * Sqlite数据库工具.
+ * Sqlite 数据库工具.
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs
  * <br/><B>SUPPORT : </B> <a href="http://www.exp-blog.com" target="_blank">www.exp-blog.com</a> 
