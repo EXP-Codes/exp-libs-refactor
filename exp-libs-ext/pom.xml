@@ -30,6 +30,8 @@
             <artifactId>jvm-agent</artifactId>
             <version>1.0</version>
             <optional>true</optional>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/jvm-agent.jar</systemPath>
         </dependency>
 
         <!-- JSON 构件 -->

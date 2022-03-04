@@ -20,6 +20,7 @@
         <module>exp-libs-log</module>
         <module>exp-libs-image</module>
         <module>exp-libs-xls</module>
+        <module>exp-libs-cep</module>
     </modules>
 
     <!-- 父项目打包为 pom，即父子聚合项目 -->
