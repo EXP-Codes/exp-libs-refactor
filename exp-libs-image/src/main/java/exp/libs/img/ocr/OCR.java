@@ -20,7 +20,7 @@ public class OCR {
 	private final static Logger log = LoggerFactory.getLogger(OCR.class);
 	
 	/** 默认OCR组件目录 */
-	public final static String OCR_DIR = "./conf/ocr/tesseract";
+	public final static String OCR_DIR = "./data/ocr/tesseract";
 	
 	/** OCR组件 */
 	private _OCR ocr;

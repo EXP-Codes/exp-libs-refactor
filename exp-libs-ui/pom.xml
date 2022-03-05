@@ -27,6 +27,7 @@
             <version>3.7</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/beauty-eye-3.7.jar</systemPath>
+            <optional>true</optional>
         </dependency>
 
         <!-- swing 绘图构件 -->
@@ -34,11 +35,13 @@
             <groupId>jgraph</groupId>
             <artifactId>jgraph</artifactId>
             <version>5.13.0.0</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.googlecode.sarasvati.thirdparty.eclipse</groupId>
             <artifactId>draw2d</artifactId>
             <version>3.8.1</version>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.realpersist</groupId>
@@ -46,6 +49,7 @@
             <version>1.0.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/schemaeditor-1.0.0.jar</systemPath>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

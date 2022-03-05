@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config hint="常用配置（覆写全量配置文件的对应项）">
+  
+  <sockets caption="Socket列表">
+    <socket id="TEST-SOCK" caption="示例配置">
+      <ip default="127.0.0.1" caption="服务IP">127.0.0.1</ip>
+      <port default="9998" caption="服务端口">9998</port>
+      <username caption="登陆账号"></username>
+      <password caption="登陆密码"></password>
+      <charset default="UTF-8" caption="收发数据编码">UTF-8</charset>
+      <bufferSize default="1" caption="收发数据缓冲区大小(MB)">1</bufferSize>
+      <delimiter default="\0" caption="收发数据的消息分隔符">\0</delimiter>
+      <overtime default="60000" caption="交互超时时间(ms)">60000</overtime>
+    </socket>
+  </sockets>
+  
+</config>

@@ -7,7 +7,7 @@ import exp.libs.utils.other.BoolUtils;
 import exp.libs.utils.str.StrUtils;
 
 /**
- * DB 专用的 xml 配置加载器，支持读取以下两种默认配置结构：
+ * DB 专用的 xml 配置加载器，支持读取以下默认的配置结构：
  *  1. datasource
  *  2. redis
  *

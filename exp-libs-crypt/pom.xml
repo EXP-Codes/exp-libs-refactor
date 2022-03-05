@@ -25,6 +25,7 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.15</version>
+            <optional>true</optional>
         </dependency>
 
         <!-- Apache 解/压缩构件 -->
@@ -32,6 +33,7 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
             <version>1.21</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

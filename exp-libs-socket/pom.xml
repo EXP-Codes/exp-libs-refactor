@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>exp-libs-conf</artifactId>
+    <artifactId>exp-libs-socket</artifactId>
 
     <properties>
     </properties>
@@ -19,22 +19,20 @@
             <groupId>com.exp-bolg</groupId>
             <artifactId>exp-libs-base</artifactId>
         </dependency>
-
-        <!-- xml 解析构件 -->
         <dependency>
-            <groupId>org.dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>2.1.3</version>
-            <optional>true</optional>
+            <groupId>com.exp-bolg</groupId>
+            <artifactId>exp-libs-conf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.exp-bolg</groupId>
+            <artifactId>exp-libs-ext</artifactId>
         </dependency>
 
-        <!-- ini 解析构件 -->
+        <!-- WEB-SOCKET 构件 -->
         <dependency>
-            <groupId>org.dtools</groupId>
-            <artifactId>javaini</artifactId>
-            <version>1.1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/javaini-1.1.0.0.jar</systemPath>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.5.2</version>
             <optional>true</optional>
         </dependency>
     </dependencies>

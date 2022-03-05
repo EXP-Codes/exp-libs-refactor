@@ -35,7 +35,7 @@ final class _OCR {
 	
 	private final static String TMP_SUFFIX = ".txt";
 	
-	/** OCR组件驱动目录 */
+	/** OCR 组件驱动目录 */
 	private String tesseractDir;
 
 	/**
