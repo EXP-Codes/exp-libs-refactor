@@ -2,6 +2,7 @@ package exp.libs.net.webkit;
 
 import exp.libs.utils.file.FileUtils;
 import exp.libs.utils.str.StrUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +40,7 @@ public class WebUtils {
 		}
 		
 		driver.manage().window().maximize(); //浏览器窗口最大化
-		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);  
+		File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile2(srcFile, new File(imgPath));
 	}
 	

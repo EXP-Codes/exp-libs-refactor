@@ -32,7 +32,6 @@
             <optional>true</optional>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/jvm-agent.jar</systemPath>
-            <optional>true</optional>
         </dependency>
 
         <!-- JSON 构件 -->

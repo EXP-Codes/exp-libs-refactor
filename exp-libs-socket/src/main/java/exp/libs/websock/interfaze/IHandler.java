@@ -1,6 +1,5 @@
 package exp.libs.websock.interfaze;
 
-import org.java_websocket.framing.Framedata;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.nio.ByteBuffer;

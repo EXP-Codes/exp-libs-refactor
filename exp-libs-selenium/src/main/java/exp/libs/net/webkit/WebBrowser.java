@@ -118,24 +118,24 @@ public class WebBrowser {
 			capabilities = DesiredCapabilities.phantomjs();
 			capabilities.setJavascriptEnabled(true);	// 执行页面js脚本
 			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);	// SSL证书支持
-			
+
 			final String PAGE_SETTINGS = PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX;
 			capabilities.setCapability(PAGE_SETTINGS.concat("loadImages"), loadImages);		// 加载图片
 			capabilities.setCapability(PAGE_SETTINGS.concat("XSSAuditingEnabled"), false);	// 跨域请求监控
 			capabilities.setCapability(PAGE_SETTINGS.concat("localToRemoteUrlAccessEnabled"), false);	// 本地资源是否可以访问远程URL
 			capabilities.setCapability(PAGE_SETTINGS.concat("userAgent"), HttpHead.VAL.USER_AGENT);	// 伪装浏览器
-			
+
 //			final String HERDER = PhantomJSDriverService.PHANTOMJS_PAGE_CUSTOMHEADERS_PREFIX;
 //			capabilities.setCapability(HERDER.concat("Accept"), "application/json, text/javascript, */*; q=0.01");
 //			capabilities.setCapability(HERDER.concat("Content-Type"), "application/x-www-form-urlencoded; charset=UTF-8");
 //			capabilities.setCapability(HERDER.concat("Accept-Encoding"), "gzip, deflate, br");
 //			capabilities.setCapability(HERDER.concat("Accept-Language"), "zh-CN,zh;q=0.8");
-			
+
 		} else if(WebDriverType.CHROME == type) {
 			capabilities = DesiredCapabilities.chrome();
 			capabilities.setJavascriptEnabled(true);
 			capabilities.setCapability("loadImages", loadImages);
-			
+
 		} else {
 			capabilities = DesiredCapabilities.htmlUnit();
 			capabilities.setJavascriptEnabled(true);

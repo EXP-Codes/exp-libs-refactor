@@ -2,7 +2,6 @@ package exp.libs.websock;
 
 import exp.libs.websock.interfaze.IHandler;
 import exp.libs.websock.interfaze.ISession;
-import org.java_websocket.framing.Framedata;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.nio.ByteBuffer;
@@ -39,12 +38,6 @@ class _DefaultHandler implements IHandler {
 
 	@Override
 	public void onMessage(ByteBuffer byteBuffer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onFragment(Framedata framedata) {
 		// TODO Auto-generated method stub
 		
 	}

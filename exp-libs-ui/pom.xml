@@ -27,7 +27,6 @@
             <version>3.7</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/beauty-eye-3.7.jar</systemPath>
-            <optional>true</optional>
         </dependency>
 
         <!-- swing 绘图构件 -->
@@ -47,9 +46,9 @@
             <groupId>com.realpersist</groupId>
             <artifactId>schemaeditor</artifactId>
             <version>1.0.0</version>
+            <optional>true</optional>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/schemaeditor-1.0.0.jar</systemPath>
-            <optional>true</optional>
         </dependency>
     </dependencies>
 
