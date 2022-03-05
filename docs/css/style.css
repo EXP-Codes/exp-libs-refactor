@@ -55,7 +55,7 @@ h6 {
 
 html,
 body {
-    background-image:-webkit-linear-gradient(60deg,rgba(218, 169, 215, 0.637),rgba(128, 174, 235, 0.904));
+    background-image:-webkit-linear-gradient(60deg,rgb(176 153 223 / 93%),rgb(0 0 0 / 90%));
     background-position: center 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -98,7 +98,7 @@ p {
 
 .navbar-nav>li>a {
     font-size: 14px;
-    color: #fff;
+    color: #efe807;
     font-family: 'Montserrat', sans-serif;
     /* text-transform: uppercase */
 }
