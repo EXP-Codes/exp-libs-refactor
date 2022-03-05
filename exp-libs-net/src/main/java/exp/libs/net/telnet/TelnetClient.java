@@ -7,9 +7,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.SocketException;
 
 /**
+ * FIXME:
  * <PRE>
- *     FIXME :
- * telnet 客户端，里面提供连接，发指令、获取返回信息，断开连接
+ * telnet客户端类，里面提供连接，发指令、获取返回信息，断开连接
  * 1.telnet有VT100 VT102 VT220 VTNT ANSI LINUX等协议。
  *  默认VT100，win telnet linux时，有乱码，则改用VT200
  * 2.VT100控制码(ansi控制码)过滤的问题,可以过滤，也可以在服务设置不要。
@@ -17,80 +17,79 @@ import java.net.SocketException;
  * 3.中文乱码的问题。
  * new String(old.getBytes("ISO8859-1"),"GBK")。
  * </PRE>
- *
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="http://www.exp-blog.com" target="_blank">www.exp-blog.com</a> 
+ * <br/><B>SUPPORT : </B> <a href="http://www.exp-blog.com" target="_blank">www.exp-blog.com</a>
  * @version   2016-02-14
  * @author    EXP: 272629724@qq.com
  * @since     jdk版本：jdk1.6
  */
 public class TelnetClient {
-	
+
 	/** 终端类型枚举  */
 	public final static String PROTOCOL_VT100 = "VT100";
-	
+
 	/** 终端类型枚举  */
 	public final static String PROTOCOL_VT220 = "VT220";
-	
+
 	/** 终端类型枚举  */
 	public final static String PROTOCOL_VTNT = "VTNT";
-	
+
 	/** 终端类型枚举  */
 	public final static String PROTOCOL_VTANSI = "VTANSI";
-	
+
 	/** 终端类型枚举  */
 	public final static String PROTOCOL_LINUX = "LINUX";
-	
+
 	/** 结束判断符，默认  */
 	public final static char PROMPT_DOLLAR_SIGN = '$';
-	
+
 	/** 结束判断符，root用户  */
 	public final static char PROMPT_NUMBER_SIGN = '#';
-	
+
 	/** 系统名称 */
 	public static final String OS = System.getProperty("os.name");
 
 	/** 系统编码 */
 	public static String encoding = System
 			.getProperty("sun.jnu.encoding");
-	
+
 	/** 系统编码，中文  */
 	public final static String CONNECT_CHARACTER_CN_GBK = "zh_CN.gbk";
-	
+
 	/** 系统编码，英文  */
 	public final static String CONNECT_CHARACTER_EN_UTF8 = "en_US.UTF-8";
-	
+
 	/** 发送指令的字符编码 */
 	private String sConnectCharacter = CONNECT_CHARACTER_EN_UTF8;
-	
+
 	/** apache commons TelnetClinet对象  */
 	private org.apache.commons.net.telnet.TelnetClient telnet;
-	
+
 	/** 输入流  */
 	private InputStream in;
-	
+
 	/** 输出流  */
 	private PrintStream out;
-	
+
 	/** 结束判断符  */
 	private char prompt = PROMPT_DOLLAR_SIGN;
-	
+
 	/** 连接状态  */
 	private boolean connectFlag = false;
-	
+
 	/** 连接超时，默认5秒	 */
 	private int connectTimeOut = 5000;
 
 	/** 返回超时，默认5秒	 */
 	private int soTimeOut = 5000;
-	
+
 	/**
 	 * 构造方法
 	 */
 	public TelnetClient() {
 		telnet = new org.apache.commons.net.telnet.TelnetClient(PROTOCOL_VT100);
 	}
-	
+
 	/**
 	 * 构造方法
 	 * @param termtype 终端类型,win访问linux请使用PROTOCOL_VT220
@@ -101,13 +100,13 @@ public class TelnetClient {
 
 	/**
 	 * telnet连接，成功返回true，失败返回false
-	 * 
+	 *
 	 * @param ip IP
-	 *            
+	 *
 	 * @param port 端口
-	 *            
+	 *
 	 * @return boolean
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public boolean connect(String ip, Integer port) throws IOException {
 		try {
@@ -126,19 +125,23 @@ public class TelnetClient {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * telnet连接并登陆，成功返回true，失败返回false
-	 * 
+	 *
 	 * @param ip IP
+	 *
 	 * @param port 端口
+	 *
 	 * @param user	用户名
+	 *
 	 * @param password	密码
+	 *
 	 * @return boolean
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public boolean connect(String ip, Integer port, String user, 
-			String password) throws IOException {
+	public boolean connect(String ip, Integer port, String user,
+						   String password) throws IOException {
 		try {
 			telnet.setConnectTimeout(connectTimeOut);
 			telnet.connect(ip, port);
@@ -160,7 +163,7 @@ public class TelnetClient {
 
 	/**
 	 * 断开连接
-	 * 
+	 *
 	 * @return true:断开成功; false:断开失败
 	 */
 	public boolean disConnect() {
@@ -180,7 +183,7 @@ public class TelnetClient {
 		return true;
 	}
 
-	
+
 	/**
 	 * connectTimeOut
 	 * @return the connectTimeOut
@@ -188,7 +191,7 @@ public class TelnetClient {
 	public int getConnectTimeOut() {
 		return connectTimeOut;
 	}
-	
+
 	/**
 	 * prompt
 	 * @return the prompt
@@ -212,30 +215,30 @@ public class TelnetClient {
 	public int getSoTimeOut() {
 		return soTimeOut;
 	}
-	
+
 	/**
 	 * 登陆
-	 * 
+	 *
 	 * @param user 用户名
 	 * @param password 密码
 	 * @return boolean
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	private boolean login(String user, String password) throws IOException {
-			readUntil("ogin: ");
-			write(user);
-			readUntil("assword: ");
-			write(password);
-			readUntil(prompt + " ");
-			return true;
+		readUntil("ogin: ");
+		write(user);
+		readUntil("assword: ");
+		write(password);
+		readUntil(prompt + " ");
+		return true;
 	}
 
 	/**
 	 * 读取返回信息,出错则返回null
-	 * 
+	 *
 	 * @param pattern 结束符
 	 * @return String
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	private String readUntil(String pattern) throws IOException  {
 		char lastChar = pattern.charAt(pattern.length() - 1);
@@ -267,9 +270,9 @@ public class TelnetClient {
 
 	/**
 	 * 发指令同时返回发送的信息，出错或没有信息返回则返回null
-	 * 
+	 *
 	 * @param command 命令
-	 *            
+	 *
 	 * @return String
 	 * @throws IOException
 	 */
@@ -279,7 +282,7 @@ public class TelnetClient {
 		String str = readUntil(prompt + " ");
 		return replaceHeadAndTail(str, command);
 	}
-	
+
 	/**
 	 * 去掉返回头尾
 	 * （头：发送的命令单独一行）
@@ -294,7 +297,7 @@ public class TelnetClient {
 			// 去掉‘回车’字符和‘空格加回车’字符
 //			str = str.replaceAll(" \r", "");
 //			str = str.replaceAll("\r", "");
-//			String regex = 
+//			String regex =
 //			".*没有那个文件或目录.*\n|.*没有那个文件或目录.*|.*No such file or directory.*\n|.*No such file or directory.*";
 //			Pattern prn = Pattern.compile(regex);
 //			Matcher matcher = prn.matcher(str);
@@ -323,7 +326,7 @@ public class TelnetClient {
 			if (str.indexOf(prompt + " ") != -1) {
 				str = str.substring(0, endpt);
 			}
-			
+
 			// 当没有返回值时返回null
 			if (str.trim().length() == 0) {
 				return null;
@@ -376,9 +379,9 @@ public class TelnetClient {
 
 	/**
 	 * 转换为超级用户登陆，并修改其结束符
-	 * 
+	 *
 	 * @param password 密码
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public void su(String password) throws IOException {
 		write("su");
@@ -390,7 +393,7 @@ public class TelnetClient {
 
 	/**
 	 * 发送指令
-	 * 
+	 *
 	 * @param value 发送的字符串
 	 */
 	private void write(String value) {
