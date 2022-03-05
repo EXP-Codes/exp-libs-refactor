@@ -27,19 +27,16 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>${logback.version}</version>
-            <optional>true</optional>
         </dependency>
         <dependency>    <!-- 与 slf4j 搭配必须，实现了 Slf4j 的 API -->
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-access</artifactId>
             <version>${logback.version}</version>
-            <optional>true</optional>
         </dependency>
         <dependency>    <!-- 支持自定义配置路径；同时与 servlet 搭配必须，实现了 HTTP-Access 的 API -->
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
-            <optional>true</optional>
         </dependency>
 
         <!-- log4j2 构件，若不需要可以 exclusion -->
@@ -47,13 +44,11 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j2.version}</version>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j2.version}</version>
-            <optional>true</optional>
         </dependency>
     </dependencies>
 

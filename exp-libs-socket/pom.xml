@@ -33,7 +33,6 @@
             <groupId>org.java-websocket</groupId>
             <artifactId>Java-WebSocket</artifactId>
             <version>1.5.2</version>
-            <optional>true</optional>
         </dependency>
     </dependencies>
 

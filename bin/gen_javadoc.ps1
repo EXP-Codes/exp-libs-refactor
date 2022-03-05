@@ -14,9 +14,9 @@ Foreach($item in $items) {
     $srcPath = "./$item/target/$srcFile"
 
     If(Test-Path $srcPath) {
-        $zipName = "$item.zip"
-        Rename-Item "$srcPath" -NewName "$zipName"
-        $srcPath = "./$item/target/$zipName"
+        $snkPath = "./$item/target/$item.zip"
+        Copy-Item -Path "$srcPath" -Destination "$snkPath"
+        $srcPath = $snkPath
 
         If(Test-Path $srcPath) {
             $snkPath = "./docs/javadocs/$item"
