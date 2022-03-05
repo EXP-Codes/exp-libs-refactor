@@ -25,7 +25,6 @@ import java.util.*;
  * @author    EXP: 272629724@qq.com
  * @since     jdk版本：jdk1.6
  */
-@SuppressWarnings("deprecation")
 public class FileUtils extends org.apache.commons.io.FileUtils {
 
 	/** 日志器 */
