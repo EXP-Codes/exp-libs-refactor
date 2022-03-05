@@ -1,5 +1,4 @@
 /************** deafault css******************/
-
 .floatleft {
     float: left
 }
@@ -55,7 +54,7 @@ h6 {
 
 html,
 body {
-    background-image:-webkit-linear-gradient(60deg,rgb(176 153 223 / 93%),rgb(0 0 0 / 90%));
+    background-image:-webkit-linear-gradient(60deg,rgb(235 178 237 / 93%),rgb(55 5 251 / 73%));
     background-position: center 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -64,6 +63,8 @@ body {
     -o-background-size: cover;
     -moz-background-size: cover;
     -ms-background-size: cover;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .section_padding {
@@ -75,9 +76,10 @@ p {
     font-weight: 400;
     font-size: 14px;
 }
-/************** main css ******************/
+
 
 /************** context css ******************/
+
 #context_area {
     /* background: url(../images/bg.jpg); */
     padding-top: 35px;
@@ -144,6 +146,8 @@ p {
 	font-size:0;
 	overflow:hidden;
 }
+
+
 /************** feature area css ******************/
 
 #features_area h2 {
@@ -173,6 +177,8 @@ p {
     top: -17%;
     left: 44%;
 }
+
+
 /************** story area css ******************/
 
 #story_area {
@@ -272,6 +278,8 @@ p {
 .progress-bar {
     background: #36C36E;
 }
+
+
 /************** blog area css ******************/
 
 #blog_area {
@@ -301,6 +309,8 @@ p {
 .comment i {
     margin-right: 10px;
 }
+
+
 /************** call to action css ******************/
 
 #caal_to_action_area {
@@ -324,6 +334,8 @@ p {
     margin-top: 13px;
     text-transform: uppercase
 }
+
+
 /************** footer area css ******************/
 
 #footer_area {

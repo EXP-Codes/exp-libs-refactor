@@ -1,7 +1,12 @@
-/************** deafault css******************/
+/************** alink css******************/
+
+a:link, a:visited {
+    color: #fff;
+    text-decoration:none;
+} 
 
 .green-a {
-    background: #4ECB8C;
+    background: #24d54a;
     display: inline-block;
     padding: 10px 15px;
     text-transform: uppercase;
@@ -21,7 +26,7 @@
 }
 
 .pink-a {
-    background: #FFBBFF;
+    background: #aa5cc3;
     display: inline-block;
     padding: 10px 15px;
     text-transform: uppercase;
@@ -32,6 +37,36 @@
 
 .yellow-a {
     background: #C7AB17;
+    display: inline-block;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.cyan-a {
+    background: #0a9f8a;
+    display: inline-block;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.grey-a {
+    background: #666565;
+    display: inline-block;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.red-a {
+    background: #eb6456;
     display: inline-block;
     padding: 10px 15px;
     text-transform: uppercase;
