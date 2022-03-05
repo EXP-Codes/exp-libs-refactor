@@ -1,0 +1,28 @@
+# 生成 javadoc 文件
+# ------------------------------------------------
+# 示例：
+#   ./bin/gen_javadoc.ps1
+# ------------------------------------------------
+
+Write-Output "Generate javadoc-jar for all modules ..."
+mvn clean package
+
+$items = Get-ChildItem . "exp-libs-*"
+Foreach($item in $items) {
+    Write-Output "Generate javadoc for $item ..."
+    $srcFile = Get-ChildItem "./$item/target" "*-javadoc.jar"
+    $srcPath = "./$item/target/$srcFile"
+
+    If(Test-Path $srcPath) {
+        $zipName = "$item.zip"
+        Rename-Item "$srcPath" -NewName "$zipName"
+        $srcPath = "./$item/target/$zipName"
+
+        If(Test-Path $srcPath) {
+            $snkPath = "./docs/javadocs/$item"
+            Remove-Item -Path "$snkPath" -Recurse
+            Expand-Archive -Path "$srcPath" -DestinationPath "$snkPath"
+        }
+    }
+}
+Write-Output "Done ."
