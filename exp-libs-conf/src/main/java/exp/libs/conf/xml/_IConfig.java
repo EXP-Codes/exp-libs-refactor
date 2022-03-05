@@ -7,12 +7,6 @@ import java.util.Map;
 
 interface _IConfig {
 
-	/** 磁盘上的配置文件 */
-	public final static String DISK_FILE = "0";
-	
-	/** jar包内的配置文件 */
-	public final static String JAR_FILE = "1";
-	
 	public String NAME();
 	
 	public boolean loadConfFiles(String... confFilePaths);

@@ -13,9 +13,12 @@ package exp.libs.utils.other;
  */
 public final class MapUtils {
 
-	/** 私有化构造函数. */
+	/** Map 最小的标准容量 */
+	public final static int MIN_MAP_SIZE = 2;
+
+	/** 私有化构造函数 */
 	private MapUtils() {}
-	
+
 	/**
 	 * <PRE>
 	 * 根据实际需要的容量，返回构造 Map 的标准容量(使得 Map 的搜索性能最优)。
@@ -27,7 +30,7 @@ public final class MapUtils {
 	 */
 	public static int genSize(int actualSize) {
 		boolean isDone = false;
-		int size = 2;
+		int size = MIN_MAP_SIZE;
 		for(int i = 1; i < 30; i++) {
 			size = (size << 1);
 			if(size >= actualSize) {
@@ -37,6 +40,7 @@ public final class MapUtils {
 		}
 		
 		if(isDone == false) {
+//			size = Integer.MAX_VALUE;
 			size = actualSize;
 		}
 		return size;

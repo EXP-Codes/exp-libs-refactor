@@ -205,29 +205,29 @@ public class XConfig implements Runnable, _IConfig {
 		
 		reflashing = true;
 		_Config conf = new _Config(name);
-		for(Iterator<String[]> fileInfos = config.getConfFiles().iterator(); 
-				fileInfos.hasNext();) {
-			String[] fileInfo = fileInfos.next();
-			String filxPath = fileInfo[0];
-			String fileType = fileInfo[1];
-			
-			File file = new File(filxPath);
+		for(Iterator<_ConfFileAttribute> fileAttrs = config.getConfFiles().iterator();
+			fileAttrs.hasNext();) {
+			_ConfFileAttribute fileAttr = fileAttrs.next();
+			int fileType = fileAttr.getFileType();
+			String filePath = fileAttr.getFilePath();
+
+			File file = new File(filePath);
 			if(!file.exists()) {
-				log.info("配置文件 [{}] 已不存在, 不重载.", filxPath);
-				fileInfos.remove();
+				log.info("配置文件 [{}] 已不存在, 不重载.", filePath);
+				fileAttrs.remove();
 			}
 			
-			if(DISK_FILE.equals(fileType)) {
-				boolean isOk = (conf.loadConfFile(filxPath) != null);
-				log.info("配置 [{}] 重载文件 [{}] {}.", name, filxPath, (isOk ? "成功" : "失败"));
+			if(_ConfFileAttribute.DISK_FILE == fileType) {
+				boolean isOk = (conf.loadConfFile(filePath) != null);
+				log.info("配置 [{}] 重载文件 [{}] {}.", name, filePath, (isOk ? "成功" : "失败"));
 				
-			} else if(JAR_FILE.equals(fileType)) {
-				boolean isOk = (conf.loadConfFileInJar(filxPath) != null);
-				log.info("配置 [{}] 重载文件 [{}] {}.", name, filxPath, (isOk ? "成功" : "失败"));
+			} else if(_ConfFileAttribute.JAR_FILE == fileType) {
+				boolean isOk = (conf.loadConfFileInJar(filePath) != null);
+				log.info("配置 [{}] 重载文件 [{}] {}.", name, filePath, (isOk ? "成功" : "失败"));
 				
 			} else {
-				log.info("配置文件 [{}] 类型异常, 不重载.", filxPath);
-				fileInfos.remove();
+				log.info("配置文件 [{}] 类型异常, 不重载.", filePath);
+				fileAttrs.remove();
 			}
 		}
 		

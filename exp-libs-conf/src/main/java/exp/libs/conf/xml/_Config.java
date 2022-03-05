@@ -20,22 +20,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class _Config implements _IConfig {
+class _Config implements _IConfig {
 
 	/** 日志器 */
 	protected final static Logger log = LoggerFactory.getLogger(_Config.class);
-	
+
+	/** 默认空配置节点 */
 	protected final static XNode NULL_XNODE = new XNode(null, null);
 	
 	/** 配置对象名称 */
 	protected String name;
 	
-	/**
-	 * 依序记录所加载过的配置文件.
-	 *  其中 单个元素为  String[2] { filxPath, 文件类型:DISK|JAR }
-	 */
-	protected List<String[]> confFiles; 
-	
+	/** 依序记录所加载过的配置文件 */
+	protected List<_ConfFileAttribute> confFiles;
+
+	/** xml 结构树 */
 	private _XTree xTree;
 	
 	/**
@@ -44,7 +43,7 @@ public class _Config implements _IConfig {
 	 */
 	protected _Config(String name) {
 		this.name = name;
-		this.confFiles = new LinkedList<String[]>();
+		this.confFiles = new LinkedList<_ConfFileAttribute>();
 		this.xTree = new _XTree();
 	}
 
@@ -90,7 +89,7 @@ public class _Config implements _IConfig {
 			Document doc = DocumentHelper.parseText(xml);
 			root = doc.getRootElement();
 			xTree.update(root);
-			confFiles.add(new String[] { confFilePath, DISK_FILE });
+			confFiles.add(new _ConfFileAttribute(_ConfFileAttribute.DISK_FILE, confFilePath));
 			
 		} catch (Exception e) {
 			log.error("加载文件失败: [{}].", confFilePath, e);
@@ -127,7 +126,7 @@ public class _Config implements _IConfig {
 			Document doc = DocumentHelper.parseText(xml);
 			root = doc.getRootElement();
 			xTree.update(root);
-			confFiles.add(new String[] { confFilePath, JAR_FILE });
+			confFiles.add(new _ConfFileAttribute(_ConfFileAttribute.JAR_FILE, confFilePath));
 			
 		} catch (Exception e) {
 			log.error("加载文件失败: [{}].", confFilePath, e);
@@ -176,7 +175,7 @@ public class _Config implements _IConfig {
 			Document doc = DocumentHelper.parseText(xml);
 			root = doc.getRootElement();
 			xTree.update(root);
-			confFiles.add(new String[] { confFilePath, DISK_FILE });
+			confFiles.add(new _ConfFileAttribute(_ConfFileAttribute.DISK_FILE, confFilePath));
 			
 		} catch (Exception e) {
 			log.error("加载文件失败: [{}].", confFilePath, e);
@@ -184,7 +183,7 @@ public class _Config implements _IConfig {
 		return root;
 	}
 	
-	protected List<String[]> getConfFiles() {
+	protected List<_ConfFileAttribute> getConfFiles() {
 		return confFiles;
 	}
 	
@@ -286,5 +285,5 @@ public class _Config implements _IConfig {
 	public Map<String, String> getAttributes(String xName, String xId) {
 		return getAttributes(toXPath(xName, xId));
 	}
-	
+
 }

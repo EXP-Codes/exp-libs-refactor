@@ -1,14 +1,22 @@
-package exp.libs.db;
+package exp.libs.conf.xml;
 
-import exp.libs.conf.xml.XConfigFactory;
-import exp.libs.conf.xml.XNode;
-import exp.libs.conf.xml._Config;
 import exp.libs.db.redis.bean.RedisBean;
 import exp.libs.db.sql.bean.DataSourceBean;
 import exp.libs.utils.num.NumUtils;
 import exp.libs.utils.other.BoolUtils;
 import exp.libs.utils.str.StrUtils;
 
+/**
+ * DB 专用的 xml 配置加载器，支持读取以下两种默认配置结构：
+ *  1. datasource
+ *  2. redis
+ *
+ * <br/><B>PROJECT : </B> exp-libs
+ * <br/><B>SUPPORT : </B> <a href="http://www.exp-blog.com" target="_blank">www.exp-blog.com</a>
+ * @version   2017-08-25
+ * @author    EXP: 272629724@qq.com
+ * @since     jdk版本：jdk1.6
+ */
 public class DBConfig extends _Config {
 
     /** 单例 */

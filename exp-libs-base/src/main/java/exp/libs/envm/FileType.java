@@ -172,10 +172,10 @@ public enum FileType {
     /** 文件类型后缀 */
     public String EXT;
     
-    /** 16进制文件头(存在相同文件头的不同文件类型) */
+    /** 16 进制文件头(存在相同文件头的不同文件类型) */
     public String HEADER;
     
-    /** 文件头的字节数 (1字节=2个16进制字符) */
+    /** 文件头的字节数 (1 字节 = 2 个 16 进制字符) */
     public int HEAD_LEN;
     
     /**

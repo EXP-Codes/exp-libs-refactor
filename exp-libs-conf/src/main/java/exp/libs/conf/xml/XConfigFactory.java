@@ -1,5 +1,7 @@
 package exp.libs.conf.xml;
 
+import exp.libs.utils.other.MapUtils;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -23,7 +25,7 @@ final public class XConfigFactory {
 	private static volatile XConfigFactory instance;
 	
 	private XConfigFactory() {
-		this.configs = new HashMap<String, XConfig>(2);
+		this.configs = new HashMap<String, XConfig>(MapUtils.genSize(2));
 	}
 	
 	private static XConfigFactory getInstn() {
