@@ -4,7 +4,7 @@
 /* Tablet Layout: 768px. */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-    .header_area_text {
+    .context_area_text {
         padding-right: 160px
     }
     .single_feature i {
@@ -23,26 +23,26 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 767px) {
-    #header_area {
+    #context_area {
         padding-top: 5px;
     }
     .navbar-toggle {
         background-color: #4ECB8C;
     }
-    .header_area_text h2 {
+    .context_area_text h2 {
         font-size: 30px;
     }
-    .header_area_text {
+    .context_area_text {
         padding-right: 0px
     }
     .navbar-toggle .icon-bar {
         background-color: #fff;
     }
-    .header_area_text {
+    .context_area_text {
         padding-top: 50px;
         padding-bottom: 50px;
     }
-    .header_area_text a,
+    .context_area_text a,
     .story_text a,
     .experience a,
     .call_project a {

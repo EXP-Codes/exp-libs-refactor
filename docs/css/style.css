@@ -54,7 +54,17 @@ h6 {
 }
 
 html,
-body {}
+body {
+    background-image:-webkit-linear-gradient(60deg,rgba(218, 169, 215, 0.637),rgba(128, 174, 235, 0.904));
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+}
 
 .section_padding {
     padding: 80px 0px
@@ -66,10 +76,10 @@ p {
     font-size: 14px;
 }
 /************** main css ******************/
-/************** header css ******************/
 
-#header_area {
-    background: url(../images/bg.jpg);
+/************** context css ******************/
+#context_area {
+    /* background: url(../images/bg.jpg); */
     padding-top: 35px;
     background-size: cover;
     background-position: center center
@@ -99,24 +109,24 @@ p {
     background: none
 }
 
-.header_area_text {
+.context_area_text {
     padding-top: 200px;
     padding-bottom: 200px;
     padding-right: 500px;
 }
 
-.header_area_text h2 {
+.context_area_text h2 {
     font-size: 50px;
     color: #fff
 }
 
-.header_area_text p {
+.context_area_text p {
     color: #fff;
     margin: 30px 0px;
 }
 
 /**
-.header_area_text a {
+.context_area_text a {
     background: #4ECB8C;
     display: inline-block;
     padding: 10px 15px;
