@@ -35,8 +35,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 	 * 文件头长度表.
 	 *  文件后缀 -> 文件头长度
 	 */
-	private final static Map<String, Integer> HEAD_LENS = 
-			new HashMap<String, Integer>();
+	private final static Map<String, Integer> HEAD_LENS = new HashMap<String, Integer>();
 	
 	/** 当前已知的文件类型中, 文件头最长的长度 */
 	private static int MAX_HEAD_LEN = -1;
@@ -45,8 +44,8 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 	 * 文件类型表.
 	 *   文件头 -> 文件后缀 -> 文件类型
 	 */
-	private final static Map<String, Map<String, FileType>> FILE_TYPES = 
-			new HashMap<String, Map<String,FileType>>();
+	private final static Map<String, Map<String, FileType>> FILE_TYPES =
+			new HashMap<String, Map<String, FileType>>();
 	
 	/**
 	 * 初始化文件类型查询表单
@@ -55,65 +54,16 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 		initFileHeadLens();
 		initFileTypes();
 	}
-	
+
 	/**
 	 * 初始化文件头长度表
 	 */
 	private static void initFileHeadLens() {
-		HEAD_LENS.put(FileType.UNKNOW.EXT, FileType.UNKNOW.HEAD_LEN);
-		HEAD_LENS.put(FileType.TXT.EXT, FileType.TXT.HEAD_LEN);
-		HEAD_LENS.put(FileType.BAT.EXT, FileType.BAT.HEAD_LEN);
-		HEAD_LENS.put(FileType.BIN.EXT, FileType.BIN.HEAD_LEN);
-		HEAD_LENS.put(FileType.INI.EXT, FileType.INI.HEAD_LEN);
-		HEAD_LENS.put(FileType.TMP.EXT, FileType.TMP.HEAD_LEN);
-		HEAD_LENS.put(FileType.MP3.EXT, FileType.MP3.HEAD_LEN);
-		HEAD_LENS.put(FileType.WAVE.EXT, FileType.WAVE.HEAD_LEN);
-		HEAD_LENS.put(FileType.MIDI.EXT, FileType.MIDI.HEAD_LEN);
-		HEAD_LENS.put(FileType.JPG.EXT, FileType.JPG.HEAD_LEN);
-		HEAD_LENS.put(FileType.PNG.EXT, FileType.PNG.HEAD_LEN);
-		HEAD_LENS.put(FileType.BMP.EXT, FileType.BMP.HEAD_LEN);
-		HEAD_LENS.put(FileType.GIF.EXT, FileType.GIF.HEAD_LEN);
-		HEAD_LENS.put(FileType.TIFF.EXT, FileType.TIFF.HEAD_LEN);
-		HEAD_LENS.put(FileType.CAD.EXT, FileType.CAD.HEAD_LEN);
-		HEAD_LENS.put(FileType.PSD.EXT, FileType.PSD.HEAD_LEN);
-		HEAD_LENS.put(FileType.RTF.EXT, FileType.RTF.HEAD_LEN);
-		HEAD_LENS.put(FileType.XML.EXT, FileType.XML.HEAD_LEN);
-		HEAD_LENS.put(FileType.HTML.EXT, FileType.HTML.HEAD_LEN);
-		HEAD_LENS.put(FileType.EMAIL.EXT, FileType.EMAIL.HEAD_LEN);
-		HEAD_LENS.put(FileType.OUTLOOK.EXT, FileType.OUTLOOK.HEAD_LEN);
-		HEAD_LENS.put(FileType.OE.EXT, FileType.OE.HEAD_LEN);
-		HEAD_LENS.put(FileType.ACCESS.EXT, FileType.ACCESS.HEAD_LEN);
-		HEAD_LENS.put(FileType.DOC.EXT, FileType.DOC.HEAD_LEN);
-		HEAD_LENS.put(FileType.XLS.EXT, FileType.XLS.HEAD_LEN);
-		HEAD_LENS.put(FileType.PPT.EXT, FileType.PPT.HEAD_LEN);
-		HEAD_LENS.put(FileType.DOCX.EXT, FileType.DOCX.HEAD_LEN);
-		HEAD_LENS.put(FileType.XLSX.EXT, FileType.XLSX.HEAD_LEN);
-		HEAD_LENS.put(FileType.PPTX.EXT, FileType.PPTX.HEAD_LEN);
-		HEAD_LENS.put(FileType.ZIP.EXT, FileType.ZIP.HEAD_LEN);
-		HEAD_LENS.put(FileType.RAR.EXT, FileType.RAR.HEAD_LEN);
-		HEAD_LENS.put(FileType.TAR.EXT, FileType.TAR.HEAD_LEN);
-		HEAD_LENS.put(FileType.GZ.EXT, FileType.GZ.HEAD_LEN);
-		HEAD_LENS.put(FileType.BZ2.EXT, FileType.BZ2.HEAD_LEN);
-		HEAD_LENS.put(FileType.WPD.EXT, FileType.WPD.HEAD_LEN);
-		HEAD_LENS.put(FileType.EPS.EXT, FileType.EPS.HEAD_LEN);
-		HEAD_LENS.put(FileType.PS.EXT, FileType.PS.HEAD_LEN);
-		HEAD_LENS.put(FileType.PDF.EXT, FileType.PDF.HEAD_LEN);
-		HEAD_LENS.put(FileType.QDF.EXT, FileType.QDF.HEAD_LEN);
-		HEAD_LENS.put(FileType.PWL.EXT, FileType.PWL.HEAD_LEN);
-		HEAD_LENS.put(FileType.AVI.EXT, FileType.AVI.HEAD_LEN);
-		HEAD_LENS.put(FileType.RAM.EXT, FileType.RAM.HEAD_LEN);
-		HEAD_LENS.put(FileType.RM.EXT, FileType.RM.HEAD_LEN);
-		HEAD_LENS.put(FileType.MPEG_VIDEO.EXT, FileType.MPEG_VIDEO.HEAD_LEN);
-		HEAD_LENS.put(FileType.MPEG.EXT, FileType.MPEG.HEAD_LEN);
-		HEAD_LENS.put(FileType.MOV.EXT, FileType.MOV.HEAD_LEN);
-		HEAD_LENS.put(FileType.ASF.EXT, FileType.ASF.HEAD_LEN);
-		HEAD_LENS.put(FileType.DLL.EXT, FileType.DLL.HEAD_LEN);
-		HEAD_LENS.put(FileType.EXE.EXT, FileType.EXE.HEAD_LEN);
-		
-		Iterator<Integer> lens = HEAD_LENS.values().iterator();
-		while(lens.hasNext()) {
-			Integer len = lens.next().intValue();
-			MAX_HEAD_LEN = (MAX_HEAD_LEN < len ? len : MAX_HEAD_LEN);
+		FileType[] fileTypes = FileType.class.getEnumConstants();
+		for (FileType fileType : fileTypes) {
+			HEAD_LENS.put(fileType.EXT, fileType.HEAD_LEN);
+			int len = fileType.HEAD_LEN;
+			MAX_HEAD_LEN = Math.max(MAX_HEAD_LEN, len);
 		}
 	}
 	
@@ -121,43 +71,19 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 	 * 初始化文件类型表
 	 */
 	private static void initFileTypes() {
+		// 默认情况一个文件头对应一种类型
+		FileType[] fileTypes = FileType.class.getEnumConstants();
+		for (FileType fileType : fileTypes) {
+			FILE_TYPES.put(fileType.HEADER, toMap(fileType));
+		}
+
+		// 特殊情况一个文件头对应多种类型
 		FILE_TYPES.put(FileType.UNKNOW.HEADER, toMap(FileType.UNKNOW, FileType.TXT, 
 				FileType.BAT, FileType.BIN, FileType.INI, FileType.TMP, FileType.MP3));
-		FILE_TYPES.put(FileType.WAVE.HEADER, toMap(FileType.WAVE));
-		FILE_TYPES.put(FileType.MIDI.HEADER, toMap(FileType.MIDI));
-		FILE_TYPES.put(FileType.JPG.HEADER, toMap(FileType.JPG));
-		FILE_TYPES.put(FileType.PNG.HEADER, toMap(FileType.PNG));
-		FILE_TYPES.put(FileType.BMP.HEADER, toMap(FileType.BMP));
-		FILE_TYPES.put(FileType.GIF.HEADER, toMap(FileType.GIF));
-		FILE_TYPES.put(FileType.TIFF.HEADER, toMap(FileType.TIFF));
-		FILE_TYPES.put(FileType.CAD.HEADER, toMap(FileType.CAD));
-		FILE_TYPES.put(FileType.PSD.HEADER, toMap(FileType.PSD));
-		FILE_TYPES.put(FileType.RTF.HEADER, toMap(FileType.RTF));
-		FILE_TYPES.put(FileType.XML.HEADER, toMap(FileType.XML));
-		FILE_TYPES.put(FileType.HTML.HEADER, toMap(FileType.HTML));
-		FILE_TYPES.put(FileType.EMAIL.HEADER, toMap(FileType.EMAIL));
-		FILE_TYPES.put(FileType.OUTLOOK.HEADER, toMap(FileType.OUTLOOK));
-		FILE_TYPES.put(FileType.OE.HEADER, toMap(FileType.OE));
-		FILE_TYPES.put(FileType.ACCESS.HEADER, toMap(FileType.ACCESS));
 		FILE_TYPES.put(FileType.DOC.HEADER, toMap(FileType.DOC, FileType.XLS, FileType.PPT));
 		FILE_TYPES.put(FileType.ZIP.HEADER, toMap(FileType.ZIP, 
-				FileType.DOCX, FileType.XLSX, FileType.PPTX));
-		FILE_TYPES.put(FileType.RAR.HEADER, toMap(FileType.RAR));
-		FILE_TYPES.put(FileType.TAR.HEADER, toMap(FileType.TAR));
-		FILE_TYPES.put(FileType.GZ.HEADER, toMap(FileType.GZ));
-		FILE_TYPES.put(FileType.BZ2.HEADER, toMap(FileType.BZ2));
-		FILE_TYPES.put(FileType.WPD.HEADER, toMap(FileType.WPD));
+				FileType.DOCX, FileType.XLSX, FileType.PPTX, FileType.WAR, FileType.JAR));
 		FILE_TYPES.put(FileType.EPS.HEADER, toMap(FileType.PS, FileType.EPS));
-		FILE_TYPES.put(FileType.PDF.HEADER, toMap(FileType.PDF));
-		FILE_TYPES.put(FileType.QDF.HEADER, toMap(FileType.QDF));
-		FILE_TYPES.put(FileType.PWL.HEADER, toMap(FileType.PWL));
-		FILE_TYPES.put(FileType.AVI.HEADER, toMap(FileType.AVI));
-		FILE_TYPES.put(FileType.RAM.HEADER, toMap(FileType.RAM));
-		FILE_TYPES.put(FileType.RM.HEADER, toMap(FileType.RM));
-		FILE_TYPES.put(FileType.MPEG_VIDEO.HEADER, toMap(FileType.MPEG_VIDEO));
-		FILE_TYPES.put(FileType.MPEG.HEADER, toMap(FileType.MPEG));
-		FILE_TYPES.put(FileType.MOV.HEADER, toMap(FileType.MOV));
-		FILE_TYPES.put(FileType.ASF.HEADER, toMap(FileType.ASF));
 		FILE_TYPES.put(FileType.DLL.HEADER, toMap(FileType.DLL, FileType.EXE));
 	}
 	
@@ -1243,7 +1169,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
 						fileType = types.values().iterator().next();
 						
 					} else {
-						log.error("判定文件 [{}] 的文件类型失败: 其文件后缀被篡改 (它可能是 {} 中的一个)", 
+						log.warn("判定文件 [{}] 的文件类型失败: 其文件后缀被篡改 (它可能是 {} 中的一个)",
 								file.getName(), types.values().toString());
 					}
 					break;

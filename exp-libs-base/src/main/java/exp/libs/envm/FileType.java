@@ -95,15 +95,21 @@ public enum FileType {
     /** MS Power Point 2003 (DOC、XLS、PPT 的文件头是相同的) */
     PPT("MS Power Point 2003", ".ppt", "D0CF11E0", 4), 
 
-    /** MS Word (DOCX、XLSX、PPTX 的文件头与ZIP是相同的, 实际上就是ZIP文件) */
+    /** MS Word (DOCX、XLSX、PPTX 的文件头与 ZIP 是相同的, 实际上就是 ZIP 文件) */
     DOCX("MS Word", ".docx", "504B0304", 4), 
     
-    /** MS Excel (DOCX、XLSX、PPTX 的文件头与ZIP是相同的, 实际上就是ZIP文件) */
+    /** MS Excel (DOCX、XLSX、PPTX 的文件头与 ZIP 是相同的, 实际上就是 ZIP 文件) */
     XLSX("MS Excel", ".xlsx", "504B0304", 4), 
     
-    /** MS Power Point (DOCX、XLSX、PPTX 的文件头与ZIP是相同的, 实际上就是ZIP文件) */
-    PPTX("MS Power Point", ".pptx", "504B0304", 4), 
-    
+    /** MS Power Point (DOCX、XLSX、PPTX 的文件头与 ZIP 是相同的, 实际上就是 ZIP 文件) */
+    PPTX("MS Power Point", ".pptx", "504B0304", 4),
+
+    /** JAR Archive (JAR、WAR 的文件头与 ZIP 是相同的, 实际上就是 ZIP 文件) */
+    JAR("JAR", ".jar", "504B0304", 4),
+
+    /** WAR Archive (JAR、WAR 的文件头与 ZIP 是相同的, 实际上就是 ZIP 文件) */
+    WAR("WAR", ".war", "504B0304", 4),
+
     /** ZIP Archive */
     ZIP("ZIP", ".zip", "504B0304", 4), 
 
