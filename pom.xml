@@ -35,13 +35,15 @@
         <module>exp-libs-db</module>
         <module>exp-libs-net</module>
         <module>exp-libs-socket</module>
+        <module>exp-libs-pf</module>
         <module>exp-libs-selenium</module>
+        <module>exp-libs-soap</module>
+        <module>exp-libs-mq</module>
         <module>exp-libs-task</module>
         <module>exp-libs-xls</module>
         <module>exp-libs-cep</module>
         <module>exp-libs-image</module>
         <module>exp-libs-ext</module>
-        <module>exp-libs-soap</module>
         <module>exp-libs-ui</module>
         <module>exp-libs-version</module>
     </modules>
@@ -73,6 +75,11 @@
             <dependency>
                 <groupId>com.exp-bolg</groupId>
                 <artifactId>exp-libs-net</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.exp-bolg</groupId>
+                <artifactId>exp-libs-socket</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
