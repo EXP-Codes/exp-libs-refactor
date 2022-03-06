@@ -20,7 +20,9 @@ Foreach($item in $items) {
 
         If(Test-Path $srcPath) {
             $snkPath = "./docs/javadocs/$item"
-            Remove-Item -Path "$snkPath" -Recurse
+            If(Test-Path $snkPath) {
+                Remove-Item -Path "$snkPath" -Recurse
+            }
             Expand-Archive -Path "$srcPath" -DestinationPath "$snkPath"
         }
     }
