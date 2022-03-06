@@ -24,7 +24,7 @@
         <url>https://github.com/lyy289065406/exp-libs-refactor</url>
     </scm>
 
-    <groupId>com.exp-bolg</groupId>
+    <groupId>com.exp-blog</groupId>
     <artifactId>exp-libs-refactor</artifactId>
     <version>2.0.0-SNAPSHOT</version>
     <modules>
@@ -66,52 +66,52 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.exp-bolg</groupId>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-base</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.exp-bolg</groupId>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-conf</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.exp-bolg</groupId>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-net</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.exp-bolg</groupId>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-socket</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.exp-bolg</groupId>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-crypt</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.exp-bolg</groupId>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-db</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.exp-bolg</groupId>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-base-ext</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.exp-bolg</groupId>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-image</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.exp-bolg</groupId>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-ui</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.exp-bolg</groupId>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-version</artifactId>
                 <version>${modules.version}</version>
             </dependency>

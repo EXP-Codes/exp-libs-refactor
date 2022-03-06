@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>exp-libs-refactor</artifactId>
-        <groupId>com.exp-bolg</groupId>
+        <groupId>com.exp-blog</groupId>
         <version>2.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -16,19 +16,19 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.exp-bolg</groupId>
+            <groupId>com.exp-blog</groupId>
             <artifactId>exp-libs-base</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.exp-bolg</groupId>
+            <groupId>com.exp-blog</groupId>
             <artifactId>exp-libs-base-ext</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.exp-bolg</groupId>
+            <groupId>com.exp-blog</groupId>
             <artifactId>exp-libs-db</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.exp-bolg</groupId>
+            <groupId>com.exp-blog</groupId>
             <artifactId>exp-libs-ui</artifactId>
         </dependency>
     </dependencies>
