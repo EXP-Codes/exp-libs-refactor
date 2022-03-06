@@ -1,8 +1,6 @@
 package exp.libs.ocr;
 
 import exp.libs.ocr.OCR;
-import exp.libs.utils.file.FileUtils;
-import exp.libs.utils.other.PathUtils;
 import exp.libs.utils.str.StrUtils;
 
 import java.io.File;
