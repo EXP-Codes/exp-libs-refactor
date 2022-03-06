@@ -136,15 +136,13 @@ public final class CEPUtils {
 	 * @param variableName 变量名称
 	 * @param value 变量值
 	 */
-	public static void declare(String variableName, Object value) throws Exception {
+	public static void declare(String variableName, Object value) {
 		try {
 			jep.addVariable(getVarCallName(variableName), value);
 			
 		} catch (Exception e) {
 			log.error(DECLARE_VARIABLE_ERROR.concat("{}"), variableName, e);
 		}
-
-		throw new Exception("ss");
 	}
 	
 	/**
@@ -207,8 +205,8 @@ public final class CEPUtils {
 	private static boolean autoRegister(String functionName) {
 		boolean isRegister = false;
 		String funClassPath = allFunsMap.get(functionName);
-		
-		if(funClassPath != null && !"".equals(funClassPath)) {
+
+		if(StrUtils.isNotEmpty(funClassPath)) {
 			register(functionName, funClassPath);
 			isRegister = true;
 		}
@@ -468,9 +466,6 @@ public final class CEPUtils {
 		
 		jep.addFunction(_Long.NAME, new _Long());
 		innerFunNames.add(_Long.NAME);
-		
-		jep.addFunction(_Null.NAME, new _Null());
-		innerFunNames.add(_Null.NAME);
 		
 		jep.addFunction(_NullStr.NAME, new _NullStr());
 		innerFunNames.add(_NullStr.NAME);
