@@ -18,7 +18,7 @@ import java.util.BitSet;
 public class BloomFilter {
 
     private static final int DEFAULT_SIZE = 2 << 24;//布隆过滤器的比特长度
-    private static final int[] seeds = {3,5,7, 11, 13, 31, 37, 61};//这里要选取质数，能很好的降低错误率
+    private static final int[] seeds = { 3, 5, 7, 11, 13, 31, 37, 61 };//这里要选取质数，能很好的降低错误率
     private static BitSet bits = new BitSet(DEFAULT_SIZE);
     private static SimpleHash[] func = new SimpleHash[seeds.length];
 

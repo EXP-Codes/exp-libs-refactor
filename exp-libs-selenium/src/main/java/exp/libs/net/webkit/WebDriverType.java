@@ -21,12 +21,9 @@ public class WebDriverType {
 	private final static String HtmlUnit = "HtmlUnit";
 	public final static WebDriverType HTMLUTIL = new WebDriverType(HtmlUnit);
 	
-	/** PhantomJS无头浏览器 */
-	private final static String PhantomJS = "phantomjs-driver.exe";
-	public final static WebDriverType PHANTOMJS = new WebDriverType(PhantomJS);
-	
-	/** Chrome浏览器 */
-	private final static String Chrome = "chrome-driver.exe";
+
+	/** Chrome 无头浏览器 */
+	private final static String Chrome = "chromedriver.exe";
 	public final static WebDriverType CHROME = new WebDriverType(Chrome);
 	
 	/** 驱动名 */

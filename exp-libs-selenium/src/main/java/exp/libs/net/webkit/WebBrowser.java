@@ -7,10 +7,8 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.Set;
@@ -75,10 +73,7 @@ public class WebBrowser {
 	 */
 	private void setWebPropertyToSysEnv() {
 		String property = "";
-		if(WebDriverType.PHANTOMJS == type) {
-			property = PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY;
-			
-		} else if(WebDriverType.CHROME == type) {
+		if(WebDriverType.CHROME == type) {
 			property = ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY;
 			
 		} else {
@@ -95,52 +90,24 @@ public class WebBrowser {
 	 * @param loadImages 是否加载图片(默认不加载)
 	 */
 	public void initWebDriver(boolean loadImages) {
-		if(WebDriverType.PHANTOMJS == type) {
-			this.driver = new PhantomJSDriver(getCapabilities(loadImages));
-			
-		} else if(WebDriverType.CHROME == type) {
-			this.driver = new ChromeDriver(getCapabilities(loadImages));
-			
-		} else {
-			this.driver = new HtmlUnitDriver(getCapabilities(loadImages));
-		}
-	}
-	
-	/**
-	 * 获取WEB驱动的能力参数
-	 * @param loadImages
-	 * @return
-	 */
-	private DesiredCapabilities getCapabilities(boolean loadImages) {
-		DesiredCapabilities capabilities = null;
-		
-		if(WebDriverType.PHANTOMJS == type) {
-			capabilities = DesiredCapabilities.phantomjs();
-			capabilities.setJavascriptEnabled(true);	// 执行页面js脚本
-			capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);	// SSL证书支持
-
-			final String PAGE_SETTINGS = PhantomJSDriverService.PHANTOMJS_PAGE_SETTINGS_PREFIX;
-			capabilities.setCapability(PAGE_SETTINGS.concat("loadImages"), loadImages);		// 加载图片
-			capabilities.setCapability(PAGE_SETTINGS.concat("XSSAuditingEnabled"), false);	// 跨域请求监控
-			capabilities.setCapability(PAGE_SETTINGS.concat("localToRemoteUrlAccessEnabled"), false);	// 本地资源是否可以访问远程URL
-			capabilities.setCapability(PAGE_SETTINGS.concat("userAgent"), HttpHead.VAL.USER_AGENT);	// 伪装浏览器
-
-//			final String HERDER = PhantomJSDriverService.PHANTOMJS_PAGE_CUSTOMHEADERS_PREFIX;
-//			capabilities.setCapability(HERDER.concat("Accept"), "application/json, text/javascript, */*; q=0.01");
-//			capabilities.setCapability(HERDER.concat("Content-Type"), "application/x-www-form-urlencoded; charset=UTF-8");
-//			capabilities.setCapability(HERDER.concat("Accept-Encoding"), "gzip, deflate, br");
-//			capabilities.setCapability(HERDER.concat("Accept-Language"), "zh-CN,zh;q=0.8");
-
-		} else if(WebDriverType.CHROME == type) {
-			capabilities = DesiredCapabilities.chrome();
-			capabilities.setJavascriptEnabled(true);
-			capabilities.setCapability("loadImages", loadImages);
+		if(WebDriverType.CHROME == type) {
+			ChromeOptions options=new ChromeOptions();
+			options.addArguments("--headless");		// 设置 chrome 的无头模式
+			options.addArguments("--disable-gpu");
+			options.addArguments("--no-sandbox");
+			options.addArguments("--disable-dev-shm-usage");
+			options.addArguments("--start-maximized");
+			options.addArguments("--window-size=1600, 900");	// FIXME 因为浏览器页面必须滚动才能全部展示，这里可以直接给个很大的高度
+			if (loadImages == false) {
+				options.addArguments("--disable-images");
+			}
+			this.driver = new ChromeDriver(options);
 
 		} else {
-			capabilities = DesiredCapabilities.htmlUnit();
+			DesiredCapabilities capabilities = DesiredCapabilities.htmlUnit();
 			capabilities.setJavascriptEnabled(true);
+			this.driver = new HtmlUnitDriver(capabilities);
 		}
-		return capabilities;
 	}
 	
 	/**
@@ -168,7 +135,7 @@ public class WebBrowser {
 		} catch(Throwable e) {}
 		
 		// 以防万一, 使用系统命令杀掉驱动进程 （Chrome只能通过此方法）
-		if(WebDriverType.PHANTOMJS != type && WebDriverType.HTMLUTIL != type) {
+		if(WebDriverType.CHROME == type) {
 			CmdUtils.kill(type.DRIVER_NAME());
 		}
 	}
