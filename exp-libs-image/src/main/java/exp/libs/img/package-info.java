@@ -1,4 +1,4 @@
 /**
- * 图像处理模块
+ * 图像处理工具
  */
 package exp.libs.img;
