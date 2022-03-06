@@ -15,7 +15,7 @@ import java.nio.channels.ClosedChannelException;
  * 在客户业务处理器之前处理异常，可针对不同类型的异常作出对应的处理
  * </pre>	
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
  * @version   2022-03-06
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+

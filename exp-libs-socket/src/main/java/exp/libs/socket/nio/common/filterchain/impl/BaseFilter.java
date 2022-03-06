@@ -13,7 +13,7 @@ import exp.libs.socket.nio.common.interfaze.ISession;
  * 若需要重写全部事件逻辑，应该实现实现IFilter接口
  * </pre>	
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
  * @version   2022-03-06
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+

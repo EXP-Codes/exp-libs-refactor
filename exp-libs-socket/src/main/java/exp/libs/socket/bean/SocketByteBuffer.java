@@ -7,7 +7,7 @@ import java.io.UnsupportedEncodingException;
  * Socket 专用的字节缓冲区(仅用于读取通道数据的操作)
  * </pre>	
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
  * @version   2022-03-06
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+

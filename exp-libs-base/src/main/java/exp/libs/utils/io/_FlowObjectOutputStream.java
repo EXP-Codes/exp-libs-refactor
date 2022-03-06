@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * 	以解决无法在同一个文件中连续序列化多个对象的问题。
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
  * @version   2022-03-06
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+
@@ -103,7 +103,7 @@ final class _FlowObjectOutputStream {
 	 * 后续【追加】的对象均不再写入 Header。
 	 * </PRE>
 	 * <br/><B>PROJECT : </B> exp-libs
-	 * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+	 * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
 	 * @version   2022-03-06
 	 * @author    EXP: exp.lqb@foxmail.com
 	 * @since     JDK 1.8+

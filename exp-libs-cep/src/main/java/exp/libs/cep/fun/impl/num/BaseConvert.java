@@ -11,7 +11,7 @@ import java.util.List;
  * 	进制互转:10进制正整数 <-> 任意进制数(>=2, <=36)
  * </pre>	
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
  * @version   2022-03-06
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+

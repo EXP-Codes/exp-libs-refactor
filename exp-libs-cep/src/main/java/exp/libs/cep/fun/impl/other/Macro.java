@@ -12,7 +12,7 @@ import java.util.List;
  * 	宏定义函数:给定多个无直接关系的函数，连续执行.期间只要有一个执行失败则中断.
  * </pre>	
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
  * @version   2022-03-06
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+

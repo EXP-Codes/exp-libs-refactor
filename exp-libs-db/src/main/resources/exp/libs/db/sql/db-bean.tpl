@@ -11,7 +11,7 @@ import exp.libs.db.sql.DBUtils;
  * Class Name : @{class_name}@
  * </PRE>
  * <B>PROJECT : </B> exp-libs
- * <B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * <B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
  * @version   @{date}@
  * @author    EXP: exp.lqb@foxmail.com
  * @since     jdk version : jdk 1.6

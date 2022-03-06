@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  *	注：若启用了心跳模式, 则在会话close后, 对象不可再用(因为同一个线程无法被启动两次)
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a> 
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a> 
  * @version   2022-03-06
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+

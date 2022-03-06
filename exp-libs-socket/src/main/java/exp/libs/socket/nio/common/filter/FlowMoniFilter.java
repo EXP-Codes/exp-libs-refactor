@@ -13,7 +13,7 @@ import java.util.Map;
  * 流量监控过滤器 （监控单位：字节）
  * </pre>	
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
  * @version   2022-03-06
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+
@@ -120,7 +120,7 @@ public class FlowMoniFilter extends BaseFilter {
 	 * 内部统计类，用于计算流量
 	 * </PRE>
 	 * <br/><B>PROJECT : </B> exp-libs
-	 * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+	 * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
 	 * @version   2022-03-06
 	 * @author    EXP: exp.lqb@foxmail.com
 	 * @since     JDK 1.8+
