@@ -14,10 +14,10 @@ import java.io.InputStreamReader;
  * OCR图像文字识别组件
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="http://www.exp-blog.com" target="_blank">www.exp-blog.com</a> 
- * @version   2017-12-17
- * @author    EXP: 272629724@qq.com
- * @since     jdk版本：jdk1.6
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * @version   2022-03-06
+ * @author    EXP: exp.lqb@foxmail.com
+ * @since     JDK 1.8+
  */
 final class _OCR {
 	

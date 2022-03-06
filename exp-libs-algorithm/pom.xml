@@ -15,7 +15,10 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.exp-bolg</groupId>
+            <artifactId>exp-libs-base</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

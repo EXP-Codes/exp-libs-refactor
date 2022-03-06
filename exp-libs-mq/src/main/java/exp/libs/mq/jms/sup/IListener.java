@@ -9,10 +9,10 @@ import javax.jms.MessageListener;
  * 例：consumer.setMessageListener(new Listener());<br>
  * 
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="http://www.exp-blog.com" target="_blank">www.exp-blog.com</a> 
- * @version   2016-02-14
- * @author    EXP: 272629724@qq.com
- * @since     jdk版本：jdk1.6
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * @version   2022-03-06
+ * @author    EXP: exp.lqb@foxmail.com
+ * @since     JDK 1.8+
  */
 public interface  IListener extends MessageListener{
 	//public void onMessage(Message message);

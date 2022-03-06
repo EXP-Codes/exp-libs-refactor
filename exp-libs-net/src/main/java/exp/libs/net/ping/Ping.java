@@ -15,10 +15,10 @@ import java.util.List;
  * 简单的ping操作
  * </pre>
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="http://www.exp-blog.com" target="_blank">www.exp-blog.com</a> 
- * @version   2018-06-27
- * @author    EXP: 272629724@qq.com
- * @since     jdk版本：jdk1.6
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank"https://exp-blog.com/a>
+ * @version   2022-03-06
+ * @author    EXP: exp.lqb@foxmail.com
+ * @since     JDK 1.8+
  */
 public class Ping {
 	
@@ -34,7 +34,7 @@ public class Ping {
 	
 	/**
 	 * 执行ping操作
-	 * @param host 被ping的主机, 可以是IP(如192.168.11.22) 或 域名(如:www.exp-blog.com)
+	 * @param host 被ping的主机, 可以是IP(如192.168.11.22) 或 域名(如:exp-blog.com)
 	 * @return ping结果
 	 */
 	public static Pong ping(String host) {
@@ -43,7 +43,7 @@ public class Ping {
 	
 	/**
 	 * 执行ping操作
-	 * @param host 被ping的主机, 可以是IP(如192.168.11.22) 或 域名(如:www.exp-blog.com)
+	 * @param host 被ping的主机, 可以是IP(如192.168.11.22) 或 域名(如:exp-blog.com)
 	 * @param count 执行ping的次数(默认4次)
 	 * @return ping结果
 	 */
@@ -53,7 +53,7 @@ public class Ping {
 	
 	/**
 	 * 执行ping操作
-	 * @param host 被ping的主机, 可以是IP(如192.168.11.22) 或 域名(如:www.exp-blog.com)
+	 * @param host 被ping的主机, 可以是IP(如192.168.11.22) 或 域名(如:exp-blog.com)
 	 * @param count 执行ping的次数(默认4次)
 	 * @param timeout 仅linux有效:命令超时(s). 若超过这个时间则ping命令强制结束
 	 * @param intervalSecond 仅linux有效:执行ping的间隔(s), 默认值1秒
@@ -67,7 +67,7 @@ public class Ping {
 
 	/**
 	 * 组装ping命令
-	 * @param host 被ping的主机, 可以是IP(如192.168.11.22) 或 域名(如:www.exp-blog.com)
+	 * @param host 被ping的主机, 可以是IP(如192.168.11.22) 或 域名(如:exp-blog.com)
 	 * @param count 执行ping的次数(默认4次)
 	 * @param timeout 仅linux有效:命令超时(s). 若超过这个时间则ping命令强制结束
 	 * @param intervalSecond 仅linux有效:执行ping的间隔(s), 默认值1秒
@@ -124,7 +124,7 @@ public class Ping {
 	    	Pinging 183.232.231.173 with 32 bytes of data:
 	    	
 	 * 或 PING 域名：
-			Pinging www.exp-blog.com [183.232.231.173] with 32 bytes of data:
+			Pinging exp-blog.com [183.232.231.173] with 32 bytes of data:
 			Reply from 183.232.231.173: bytes=32 time<1ms TTL=50
 			Reply from 183.232.231.173: bytes=32 time=6ms TTL=50
 			Reply from 183.232.231.173: bytes=32 time=7ms TTL=50
@@ -205,7 +205,7 @@ public class Ping {
 	    	正在 Ping 183.232.231.173 具有 32 字节的数据:
 	    	
 	 * 或 PING 域名：
-			正在 Ping www.exp-blog.com [183.232.231.172] 具有 32 字节的数据:
+			正在 Ping exp-blog.com [183.232.231.172] 具有 32 字节的数据:
 			来自 183.232.231.172 的回复: 字节=32 时间<1ms TTL=54
 			来自 183.232.231.172 的回复: 字节=32 时间=58ms TTL=54
 			来自 183.232.231.172 的回复: 字节=32 时间=69ms TTL=54
@@ -286,13 +286,13 @@ public class Ping {
 	    	PING 220.181.112.244 (220.181.112.244) 56(84) bytes of data.
 	    	
 	 * 或 PING 域名：
-		 	PING www.exp-blog.com (220.181.112.244) 56(84) bytes of data.
+		 	PING exp-blog.com (220.181.112.244) 56(84) bytes of data.
 			64 bytes from 220.181.112.244 (220.181.112.244): icmp_seq=1 ttl=55 time<1 ms
 			64 bytes from 220.181.112.244 (220.181.112.244): icmp_seq=2 ttl=55 time=43.9 ms
 			64 bytes from 220.181.112.244 (220.181.112.244): icmp_seq=3 ttl=55 time=43.9 ms
 			64 bytes from 220.181.112.244 (220.181.112.244): icmp_seq=4 ttl=55 time=43.9 ms
 			
-			--- www.exp-blog.com ping statistics ---
+			--- exp-blog.com ping statistics ---
 			4 packets transmitted, 4 received, 0% packet loss, time 3003ms
 			rtt min/avg/max/mdev = 43.928/43.953/43.989/0.257 ms 
 		</PRE>
@@ -359,7 +359,7 @@ public class Ping {
 	/**
 	 * 执行tracert操作
 	 * 
-	 * @param host 被tracert的主机, 可以是IP(如192.168.11.22) 或 域名(如:www.exp-blog.com)
+	 * @param host 被tracert的主机, 可以是IP(如192.168.11.22) 或 域名(如:exp-blog.com)
 	 * @return tracert结果
 	 */
 	public static String tracert(String host) {
