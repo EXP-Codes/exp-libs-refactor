@@ -45,6 +45,13 @@
             <artifactId>jackson-jaxrs</artifactId>
             <version>1.9.13</version>
         </dependency>
+
+        <!-- ehcache缓存器 -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.10.9.2</version>
+        </dependency>
     </dependencies>
 
 </project>
