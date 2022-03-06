@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//httpclient/src/java/org/apache/commons/httpclient/ChunkedInputStream.java,v 1.24 2004/10/10 15:18:55 olegk Exp $
  * $Revision: 480424 $
- * $Date: 2006-11-29 05:56:49 +0000 (Wed, 29 Nov 2006) $
+ * $Date: 2006-11-29 06:56:49 +0100 (Wed, 29 Nov 2006) $
  *
  * ====================================================================
  *
@@ -30,14 +30,14 @@
 
 package org.apache.commons.httpclient;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.httpclient.util.ExceptionUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 
 /**
@@ -87,20 +87,20 @@ public class ChunkedInputStream extends InputStream {
     private static final Log LOG = LogFactory.getLog(ChunkedInputStream.class);
 
     /**
-     * ChunkedInputStream constructor that associates the chunked input stream with a 
-     * {@link HttpMethod HTTP method}. Usually it should be the same {@link HttpMethod 
-     * HTTP method} the chunked input stream originates from. If chunked input stream 
-     * contains any footers (trailing headers), they will be added to the associated 
+     * ChunkedInputStream constructor that associates the chunked input stream with a
+     * {@link HttpMethod HTTP method}. Usually it should be the same {@link HttpMethod
+     * HTTP method} the chunked input stream originates from. If chunked input stream
+     * contains any footers (trailing headers), they will be added to the associated
      * {@link HttpMethod HTTP method}.
      *
      * @param in the raw input stream
-     * @param method the HTTP method to associate this input stream with. Can be <tt>null</tt>.  
+     * @param method the HTTP method to associate this input stream with. Can be <tt>null</tt>.
      *
      * @throws IOException If an IO error occurs
      */
     public ChunkedInputStream(
-        final InputStream in, final HttpMethod method) throws IOException {
-            
+            final InputStream in, final HttpMethod method) throws IOException {
+
         if (in == null) {
             throw new IllegalArgumentException("InputStream parameter may not be null");
         }
@@ -119,19 +119,19 @@ public class ChunkedInputStream extends InputStream {
     public ChunkedInputStream(final InputStream in) throws IOException {
         this(in, null);
     }
-    
+
     /**
      * <p> Returns all the data in a chunked stream in coalesced form. A chunk
      * is followed by a CRLF. The method returns -1 as soon as a chunksize of 0
      * is detected.</p>
-     * 
+     *
      * <p> Trailer headers are read automcatically at the end of the stream and
      * can be obtained with the getResponseFooters() method.</p>
      *
      * @return -1 of the end of the stream has been reached or the next data
      * byte
      * @throws IOException If an IO problem occurs
-     * 
+     *
      * @see HttpMethod#getResponseFooters()
      */
     public int read() throws IOException {
@@ -141,10 +141,10 @@ public class ChunkedInputStream extends InputStream {
         }
         if (eof) {
             return -1;
-        } 
+        }
         if (pos >= chunkSize) {
             nextChunk();
-            if (eof) { 
+            if (eof) {
                 return -1;
             }
         }
@@ -160,7 +160,7 @@ public class ChunkedInputStream extends InputStream {
      * @param len the maximum number of bytes that can be returned.
      * @return The number of bytes returned or -1 if the end of stream has been
      * reached.
-     * @see InputStream#read(byte[], int, int)
+     * @see java.io.InputStream#read(byte[], int, int)
      * @throws IOException if an IO problem occurs.
      */
     public int read (byte[] b, int off, int len) throws IOException {
@@ -169,12 +169,12 @@ public class ChunkedInputStream extends InputStream {
             throw new IOException("Attempted read from closed stream.");
         }
 
-        if (eof) { 
+        if (eof) {
             return -1;
         }
         if (pos >= chunkSize) {
             nextChunk();
-            if (eof) { 
+            if (eof) {
                 return -1;
             }
         }
@@ -189,7 +189,7 @@ public class ChunkedInputStream extends InputStream {
      * @param b The byte array that will hold the contents from the stream.
      * @return The number of bytes returned or -1 if the end of stream has been
      * reached.
-     * @see InputStream#read(byte[])
+     * @see java.io.InputStream#read(byte[])
      * @throws IOException if an IO problem occurs.
      */
     public int read (byte[] b) throws IOException {
@@ -203,9 +203,9 @@ public class ChunkedInputStream extends InputStream {
     private void readCRLF() throws IOException {
         int cr = in.read();
         int lf = in.read();
-        if ((cr != '\r') || (lf != '\n')) { 
+        if ((cr != '\r') || (lf != '\n')) {
             throw new IOException(
-                "CRLF expected at end of chunk: " + cr + "/" + lf);
+                    "CRLF expected at end of chunk: " + cr + "/" + lf);
         }
     }
 
@@ -235,26 +235,32 @@ public class ChunkedInputStream extends InputStream {
      * @param in The new input stream.
      * @param required <tt>true<tt/> if a valid chunk must be present,
      *                 <tt>false<tt/> otherwise.
-     * 
+     *
      * @return the chunk size as integer
-     * 
+     *
      * @throws IOException when the chunk size could not be parsed
      */
-    private static int getChunkSizeFromInputStream(final InputStream in) 
-      throws IOException {
-            
+    private static int getChunkSizeFromInputStream(final InputStream in)
+            throws IOException {
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         // States: 0=normal, 1=\r was scanned, 2=inside quoted string, -1=end
-        int state = 0; 
+        int state = 0;
         while (state != -1) {
-        	int b = in.read();
-            if (b == -1) { 
-            	System.err.println("chunked stream ended unexpectedly");
-            	return 0;
+            int b = in.read();
+            if (b == -1) {
+
+                /**
+                 * 修正方法
+                 * @author EXP
+                 */
+                System.err.println("chunked stream ended unexpectedly");
+                return 0;
 //                throw new IOException("chunked stream ended unexpectedly");
+
             }
             switch (state) {
-                case 0: 
+                case 0:
                     switch (b) {
                         case '\r':
                             state = 1;
@@ -273,7 +279,7 @@ public class ChunkedInputStream extends InputStream {
                     } else {
                         // this was not CRLF
                         throw new IOException("Protocol violation: Unexpected"
-                            + " single newline character in chunk size");
+                                + " single newline character in chunk size");
                     }
                     break;
 
@@ -298,8 +304,8 @@ public class ChunkedInputStream extends InputStream {
         String dataString = EncodingUtil.getAsciiString(baos.toByteArray());
         int separator = dataString.indexOf(';');
         dataString = (separator > 0)
-            ? dataString.substring(0, separator).trim()
-            : dataString.trim();
+                ? dataString.substring(0, separator).trim()
+                : dataString.trim();
 
         int result;
         try {
@@ -325,7 +331,7 @@ public class ChunkedInputStream extends InputStream {
         } catch(HttpException e) {
             LOG.error("Error parsing trailer headers", e);
             IOException ioe = new IOException(e.getMessage());
-            ExceptionUtil.initCause(ioe, e); 
+            ExceptionUtil.initCause(ioe, e);
             throw ioe;
         }
         if (this.method != null) {

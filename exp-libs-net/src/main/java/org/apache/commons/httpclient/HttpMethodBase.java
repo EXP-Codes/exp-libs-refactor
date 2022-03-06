@@ -1,7 +1,7 @@
 /*
  * $Header: /home/jerenkrantz/tmp/commons/commons-convert/cvs/home/cvs/jakarta-commons//httpclient/src/java/org/apache/commons/httpclient/HttpMethodBase.java,v 1.222 2005/01/14 21:16:40 olegk Exp $
- * $Revision: 487802 $
- * $Date: 2006-12-16 14:14:16 +0000 (Sat, 16 Dec 2006) $
+ * $Revision: 539441 $
+ * $Date: 2007-05-18 14:56:55 +0200 (Fri, 18 May 2007) $
  *
  * ====================================================================
  *
@@ -30,6 +30,13 @@
 
 package org.apache.commons.httpclient;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InterruptedIOException;
+import java.util.Collection;
+
 import org.apache.commons.httpclient.auth.AuthState;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.cookie.CookieSpec;
@@ -41,9 +48,6 @@ import org.apache.commons.httpclient.util.EncodingUtil;
 import org.apache.commons.httpclient.util.ExceptionUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import java.io.*;
-import java.util.Collection;
 
 /**
  * An abstract base implementation of HttpMethod.
@@ -90,7 +94,7 @@ import java.util.Collection;
  * @author <a href="mailto:ggregory@seagullsw.com">Gary Gregory</a>
  * @author Christian Kohlschuetter
  *
- * @version $Revision: 487802 $ $Date: 2006-12-16 14:14:16 +0000 (Sat, 16 Dec 2006) $
+ * @version $Revision: 539441 $ $Date: 2007-05-18 14:56:55 +0200 (Fri, 18 May 2007) $
  */
 public abstract class HttpMethodBase implements HttpMethod {
 
@@ -99,7 +103,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     /** Log object for this class. */
     private static final Log LOG = LogFactory.getLog(HttpMethodBase.class);
 
-    // ----------------------------------------------------- Instance variables 
+    // ----------------------------------------------------- Instance variables
 
     /** Request headers, if any. */
     private HeaderGroup requestHeaders = new HeaderGroup();
@@ -119,7 +123,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     /** Query string of the HTTP method, if any. */
     private String queryString = null;
 
-    /** The response body of the HTTP method, assuming it has not be 
+    /** The response body of the HTTP method, assuming it has not be
      * intercepted by a sub-class. */
     private InputStream responseStream = null;
 
@@ -133,7 +137,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     private boolean followRedirects = false;
 
     /** True if the HTTP method should automatically handle
-    *  HTTP authentication challenges. */
+     *  HTTP authentication challenges. */
     private boolean doAuthentication = true;
 
     /** HTTP protocol parameters. */
@@ -148,8 +152,8 @@ public abstract class HttpMethodBase implements HttpMethod {
     /** True if this method has already been executed. */
     private boolean used = false;
 
-    /** Count of how many times did this HTTP method transparently handle 
-    * a recoverable exception. */
+    /** Count of how many times did this HTTP method transparently handle
+     * a recoverable exception. */
     private int recoverableExceptionCount = 0;
 
     /** the host for this HTTP method, can be null */
@@ -157,7 +161,7 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Handles method retries
-     * 
+     *
      * @deprecated no loner used
      */
     private MethodRetryHandler methodRetryHandler;
@@ -177,13 +181,13 @@ public abstract class HttpMethodBase implements HttpMethod {
     /** Whether the HTTP request has been transmitted to the target
      * server it its entirety */
     private boolean requestSent = false;
-    
+
     /** Actual cookie policy */
     private CookieSpec cookiespec = null;
 
     /** Default initial size of the response buffer if content length is unknown. */
     private static final int DEFAULT_INITIAL_BUFFER_SIZE = 4*1024; // 4 kB
-    
+
     // ----------------------------------------------------------- Constructors
 
     /**
@@ -199,12 +203,12 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @param uri either an absolute or relative URI. The URI is expected
      *            to be URL-encoded
-     * 
+     *
      * @throws IllegalArgumentException when URI is invalid
      * @throws IllegalStateException when protocol of the absolute URI is not recognised
      */
-    public HttpMethodBase(String uri) 
-        throws IllegalArgumentException, IllegalStateException {
+    public HttpMethodBase(String uri)
+            throws IllegalArgumentException, IllegalStateException {
 
         try {
 
@@ -215,8 +219,8 @@ public abstract class HttpMethodBase implements HttpMethod {
             String charset = getParams().getUriCharset();
             setURI(new URI(uri, true, charset));
         } catch (URIException e) {
-            throw new IllegalArgumentException("Invalid uri '" 
-                + uri + "': " + e.getMessage() 
+            throw new IllegalArgumentException("Invalid uri '"
+                    + uri + "': " + e.getMessage()
             );
         }
     }
@@ -226,19 +230,19 @@ public abstract class HttpMethodBase implements HttpMethod {
     /**
      * Obtains the name of the HTTP method as used in the HTTP request line,
      * for example <tt>"GET"</tt> or <tt>"POST"</tt>.
-     * 
+     *
      * @return the name of this method
      */
     public abstract String getName();
 
     /**
      * Returns the URI of the HTTP method
-     * 
+     *
      * @return The URI
-     * 
+     *
      * @throws URIException If the URI cannot be created.
-     * 
-     * @see HttpMethod#getURI()
+     *
+     * @see org.apache.commons.httpclient.HttpMethod#getURI()
      */
     public URI getURI() throws URIException {
         StringBuffer buffer = new StringBuffer();
@@ -262,12 +266,12 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Sets the URI for this method. 
-     * 
-     * @param uri URI to be set 
-     * 
+     * Sets the URI for this method.
+     *
+     * @param uri URI to be set
+     *
      * @throws URIException if a URI cannot be set
-     * 
+     *
      * @since 3.0
      */
     public void setURI(URI uri) throws URIException {
@@ -277,17 +281,17 @@ public abstract class HttpMethodBase implements HttpMethod {
         }
         // set the path, defaulting to root
         setPath(
-            uri.getPath() == null
-            ? "/"
-            : uri.getEscapedPath()
+                uri.getPath() == null
+                        ? "/"
+                        : uri.getEscapedPath()
         );
         setQueryString(uri.getEscapedQuery());
-    } 
+    }
 
     /**
-     * Sets whether or not the HTTP method should automatically follow HTTP redirects 
+     * Sets whether or not the HTTP method should automatically follow HTTP redirects
      * (status code 302, etc.)
-     * 
+     *
      * @param followRedirects <tt>true</tt> if the method will automatically follow redirects,
      * <tt>false</tt> otherwise.
      */
@@ -296,10 +300,10 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Returns <tt>true</tt> if the HTTP method should automatically follow HTTP redirects 
+     * Returns <tt>true</tt> if the HTTP method should automatically follow HTTP redirects
      * (status code 302, etc.), <tt>false</tt> otherwise.
-     * 
-     * @return <tt>true</tt> if the method will automatically follow HTTP redirects, 
+     *
+     * @return <tt>true</tt> if the method will automatically follow HTTP redirects,
      * <tt>false</tt> otherwise.
      */
     public boolean getFollowRedirects() {
@@ -309,7 +313,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     /** Sets whether version 1.1 of the HTTP protocol should be used per default.
      *
      * @param http11 <tt>true</tt> to use HTTP/1.1, <tt>false</tt> to use 1.0
-     * 
+     *
      * @deprecated Use {@link HttpMethodParams#setVersion(HttpVersion)}
      */
     public void setHttp11(boolean http11) {
@@ -317,16 +321,16 @@ public abstract class HttpMethodBase implements HttpMethod {
             this.params.setVersion(HttpVersion.HTTP_1_1);
         } else {
             this.params.setVersion(HttpVersion.HTTP_1_0);
-        } 
+        }
     }
 
     /**
-     * Returns <tt>true</tt> if the HTTP method should automatically handle HTTP 
+     * Returns <tt>true</tt> if the HTTP method should automatically handle HTTP
      * authentication challenges (status code 401, etc.), <tt>false</tt> otherwise
      *
-     * @return <tt>true</tt> if authentication challenges will be processed 
+     * @return <tt>true</tt> if authentication challenges will be processed
      * automatically, <tt>false</tt> otherwise.
-     * 
+     *
      * @since 2.0
      */
     public boolean getDoAuthentication() {
@@ -334,12 +338,12 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Sets whether or not the HTTP method should automatically handle HTTP 
+     * Sets whether or not the HTTP method should automatically handle HTTP
      * authentication challenges (status code 401, etc.)
      *
      * @param doAuthentication <tt>true</tt> to process authentication challenges
      * authomatically, <tt>false</tt> otherwise.
-     * 
+     *
      * @since 2.0
      */
     public void setDoAuthentication(boolean doAuthentication) {
@@ -349,11 +353,11 @@ public abstract class HttpMethodBase implements HttpMethod {
     // ---------------------------------------------- Protected Utility Methods
 
     /**
-     * Returns <tt>true</tt> if version 1.1 of the HTTP protocol should be 
+     * Returns <tt>true</tt> if version 1.1 of the HTTP protocol should be
      * used per default, <tt>false</tt> if version 1.0 should be used.
      *
      * @return <tt>true</tt> to use HTTP/1.1, <tt>false</tt> to use 1.0
-     * 
+     *
      * @deprecated Use {@link HttpMethodParams#getVersion()}
      */
     public boolean isHttp11() {
@@ -373,22 +377,6 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Adds the specified response header, NOT overwriting any previous value.
-     * Note that header-name matching is case insensitive.
-     *
-     * @param header the header to add to the request
-     */
-    public void addResponseHeader(Header header) {
-        LOG.trace("HttpMethodBase.addResponseHeader(Header)");
-
-        if (header == null) {
-            LOG.debug("null header value ignored");
-        } else {
-            getResponseHeaderGroup().addHeader(header);
-        }
-    }
-    
-    /**
      * Adds the specified request header, NOT overwriting any previous value.
      * Note that header-name matching is case insensitive.
      *
@@ -406,7 +394,7 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Use this method internally to add footers.
-     * 
+     *
      * @param footer The footer to add.
      */
     public void addResponseFooter(Header footer) {
@@ -415,7 +403,7 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Gets the path of this HTTP method.
-     * Calling this method <em>after</em> the request has been executed will 
+     * Calling this method <em>after</em> the request has been executed will
      * return the <em>actual</em> path, following any redirects automatically
      * handled by this HTTP method.
      *
@@ -426,12 +414,12 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Sets the query string of this HTTP method. The caller must ensure that the string 
-     * is properly URL encoded. The query string should not start with the question 
+     * Sets the query string of this HTTP method. The caller must ensure that the string
+     * is properly URL encoded. The query string should not start with the question
      * mark character.
      *
      * @param queryString the query string
-     * 
+     *
      * @see EncodingUtil#formUrlEncode(NameValuePair[], String)
      */
     public void setQueryString(String queryString) {
@@ -439,14 +427,14 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Sets the query string of this HTTP method.  The pairs are encoded as UTF-8 characters.  
-     * To use a different charset the parameters can be encoded manually using EncodingUtil 
+     * Sets the query string of this HTTP method.  The pairs are encoded as UTF-8 characters.
+     * To use a different charset the parameters can be encoded manually using EncodingUtil
      * and set as a single String.
      *
      * @param params an array of {@link NameValuePair}s to add as query string
-     *        parameters. The name/value pairs will be automcatically 
+     *        parameters. The name/value pairs will be automcatically
      *        URL encoded
-     * 
+     *
      * @see EncodingUtil#formUrlEncode(NameValuePair[], String)
      * @see #setQueryString(String)
      */
@@ -479,19 +467,19 @@ public abstract class HttpMethodBase implements HttpMethod {
     /**
      * Sets the specified request header, overwriting any previous value.
      * Note that header-name matching is case insensitive.
-     * 
+     *
      * @param header the header
      */
     public void setRequestHeader(Header header) {
-        
+
         Header[] headers = getRequestHeaderGroup().getHeaders(header.getName());
-        
+
         for (int i = 0; i < headers.length; i++) {
             getRequestHeaderGroup().removeHeader(headers[i]);
         }
-        
+
         getRequestHeaderGroup().addHeader(header);
-        
+
     }
 
     /**
@@ -499,11 +487,11 @@ public abstract class HttpMethodBase implements HttpMethod {
      * case insensitive. <tt>null</tt> will be returned if either
      * <i>headerName</i> is <tt>null</tt> or there is no matching header for
      * <i>headerName</i>.
-     * 
+     *
      * @param headerName The name of the header to be returned.
      *
      * @return The specified request header.
-     * 
+     *
      * @since 3.0
      */
     public Header getRequestHeader(String headerName) {
@@ -524,7 +512,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * @see HttpMethod#getRequestHeaders(String)
+     * @see org.apache.commons.httpclient.HttpMethod#getRequestHeaders(java.lang.String)
      */
     public Header[] getRequestHeaders(String headerName) {
         return getRequestHeaderGroup().getHeaders(headerName);
@@ -532,9 +520,9 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Gets the {@link HeaderGroup header group} storing the request headers.
-     * 
+     *
      * @return a HeaderGroup
-     * 
+     *
      * @since 2.0beta1
      */
     protected HeaderGroup getRequestHeaderGroup() {
@@ -542,11 +530,11 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Gets the {@link HeaderGroup header group} storing the response trailer headers 
+     * Gets the {@link HeaderGroup header group} storing the response trailer headers
      * as per RFC 2616 section 3.6.1.
-     * 
+     *
      * @return a HeaderGroup
-     * 
+     *
      * @since 2.0beta1
      */
     protected HeaderGroup getResponseTrailerHeaderGroup() {
@@ -555,18 +543,18 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Gets the {@link HeaderGroup header group} storing the response headers.
-     * 
+     *
      * @return a HeaderGroup
-     * 
+     *
      * @since 2.0beta1
      */
     protected HeaderGroup getResponseHeaderGroup() {
         return responseHeaders;
     }
-    
+
     /**
-     * @see HttpMethod#getResponseHeaders(String)
-     * 
+     * @see org.apache.commons.httpclient.HttpMethod#getResponseHeaders(java.lang.String)
+     *
      * @since 3.0
      */
     public Header[] getResponseHeaders(String headerName) {
@@ -620,12 +608,12 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @return the matching header
      */
-    public Header getResponseHeader(String headerName) {        
+    public Header getResponseHeader(String headerName) {
         if (headerName == null) {
             return null;
         } else {
             return getResponseHeaderGroup().getCondensedHeader(headerName);
-        }        
+        }
     }
 
 
@@ -637,9 +625,9 @@ public abstract class HttpMethodBase implements HttpMethod {
      * Return <tt>-1</tt> when the content-length is unknown.
      * </p>
      *
-     * @return content length, if <tt>Content-Length</tt> header is available. 
+     * @return content length, if <tt>Content-Length</tt> header is available.
      *          <tt>0</tt> indicates that the request has no body.
-     *          If <tt>Content-Length</tt> header is not present, the method 
+     *          If <tt>Content-Length</tt> header is not present, the method
      *          returns  <tt>-1</tt>.
      */
     public long getResponseContentLength() {
@@ -667,16 +655,18 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Returns the response body of the HTTP method, if any, as an array of bytes.
-     * If response body is not available or cannot be read, returns <tt>null</tt>
-     * 
+     * If response body is not available or cannot be read, returns <tt>null</tt>.
+     * Buffers the response and this method can be called several times yielding
+     * the same result each time.
+     *
      * Note: This will cause the entire response body to be buffered in memory. A
      * malicious server may easily exhaust all the VM memory. It is strongly
      * recommended, to use getResponseAsStream if the content length of the response
      * is unknown or resonably large.
-     *  
+     *
      * @return The response body.
-     * 
-     * @throws IOException If an I/O (transport) problem occurs while obtaining the 
+     *
+     * @throws IOException If an I/O (transport) problem occurs while obtaining the
      * response body.
      */
     public byte[] getResponseBody() throws IOException {
@@ -687,12 +677,12 @@ public abstract class HttpMethodBase implements HttpMethod {
                 if (contentLength > Integer.MAX_VALUE) { //guard below cast from overflow
                     throw new IOException("Content too large to be buffered: "+ contentLength +" bytes");
                 }
-//                int limit = getParams().getIntParameter(HttpMethodParams.BUFFER_WARN_TRIGGER_LIMIT, 1024*1024);
-//                if ((contentLength == -1) || (contentLength > limit)) {
-//                    LOG.debug("Going to buffer response body of large or unknown size. "
-//                            +"Using getResponseBodyAsStream instead is recommended.");
-//                }
-//                LOG.debug("Buffering response body");
+                int limit = getParams().getIntParameter(HttpMethodParams.BUFFER_WARN_TRIGGER_LIMIT, 1024*1024);
+                if ((contentLength == -1) || (contentLength > limit)) {
+                    LOG.warn("Going to buffer response body of large or unknown size. "
+                            +"Using getResponseBodyAsStream instead is recommended.");
+                }
+                LOG.debug("Buffering response body");
                 ByteArrayOutputStream outstream = new ByteArrayOutputStream(
                         contentLength > 0 ? (int) contentLength : DEFAULT_INITIAL_BUFFER_SIZE);
                 byte[] buffer = new byte[4096];
@@ -710,20 +700,22 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Returns the response body of the HTTP method, if any, as an array of bytes.
-     * If response body is not available or cannot be read, returns <tt>null</tt>
-     * 
+     * If response body is not available or cannot be read, returns <tt>null</tt>.
+     * Buffers the response and this method can be called several times yielding
+     * the same result each time.
+     *
      * Note: This will cause the entire response body to be buffered in memory. This method is
      * safe if the content length of the response is unknown, because the amount of memory used
      * is limited.<p>
-     * 
-     * If the response is large this method involves lots of array copying and many object 
+     *
+     * If the response is large this method involves lots of array copying and many object
      * allocations, which makes it unsuitable for high-performance / low-footprint applications.
      * Those applications should use {@link #getResponseBodyAsStream()}.
-     * 
-     * @param maxlen the maximum content length to accept (number of bytes). 
+     *
+     * @param maxlen the maximum content length to accept (number of bytes).
      * @return The response body.
-     * 
-     * @throws IOException If an I/O (transport) problem occurs while obtaining the 
+     *
+     * @throws IOException If an I/O (transport) problem occurs while obtaining the
      * response body.
      */
     public byte[] getResponseBody(int maxlen) throws IOException {
@@ -737,7 +729,7 @@ public abstract class HttpMethodBase implements HttpMethod {
                     throw new HttpContentTooLargeException(
                             "Content-Length is " + contentLength, maxlen);
                 }
-                
+
                 LOG.debug("Buffering response body");
                 ByteArrayOutputStream rawdata = new ByteArrayOutputStream(
                         contentLength > 0 ? (int) contentLength : DEFAULT_INITIAL_BUFFER_SIZE);
@@ -750,14 +742,14 @@ public abstract class HttpMethodBase implements HttpMethod {
                     rawdata.write(buffer, 0, len);
                     pos += len;
                 } while (pos < maxlen);
-                
+
                 setResponseStream(null);
                 // check if there is even more data
                 if (pos == maxlen) {
                     if (instream.read() != -1)
                         throw new HttpContentTooLargeException(
                                 "Content-Length not known but larger than "
-                                + maxlen, maxlen);
+                                        + maxlen, maxlen);
                 }
                 this.responseBody = rawdata.toByteArray();
             }
@@ -766,12 +758,14 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Returns the response body of the HTTP method, if any, as an {@link InputStream}. 
-     * If response body is not available, returns <tt>null</tt>
-     * 
+     * Returns the response body of the HTTP method, if any, as an {@link InputStream}.
+     * If response body is not available, returns <tt>null</tt>. If the response has been
+     * buffered this method returns a new stream object on every call. If the response
+     * has not been buffered the returned stream can only be read once.
+     *
      * @return The response body or <code>null</code>.
-     * 
-     * @throws IOException If an I/O (transport) problem occurs while obtaining the 
+     *
+     * @throws IOException If an I/O (transport) problem occurs while obtaining the
      * response body.
      */
     public InputStream getResponseBodyAsStream() throws IOException {
@@ -787,19 +781,20 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Returns the response body of the HTTP method, if any, as a {@link String}. 
+     * Returns the response body of the HTTP method, if any, as a {@link String}.
      * If response body is not available or cannot be read, returns <tt>null</tt>
      * The string conversion on the data is done using the character encoding specified
-     * in <tt>Content-Type</tt> header.
-     * 
+     * in <tt>Content-Type</tt> header. Buffers the response and this method can be
+     * called several times yielding the same result each time.
+     *
      * Note: This will cause the entire response body to be buffered in memory. A
      * malicious server may easily exhaust all the VM memory. It is strongly
      * recommended, to use getResponseAsStream if the content length of the response
      * is unknown or resonably large.
-     * 
+     *
      * @return The response body or <code>null</code>.
-     * 
-     * @throws IOException If an I/O (transport) problem occurs while obtaining the 
+     *
+     * @throws IOException If an I/O (transport) problem occurs while obtaining the
      * response body.
      */
     public String getResponseBodyAsString() throws IOException {
@@ -813,26 +808,27 @@ public abstract class HttpMethodBase implements HttpMethod {
             return null;
         }
     }
-    
+
     /**
-     * Returns the response body of the HTTP method, if any, as a {@link String}. 
+     * Returns the response body of the HTTP method, if any, as a {@link String}.
      * If response body is not available or cannot be read, returns <tt>null</tt>
      * The string conversion on the data is done using the character encoding specified
-     * in <tt>Content-Type</tt> header.<p>
-     * 
+     * in <tt>Content-Type</tt> header. Buffers the response and this method can be
+     * called several times yielding the same result each time.</p>
+     *
      * Note: This will cause the entire response body to be buffered in memory. This method is
      * safe if the content length of the response is unknown, because the amount of memory used
      * is limited.<p>
-     * 
-     * If the response is large this method involves lots of array copying and many object 
+     *
+     * If the response is large this method involves lots of array copying and many object
      * allocations, which makes it unsuitable for high-performance / low-footprint applications.
      * Those applications should use {@link #getResponseBodyAsStream()}.
-     * 
+     *
      * @param maxlen the maximum content length to accept (number of bytes). Note that,
      * depending on the encoding, this is not equal to the number of characters.
      * @return The response body or <code>null</code>.
-     * 
-     * @throws IOException If an I/O (transport) problem occurs while obtaining the 
+     *
+     * @throws IOException If an I/O (transport) problem occurs while obtaining the
      * response body.
      */
     public String getResponseBodyAsString(int maxlen) throws IOException {
@@ -866,7 +862,7 @@ public abstract class HttpMethodBase implements HttpMethod {
      * or there are no footers available.  If there are multiple footers
      * with the same name, there values will be combined with the ',' separator
      * as specified by RFC2616.
-     * 
+     *
      * @param footerName the footer name to match
      * @return the matching footer
      */
@@ -897,11 +893,11 @@ public abstract class HttpMethodBase implements HttpMethod {
     protected InputStream getResponseStream() {
         return responseStream;
     }
-    
+
     /**
      * Returns the status text (or "reason phrase") associated with the latest
      * response.
-     * 
+     *
      * @return The status text.
      */
     public String getStatusText() {
@@ -909,14 +905,14 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Defines how strictly HttpClient follows the HTTP protocol specification  
+     * Defines how strictly HttpClient follows the HTTP protocol specification
      * (RFC 2616 and other relevant RFCs). In the strict mode HttpClient precisely
-     * implements the requirements of the specification, whereas in non-strict mode 
-     * it attempts to mimic the exact behaviour of commonly used HTTP agents, 
+     * implements the requirements of the specification, whereas in non-strict mode
+     * it attempts to mimic the exact behaviour of commonly used HTTP agents,
      * which many HTTP servers expect.
-     * 
+     *
      * @param strictMode <tt>true</tt> for strict mode, <tt>false</tt> otherwise
-     * 
+     *
      * @deprecated Use {@link org.apache.commons.httpclient.params.HttpParams#setParameter(String, Object)}
      * to exercise a more granular control over HTTP protocol strictness.
      */
@@ -939,17 +935,6 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Adds the specified response header, NOT overwriting any previous value.
-     * Note that header-name matching is case insensitive.
-     *
-     * @param headerName the header's name
-     * @param headerValue the header's value
-     */
-    public void addResponseHeader(String headerName, String headerValue) {
-        addResponseHeader(new Header(headerName, headerValue));
-    }
-    
-    /**
      * Adds the specified request header, NOT overwriting any previous value.
      * Note that header-name matching is case insensitive.
      *
@@ -962,7 +947,7 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Tests if the connection should be force-closed when no longer needed.
-     * 
+     *
      * @return <code>true</code> if the connection must be closed
      */
     protected boolean isConnectionCloseForced() {
@@ -970,10 +955,10 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Sets whether or not the connection should be force-closed when no longer 
-     * needed. This value should only be set to <code>true</code> in abnormal 
-     * circumstances, such as HTTP protocol violations. 
-     * 
+     * Sets whether or not the connection should be force-closed when no longer
+     * needed. This value should only be set to <code>true</code> in abnormal
+     * circumstances, such as HTTP protocol violations.
+     *
      * @param b <code>true</code> if the connection must be closed, <code>false</code>
      * otherwise.
      */
@@ -986,15 +971,15 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Tests if the connection should be closed after the method has been executed.
-     * The connection will be left open when using HTTP/1.1 or if <tt>Connection: 
+     * The connection will be left open when using HTTP/1.1 or if <tt>Connection:
      * keep-alive</tt> header was sent.
-     * 
+     *
      * @param conn the connection in question
-     * 
+     *
      * @return boolean true if we should close the connection.
      */
     protected boolean shouldCloseConnection(HttpConnection conn) {
-        // Connection must be closed due to an abnormal circumstance 
+        // Connection must be closed due to an abnormal circumstance
         if (isConnectionCloseForced()) {
             LOG.debug("Should force-close connection.");
             return true;
@@ -1020,14 +1005,14 @@ public abstract class HttpMethodBase implements HttpMethod {
         if (connectionHeader != null) {
             if (connectionHeader.getValue().equalsIgnoreCase("close")) {
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("Should close connection in response to directive: " 
-                        + connectionHeader.getValue());
+                    LOG.debug("Should close connection in response to directive: "
+                            + connectionHeader.getValue());
                 }
                 return true;
             } else if (connectionHeader.getValue().equalsIgnoreCase("keep-alive")) {
                 if (LOG.isDebugEnabled()) {
-                    LOG.debug("Should NOT close connection in response to directive: " 
-                        + connectionHeader.getValue());
+                    LOG.debug("Should NOT close connection in response to directive: "
+                            + connectionHeader.getValue());
                 }
                 return false;
             } else {
@@ -1049,16 +1034,16 @@ public abstract class HttpMethodBase implements HttpMethod {
         }
         return this.effectiveVersion.lessEquals(HttpVersion.HTTP_1_0);
     }
-    
+
     /**
      * Tests if the this method is ready to be executed.
-     * 
+     *
      * @param state the {@link HttpState state} information associated with this method
      * @param conn the {@link HttpConnection connection} to be used
      * @throws HttpException If the method is in invalid state.
      */
     private void checkExecuteConditions(HttpState state, HttpConnection conn)
-    throws HttpException {
+            throws HttpException {
 
         if (state == null) {
             throw new IllegalArgumentException("HttpState parameter may not be null");
@@ -1076,7 +1061,7 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Executes this method using the specified <code>HttpConnection</code> and
-     * <code>HttpState</code>. 
+     * <code>HttpState</code>.
      *
      * @param state {@link HttpState state} information to associate with this
      *        request. Must be non-null.
@@ -1089,11 +1074,11 @@ public abstract class HttpMethodBase implements HttpMethod {
      * @throws HttpException  if a protocol exception occurs.
      */
     public int execute(HttpState state, HttpConnection conn)
-        throws HttpException, IOException {
-                
+            throws HttpException, IOException {
+
         LOG.trace("enter HttpMethodBase.execute(HttpState, HttpConnection)");
 
-        // this is our connection now, assign it to a local variable so 
+        // this is our connection now, assign it to a local variable so
         // that it can be released later
         this.responseConnection = conn;
 
@@ -1105,21 +1090,21 @@ public abstract class HttpMethodBase implements HttpMethod {
 
         // determine the effective protocol version
         if (this.effectiveVersion == null) {
-            this.effectiveVersion = this.params.getVersion(); 
+            this.effectiveVersion = this.params.getVersion();
         }
 
         writeRequest(state, conn);
         this.requestSent = true;
         readResponse(state, conn);
         // the method has successfully executed
-        used = true; 
+        used = true;
 
         return statusLine.getStatusCode();
     }
 
     /**
      * Aborts the execution of this method.
-     * 
+     *
      * @since 3.0
      */
     public void abort() {
@@ -1127,7 +1112,7 @@ public abstract class HttpMethodBase implements HttpMethod {
             return;
         }
         this.aborted = true;
-        HttpConnection conn = this.responseConnection; 
+        HttpConnection conn = this.responseConnection;
         if (conn != null) {
             conn.close();
         }
@@ -1136,7 +1121,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     /**
      * Returns <tt>true</tt> if the HTTP method has been already {@link #execute executed},
      * but not {@link #recycle recycled}.
-     * 
+     *
      * @return <tt>true</tt> if the method has been executed, <tt>false</tt> otherwise
      */
     public boolean hasBeenUsed() {
@@ -1148,9 +1133,9 @@ public abstract class HttpMethodBase implements HttpMethod {
      * Note that all of the instance variables will be reset
      * once this method has been called. This method will also
      * release the connection being used by this HTTP method.
-     * 
+     *
      * @see #releaseConnection()
-     * 
+     *
      * @deprecated no longer supported and will be removed in the future
      *             version of HttpClient
      */
@@ -1183,7 +1168,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     /**
      * Releases the connection being used by this HTTP method. In particular the
      * connection is used to read the response(if there is one) and will be held
-     * until the response has been read. If the connection can be reused by other 
+     * until the response has been read. If the connection can be reused by other
      * HTTP methods it is NOT closed at this point.
      *
      * @since 2.0
@@ -1209,17 +1194,17 @@ public abstract class HttpMethodBase implements HttpMethod {
      * @param headerName the header name
      */
     public void removeRequestHeader(String headerName) {
-        
+
         Header[] headers = getRequestHeaderGroup().getHeaders(headerName);
         for (int i = 0; i < headers.length; i++) {
             getRequestHeaderGroup().removeHeader(headers[i]);
         }
-        
+
     }
-    
+
     /**
      * Removes the given request header.
-     * 
+     *
      * @param header the header
      */
     public void removeRequestHeader(final Header header) {
@@ -1233,7 +1218,7 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Returns <tt>true</tt> the method is ready to execute, <tt>false</tt> otherwise.
-     * 
+     *
      * @return This implementation always returns <tt>true</tt>.
      */
     public boolean validate() {
@@ -1241,15 +1226,14 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
 
-    /** 
+    /**
      * Returns the actual cookie policy
-     * 
+     *
      * @param state HTTP state. TODO: to be removed in the future
-     * 
+     *
      * @return cookie spec
      */
-    @SuppressWarnings({ "deprecation", "rawtypes" })
-	private CookieSpec getCookieSpec(final HttpState state) {
+    private CookieSpec getCookieSpec(final HttpState state) {
         if (this.cookiespec == null) {
             int i = state.getCookiePolicy();
             if (i == -1) {
@@ -1273,14 +1257,14 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @throws IOException if an I/O (transport) error occurs. Some transport exceptions
      *                     can be recovered from.
-     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions 
+     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions
      *                    cannot be recovered from.
      */
     protected void addCookieRequestHeader(HttpState state, HttpConnection conn)
-        throws IOException, HttpException {
+            throws IOException, HttpException {
 
         LOG.trace("enter HttpMethodBase.addCookieRequestHeader(HttpState, "
-                  + "HttpConnection)");
+                + "HttpConnection)");
 
         Header[] cookieheaders = getRequestHeaderGroup().getHeaders("Cookie");
         for (int i = 0; i < cookieheaders.length; i++) {
@@ -1296,7 +1280,7 @@ public abstract class HttpMethodBase implements HttpMethod {
             host = conn.getHost();
         }
         Cookie[] cookies = matcher.match(host, conn.getPort(),
-            getPath(), conn.isSecure(), state.getCookies());
+                getPath(), conn.isSecure(), state.getCookies());
         if ((cookies != null) && (cookies.length > 0)) {
             if (getParams().isParameterTrue(HttpMethodParams.SINGLE_COOKIE_HEADER)) {
                 // In strict mode put all cookies on the same header
@@ -1336,13 +1320,13 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @throws IOException if an I/O (transport) error occurs. Some transport exceptions
      *                     can be recovered from.
-     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions 
+     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions
      *                    cannot be recovered from.
      */
     protected void addHostRequestHeader(HttpState state, HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace("enter HttpMethodBase.addHostRequestHeader(HttpState, "
-                  + "HttpConnection)");
+                + "HttpConnection)");
 
         // Per 19.6.1.1 of RFC 2616, it is legal for HTTP/1.0 based
         // applications to send the Host request-header.
@@ -1377,7 +1361,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Generates <tt>Proxy-Connection: Keep-Alive</tt> request header when 
+     * Generates <tt>Proxy-Connection: Keep-Alive</tt> request header when
      * communicating via a proxy server.
      *
      * @param state the {@link HttpState state} information associated with this method
@@ -1386,14 +1370,14 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @throws IOException if an I/O (transport) error occurs. Some transport exceptions
      *                     can be recovered from.
-     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions 
+     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions
      *                    cannot be recovered from.
      */
     protected void addProxyConnectionHeader(HttpState state,
                                             HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace("enter HttpMethodBase.addProxyConnectionHeader("
-                  + "HttpState, HttpConnection)");
+                + "HttpState, HttpConnection)");
         if (!conn.isTransparent()) {
             if (getRequestHeader("Proxy-Connection") == null) {
                 addRequestHeader("Proxy-Connection", "Keep-Alive");
@@ -1402,7 +1386,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * Generates all the required request {@link Header header}s 
+     * Generates all the required request {@link Header header}s
      * to be submitted via the given {@link HttpConnection connection}.
      *
      * <p>
@@ -1423,15 +1407,15 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @throws IOException if an I/O (transport) error occurs. Some transport exceptions
      *                     can be recovered from.
-     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions 
+     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions
      *                    cannot be recovered from.
      *
      * @see #writeRequestHeaders
      */
     protected void addRequestHeaders(HttpState state, HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace("enter HttpMethodBase.addRequestHeaders(HttpState, "
-            + "HttpConnection)");
+                + "HttpConnection)");
 
         addUserAgentRequestHeader(state, conn);
         addHostRequestHeader(state, conn);
@@ -1449,14 +1433,14 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @throws IOException if an I/O (transport) error occurs. Some transport exceptions
      *                     can be recovered from.
-     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions 
+     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions
      *                    cannot be recovered from.
      */
     protected void addUserAgentRequestHeader(HttpState state,
                                              HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace("enter HttpMethodBase.addUserAgentRequestHeaders(HttpState, "
-            + "HttpConnection)");
+                + "HttpConnection)");
 
         if (getRequestHeader("User-Agent") == null) {
             String agent = (String)getParams().getParameter(HttpMethodParams.USER_AGENT);
@@ -1508,9 +1492,9 @@ public abstract class HttpMethodBase implements HttpMethod {
      * @return HTTP request line
      */
     protected static String generateRequestLine(HttpConnection connection,
-        String name, String requestPath, String query, String version) {
+                                                String name, String requestPath, String query, String version) {
         LOG.trace("enter HttpMethodBase.generateRequestLine(HttpConnection, "
-            + "String, String, String, String)");
+                + "String, String, String, String)");
 
         StringBuffer buf = new StringBuffer();
         // Append method name
@@ -1522,8 +1506,8 @@ public abstract class HttpMethodBase implements HttpMethod {
             buf.append(protocol.getScheme().toLowerCase());
             buf.append("://");
             buf.append(connection.getHost());
-            if ((connection.getPort() != -1) 
-                && (connection.getPort() != protocol.getDefaultPort())
+            if ((connection.getPort() != -1)
+                    && (connection.getPort() != protocol.getDefaultPort())
             ) {
                 buf.append(":");
                 buf.append(connection.getPort());
@@ -1549,12 +1533,12 @@ public abstract class HttpMethodBase implements HttpMethod {
         buf.append(" ");
         buf.append(version);
         buf.append("\r\n");
-        
+
         return buf.toString();
     }
-    
+
     /**
-     * This method is invoked immediately after 
+     * This method is invoked immediately after
      * {@link #readResponseBody(HttpState,HttpConnection)} and can be overridden by
      * sub-classes in order to provide custom body processing.
      *
@@ -1573,7 +1557,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * This method is invoked immediately after 
+     * This method is invoked immediately after
      * {@link #readResponseHeaders(HttpState,HttpConnection)} and can be overridden by
      * sub-classes in order to provide custom response headers processing.
 
@@ -1591,9 +1575,9 @@ public abstract class HttpMethodBase implements HttpMethod {
      * @see #readResponseHeaders
      */
     protected void processResponseHeaders(HttpState state,
-        HttpConnection conn) {
+                                          HttpConnection conn) {
         LOG.trace("enter HttpMethodBase.processResponseHeaders(HttpState, "
-            + "HttpConnection)");
+                + "HttpConnection)");
 
         CookieSpec parser = getCookieSpec(state);
 
@@ -1624,12 +1608,12 @@ public abstract class HttpMethodBase implements HttpMethod {
      *        this HTTP method
      */
     protected void processCookieHeaders(
-            final CookieSpec parser, 
-            final Header[] headers, 
-            final HttpState state, 
+            final CookieSpec parser,
+            final Header[] headers,
+            final HttpState state,
             final HttpConnection conn) {
         LOG.trace("enter HttpMethodBase.processCookieHeaders(Header[], HttpState, "
-                  + "HttpConnection)");
+                + "HttpConnection)");
 
         String host = this.params.getVirtualHost();
         if (host == null) {
@@ -1640,16 +1624,16 @@ public abstract class HttpMethodBase implements HttpMethod {
             Cookie[] cookies = null;
             try {
                 cookies = parser.parse(
-                  host,
-                  conn.getPort(),
-                  getPath(),
-                  conn.isSecure(),
-                  header);
+                        host,
+                        conn.getPort(),
+                        getPath(),
+                        conn.isSecure(),
+                        header);
             } catch (MalformedCookieException e) {
                 if (LOG.isWarnEnabled()) {
-                    LOG.warn("Invalid cookie header: \"" 
-                        + header.getValue() 
-                        + "\". " + e.getMessage());
+                    LOG.warn("Invalid cookie header: \""
+                            + header.getValue()
+                            + "\". " + e.getMessage());
                 }
             }
             if (cookies != null) {
@@ -1657,21 +1641,21 @@ public abstract class HttpMethodBase implements HttpMethod {
                     Cookie cookie = cookies[j];
                     try {
                         parser.validate(
-                          host,
-                          conn.getPort(),
-                          getPath(),
-                          conn.isSecure(),
-                          cookie);
+                                host,
+                                conn.getPort(),
+                                getPath(),
+                                conn.isSecure(),
+                                cookie);
                         state.addCookie(cookie);
                         if (LOG.isDebugEnabled()) {
-                            LOG.debug("Cookie accepted: \"" 
-                                + parser.formatCookie(cookie) + "\"");
+                            LOG.debug("Cookie accepted: \""
+                                    + parser.formatCookie(cookie) + "\"");
                         }
                     } catch (MalformedCookieException e) {
-//                        if (LOG.isWarnEnabled()) {
-//                            LOG.warn("Cookie rejected: \"" + parser.formatCookie(cookie) 
-//                                + "\". " + e.getMessage());
-//                        }
+                        if (LOG.isWarnEnabled()) {
+                            LOG.warn("Cookie rejected: \"" + parser.formatCookie(cookie)
+                                    + "\". " + e.getMessage());
+                        }
                     }
                 }
             }
@@ -1679,7 +1663,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
     /**
-     * This method is invoked immediately after 
+     * This method is invoked immediately after
      * {@link #readStatusLine(HttpState,HttpConnection)} and can be overridden by
      * sub-classes in order to provide custom response status line processing.
      *
@@ -1738,13 +1722,13 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @throws IOException if an I/O (transport) error occurs. Some transport exceptions
      *                     can be recovered from.
-     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions 
+     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions
      *                    cannot be recovered from.
      */
     protected void readResponse(HttpState state, HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace(
-        "enter HttpMethodBase.readResponse(HttpState, HttpConnection)");
+                "enter HttpMethodBase.readResponse(HttpState, HttpConnection)");
         // Status line & line may have already been received
         // if 'expect - continue' handshake has been used
         while (this.statusLine == null) {
@@ -1752,11 +1736,11 @@ public abstract class HttpMethodBase implements HttpMethod {
             processStatusLine(state, conn);
             readResponseHeaders(state, conn);
             processResponseHeaders(state, conn);
-            
+
             int status = this.statusLine.getStatusCode();
             if ((status >= 100) && (status < 200)) {
                 if (LOG.isInfoEnabled()) {
-                    LOG.info("Discarding unexpected response: " + this.statusLine.toString()); 
+                    LOG.info("Discarding unexpected response: " + this.statusLine.toString());
                 }
                 this.statusLine = null;
             }
@@ -1786,16 +1770,16 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @throws IOException if an I/O (transport) error occurs. Some transport exceptions
      *                     can be recovered from.
-     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions 
+     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions
      *                    cannot be recovered from.
      *
      * @see #readResponse
      * @see #processResponseBody
      */
     protected void readResponseBody(HttpState state, HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace(
-            "enter HttpMethodBase.readResponseBody(HttpState, HttpConnection)");
+                "enter HttpMethodBase.readResponseBody(HttpState, HttpConnection)");
 
         // assume we are not done with the connection if we get a stream
         InputStream stream = readResponseBody(conn);
@@ -1810,7 +1794,7 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Returns the response body as an {@link InputStream input stream}
-     * corresponding to the values of the <tt>Content-Length</tt> and 
+     * corresponding to the values of the <tt>Content-Length</tt> and
      * <tt>Transfer-Encoding</tt> headers. If no response body is available
      * returns <tt>null</tt>.
      * <p>
@@ -1823,12 +1807,11 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @throws IOException if an I/O (transport) error occurs. Some transport exceptions
      *                     can be recovered from.
-     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions 
+     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions
      *                    cannot be recovered from.
      */
-    @SuppressWarnings("resource")
-	private InputStream readResponseBody(HttpConnection conn)
-        throws HttpException, IOException {
+    private InputStream readResponseBody(HttpConnection conn)
+            throws HttpException, IOException {
 
         LOG.trace("enter HttpMethodBase.readResponseBody(HttpConnection)");
 
@@ -1845,8 +1828,8 @@ public abstract class HttpMethodBase implements HttpMethod {
         if (transferEncodingHeader != null) {
 
             String transferEncoding = transferEncodingHeader.getValue();
-            if (!"chunked".equalsIgnoreCase(transferEncoding) 
-                && !"identity".equalsIgnoreCase(transferEncoding)) {
+            if (!"chunked".equalsIgnoreCase(transferEncoding)
+                    && !"identity".equalsIgnoreCase(transferEncoding)) {
                 if (LOG.isWarnEnabled()) {
                     LOG.warn("Unsupported transfer encoding: " + transferEncoding);
                 }
@@ -1854,8 +1837,8 @@ public abstract class HttpMethodBase implements HttpMethod {
             HeaderElement[] encodings = transferEncodingHeader.getElements();
             // The chunked encoding must be the last one applied
             // RFC2616, 14.41
-            int len = encodings.length;            
-            if ((len > 0) && ("chunked".equalsIgnoreCase(encodings[len - 1].getName()))) { 
+            int len = encodings.length;
+            if ((len > 0) && ("chunked".equalsIgnoreCase(encodings[len - 1].getName()))) {
                 // if response body is empty
                 if (conn.isResponseAvailable(conn.getParams().getSoTimeout())) {
                     result = new ChunkedInputStream(is, this);
@@ -1868,10 +1851,10 @@ public abstract class HttpMethodBase implements HttpMethod {
                 }
             } else {
                 LOG.info("Response content is not chunk-encoded");
-                // The connection must be terminated by closing 
+                // The connection must be terminated by closing
                 // the socket as per RFC 2616, 3.6
                 setConnectionCloseForced(true);
-                result = is;  
+                result = is;
             }
         } else {
             long expectedLength = getResponseContentLength();
@@ -1887,11 +1870,11 @@ public abstract class HttpMethodBase implements HttpMethod {
                         setConnectionCloseForced(true);
                     }
                 }
-                result = is;            
+                result = is;
             } else {
                 result = new ContentLengthInputStream(is, expectedLength);
             }
-        } 
+        }
 
         // See if the response is supposed to have a response body
         if (!canHaveBody) {
@@ -1903,12 +1886,12 @@ public abstract class HttpMethodBase implements HttpMethod {
         if (result != null) {
 
             result = new AutoCloseInputStream(
-                result,
-                new ResponseConsumedWatcher() {
-                    public void responseConsumed() {
-                        responseBodyConsumed();
+                    result,
+                    new ResponseConsumedWatcher() {
+                        public void responseConsumed() {
+                            responseBodyConsumed();
+                        }
                     }
-                }
             );
         }
 
@@ -1936,26 +1919,22 @@ public abstract class HttpMethodBase implements HttpMethod {
      *
      * @throws IOException if an I/O (transport) error occurs. Some transport exceptions
      *                     can be recovered from.
-     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions 
+     * @throws HttpException  if a protocol exception occurs. Usually protocol exceptions
      *                    cannot be recovered from.
      *
      * @see #readResponse
      * @see #processResponseHeaders
      */
     protected void readResponseHeaders(HttpState state, HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace("enter HttpMethodBase.readResponseHeaders(HttpState,"
-            + "HttpConnection)");
+                + "HttpConnection)");
 
         getResponseHeaderGroup().clear();
-        
+
         Header[] headers = HttpParser.parseHeaders(
-            conn.getResponseInputStream(), getParams().getHttpElementCharset());
-        if (Wire.HEADER_WIRE.enabled()) {
-            for (int i = 0; i < headers.length; i++) {
-                Wire.HEADER_WIRE.input(headers[i].toExternalForm());
-            }
-        }
+                conn.getResponseInputStream(), getParams().getHttpElementCharset());
+        // Wire logging moved to HttpParser
         getResponseHeaderGroup().setHeaders(headers);
     }
 
@@ -1981,11 +1960,11 @@ public abstract class HttpMethodBase implements HttpMethod {
      * @see StatusLine
      */
     protected void readStatusLine(HttpState state, HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace("enter HttpMethodBase.readStatusLine(HttpState, HttpConnection)");
 
         final int maxGarbageLines = getParams().
-            getIntParameter(HttpMethodParams.STATUS_LINE_GARBAGE_LIMIT, Integer.MAX_VALUE);
+                getIntParameter(HttpMethodParams.STATUS_LINE_GARBAGE_LIMIT, Integer.MAX_VALUE);
 
         //read out the HTTP status string
         int count = 0;
@@ -1994,8 +1973,8 @@ public abstract class HttpMethodBase implements HttpMethod {
             s = conn.readLine(getParams().getHttpElementCharset());
             if (s == null && count == 0) {
                 // The server just dropped connection on us
-                throw new NoHttpResponseException("The server " + conn.getHost() + 
-                    " failed to respond");
+                throw new NoHttpResponseException("The server " + conn.getHost() +
+                        " failed to respond");
             }
             if (Wire.HEADER_WIRE.enabled()) {
                 Wire.HEADER_WIRE.input(s + "\r\n");
@@ -2005,7 +1984,7 @@ public abstract class HttpMethodBase implements HttpMethod {
                 break;
             } else if (s == null || count >= maxGarbageLines) {
                 // Giving up
-                throw new ProtocolException("The server " + conn.getHost() + 
+                throw new ProtocolException("The server " + conn.getHost() +
                         " failed to respond with a valid HTTP response");
             }
             count++;
@@ -2016,12 +1995,12 @@ public abstract class HttpMethodBase implements HttpMethod {
 
         //check for a valid HTTP-Version
         String versionStr = statusLine.getHttpVersion();
-        if (getParams().isParameterFalse(HttpMethodParams.UNAMBIGUOUS_STATUS_LINE) 
-           && versionStr.equals("HTTP")) {
+        if (getParams().isParameterFalse(HttpMethodParams.UNAMBIGUOUS_STATUS_LINE)
+                && versionStr.equals("HTTP")) {
             getParams().setVersion(HttpVersion.HTTP_1_0);
             if (LOG.isWarnEnabled()) {
                 LOG.warn("Ambiguous status line (HTTP protocol version missing):" +
-                statusLine.toString());
+                        statusLine.toString());
             }
         } else {
             this.effectiveVersion = HttpVersion.parse(versionStr);
@@ -2074,9 +2053,9 @@ public abstract class HttpMethodBase implements HttpMethod {
      *                    cannot be recovered from.
      */
     protected void writeRequest(HttpState state, HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace(
-            "enter HttpMethodBase.writeRequest(HttpState, HttpConnection)");
+                "enter HttpMethodBase.writeRequest(HttpState, HttpConnection)");
         writeRequestLine(state, conn);
         writeRequestHeaders(state, conn);
         conn.writeLine(); // close head
@@ -2090,13 +2069,13 @@ public abstract class HttpMethodBase implements HttpMethod {
         if (expectheader != null) {
             expectvalue = expectheader.getValue();
         }
-        if ((expectvalue != null) 
-         && (expectvalue.compareToIgnoreCase("100-continue") == 0)) {
+        if ((expectvalue != null)
+                && (expectvalue.compareToIgnoreCase("100-continue") == 0)) {
             if (ver.greaterEquals(HttpVersion.HTTP_1_1)) {
 
                 // make sure the status line and headers have been sent
                 conn.flushRequestOutputStream();
-                
+
                 int readTimeout = conn.getParams().getSoTimeout();
                 try {
                     conn.setSocketTimeout(RESPONSE_WAIT_TIME_MS);
@@ -2124,11 +2103,11 @@ public abstract class HttpMethodBase implements HttpMethod {
                 } finally {
                     conn.setSocketTimeout(readTimeout);
                 }
-                
+
             } else {
                 removeRequestHeader("Expect");
                 LOG.info("'Expect: 100-continue' handshake is only supported by "
-                    + "HTTP/1.1 or higher");
+                        + "HTTP/1.1 or higher");
             }
         }
 
@@ -2162,7 +2141,7 @@ public abstract class HttpMethodBase implements HttpMethod {
      *                    cannot be recovered from.
      */
     protected boolean writeRequestBody(HttpState state, HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         return true;
     }
 
@@ -2192,13 +2171,13 @@ public abstract class HttpMethodBase implements HttpMethod {
      * @see #getRequestHeaders
      */
     protected void writeRequestHeaders(HttpState state, HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace("enter HttpMethodBase.writeRequestHeaders(HttpState,"
-            + "HttpConnection)");
+                + "HttpConnection)");
         addRequestHeaders(state, conn);
 
         String charset = getParams().getHttpElementCharset();
-        
+
         Header[] headers = getRequestHeaders();
         for (int i = 0; i < headers.length; i++) {
             String s = headers[i].toExternalForm();
@@ -2229,9 +2208,9 @@ public abstract class HttpMethodBase implements HttpMethod {
      * @see #generateRequestLine
      */
     protected void writeRequestLine(HttpState state, HttpConnection conn)
-    throws IOException, HttpException {
+            throws IOException, HttpException {
         LOG.trace(
-            "enter HttpMethodBase.writeRequestLine(HttpState, HttpConnection)");
+                "enter HttpMethodBase.writeRequestLine(HttpState, HttpConnection)");
         String requestLine = getRequestLine(conn);
         if (Wire.HEADER_WIRE.enabled()) {
             Wire.HEADER_WIRE.output(requestLine);
@@ -2241,10 +2220,10 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Returns the request line.
-     * 
+     *
      * @param conn the {@link HttpConnection connection} used to execute
      *        this HTTP method
-     * 
+     *
      * @return The request line.
      */
     private String getRequestLine(HttpConnection conn) {
@@ -2265,9 +2244,9 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Assigns {@link HttpMethodParams HTTP protocol parameters} for this method.
-     * 
+     *
      * @since 3.0
-     * 
+     *
      * @see HttpMethodParams
      */
     public void setParams(final HttpMethodParams params) {
@@ -2304,7 +2283,7 @@ public abstract class HttpMethodBase implements HttpMethod {
         boolean result = true;
 
         if ((status >= 100 && status <= 199) || (status == 204)
-            || (status == 304)) { // NOT MODIFIED
+                || (status == 304)) { // NOT MODIFIED
             result = false;
         }
 
@@ -2314,9 +2293,9 @@ public abstract class HttpMethodBase implements HttpMethod {
     /**
      * Returns proxy authentication realm, if it has been used during authentication process. 
      * Otherwise returns <tt>null</tt>.
-     * 
+     *
      * @return proxy authentication realm
-     * 
+     *
      * @deprecated use #getProxyAuthState()
      */
     public String getProxyAuthenticationRealm() {
@@ -2326,9 +2305,9 @@ public abstract class HttpMethodBase implements HttpMethod {
     /**
      * Returns authentication realm, if it has been used during authentication process. 
      * Otherwise returns <tt>null</tt>.
-     * 
+     *
      * @return authentication realm
-     * 
+     *
      * @deprecated use #getHostAuthState()
      */
     public String getAuthenticationRealm() {
@@ -2337,7 +2316,7 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Returns the character set from the <tt>Content-Type</tt> header.
-     * 
+     *
      * @param contentheader The content header.
      * @return String The character set.
      */
@@ -2369,7 +2348,7 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Returns the character encoding of the request from the <tt>Content-Type</tt> header.
-     * 
+     *
      * @return String The character set.
      */
     public String getRequestCharSet() {
@@ -2377,9 +2356,9 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
 
 
-    /**  
+    /**
      * Returns the character encoding of the response from the <tt>Content-Type</tt> header.
-     * 
+     *
      * @return String The character set.
      */
     public String getResponseCharSet() {
@@ -2388,7 +2367,7 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * @deprecated no longer used
-     * 
+     *
      * Returns the number of "recoverable" exceptions thrown and handled, to
      * allow for monitoring the quality of the connection.
      *
@@ -2418,18 +2397,18 @@ public abstract class HttpMethodBase implements HttpMethod {
             // At this point, no response data should be available.
             // If there is data available, regard the connection as being
             // unreliable and close it.
-            
+
             if (shouldCloseConnection(responseConnection)) {
                 responseConnection.close();
             } else {
                 try {
                     if(responseConnection.isResponseAvailable()) {
                         boolean logExtraInput =
-                            getParams().isParameterTrue(HttpMethodParams.WARN_EXTRA_INPUT);
+                                getParams().isParameterTrue(HttpMethodParams.WARN_EXTRA_INPUT);
 
                         if(logExtraInput) {
                             LOG.warn("Extra response data detected - closing connection");
-                        } 
+                        }
                         responseConnection.close();
                     }
                 }
@@ -2455,9 +2434,9 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Returns the {@link HostConfiguration host configuration}.
-     * 
+     *
      * @return the host configuration
-     * 
+     *
      * @deprecated no longer applicable
      */
     public HostConfiguration getHostConfiguration() {
@@ -2467,9 +2446,9 @@ public abstract class HttpMethodBase implements HttpMethod {
     }
     /**
      * Sets the {@link HostConfiguration host configuration}.
-     * 
+     *
      * @param hostconfig The hostConfiguration to set
-     * 
+     *
      * @deprecated no longer applicable
      */
     public void setHostConfiguration(final HostConfiguration hostconfig) {
@@ -2485,9 +2464,9 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Returns the {@link MethodRetryHandler retry handler} for this HTTP method
-     * 
+     *
      * @return the methodRetryHandler
-     * 
+     *
      * @deprecated use {@link HttpMethodParams}
      */
     public MethodRetryHandler getMethodRetryHandler() {
@@ -2496,9 +2475,9 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Sets the {@link MethodRetryHandler retry handler} for this HTTP method
-     * 
+     *
      * @param handler the methodRetryHandler to use when this method executed
-     * 
+     *
      * @deprecated use {@link HttpMethodParams}
      */
     public void setMethodRetryHandler(MethodRetryHandler handler) {
@@ -2510,13 +2489,13 @@ public abstract class HttpMethodBase implements HttpMethod {
      * current (2.0) design flaw that prevents the user from
      * obtaining correct status code, headers and response body from the 
      * preceding HTTP CONNECT method.
-     * 
+     *
      * TODO: Remove this crap as soon as possible
      */
     void fakeResponse(
-        StatusLine statusline, 
-        HeaderGroup responseheaders,
-        InputStream responseStream
+            StatusLine statusline,
+            HeaderGroup responseheaders,
+            InputStream responseStream
     ) {
         // set used so that the response can be read
         this.used = true;
@@ -2525,12 +2504,12 @@ public abstract class HttpMethodBase implements HttpMethod {
         this.responseBody = null;
         this.responseStream = responseStream;
     }
-    
+
     /**
      * Returns the target host {@link AuthState authentication state}
-     * 
+     *
      * @return host authentication state
-     * 
+     *
      * @since 3.0
      */
     public AuthState getHostAuthState() {
@@ -2539,37 +2518,58 @@ public abstract class HttpMethodBase implements HttpMethod {
 
     /**
      * Returns the proxy {@link AuthState authentication state}
-     * 
+     *
      * @return host authentication state
-     * 
+     *
      * @since 3.0
      */
     public AuthState getProxyAuthState() {
         return this.proxyAuthState;
     }
-    
+
     /**
      * Tests whether the execution of this method has been aborted
-     * 
+     *
      * @return <tt>true</tt> if the execution of this method has been aborted,
      *  <tt>false</tt> otherwise
-     * 
+     *
      * @since 3.0
      */
     public boolean isAborted() {
         return this.aborted;
     }
-    
+
     /**
      * Returns <tt>true</tt> if the HTTP has been transmitted to the target
      * server in its entirety, <tt>false</tt> otherwise. This flag can be useful 
      * for recovery logic. If the request has not been transmitted in its entirety,
      * it is safe to retry the failed method.
-     * 
+     *
      * @return <tt>true</tt> if the request has been sent, <tt>false</tt> otherwise
      */
     public boolean isRequestSent() {
         return this.requestSent;
     }
-    
+
+    /**
+     * 追加方法: 用于修正 commons-httpclient 自动重定向页面后导致响应 cookies 丢失问题
+     * @param headerName header 键
+     * @param headerValue header 值
+     * @author EXP
+     */
+    public void addResponseHeader(String headerName, String headerValue) {
+        addResponseHeader(new Header(headerName, headerValue));
+    }
+
+    /**
+     * 追加方法: 用于修正 commons-httpclient 自动重定向页面后导致响应 cookies 丢失问题
+     * @param header 响应头
+     * @author EXP
+     */
+    public void addResponseHeader(Header header) {
+        if (header != null) {
+            getResponseHeaderGroup().addHeader(header);
+        }
+    }
+
 }
