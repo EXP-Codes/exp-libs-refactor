@@ -25,7 +25,7 @@
         </dependency>
         <dependency>
             <groupId>com.exp-bolg</groupId>
-            <artifactId>exp-libs-ext</artifactId>
+            <artifactId>exp-libs-base-ext</artifactId>
         </dependency>
 
         <!-- WEB-SOCKET 构件 -->

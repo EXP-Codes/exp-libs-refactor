@@ -43,11 +43,12 @@
         <module>exp-libs-xls</module>
         <module>exp-libs-cep</module>
         <module>exp-libs-image</module>
-        <module>exp-libs-ext</module>
+        <module>exp-libs-base-ext</module>
         <module>exp-libs-ui</module>
         <module>exp-libs-version</module>
         <module>exp-libs-tensorflow</module>
-        <module>exp-libs-heuristic</module>
+        <module>exp-libs-algorithm-ext</module>
+        <module>exp-libs-algorithm</module>
     </modules>
 
     <!-- 父项目打包为 pom，即父子聚合项目 -->
@@ -96,7 +97,7 @@
             </dependency>
             <dependency>
                 <groupId>com.exp-bolg</groupId>
-                <artifactId>exp-libs-ext</artifactId>
+                <artifactId>exp-libs-base-ext</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>

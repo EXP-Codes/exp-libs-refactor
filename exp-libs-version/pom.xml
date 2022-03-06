@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>com.exp-bolg</groupId>
-            <artifactId>exp-libs-ext</artifactId>
+            <artifactId>exp-libs-base-ext</artifactId>
         </dependency>
         <dependency>
             <groupId>com.exp-bolg</groupId>
