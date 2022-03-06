@@ -28,4 +28,11 @@ settings 仓库配置
     <mirrorOf>mvnrepository</mirrorOf>
     <url>http://mvnrepository.com/</url>
 </mirror>
+
+<!-- 本项目发布到 sonatype 中央仓库 -->
+<mirror>
+    <id>sonatype</id>
+    <mirrorOf>sonatype</mirrorOf>
+    <url>https://s01.oss.sonatype.org/</url>
+</mirror>
 ```
