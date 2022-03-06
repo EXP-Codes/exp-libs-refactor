@@ -23,6 +23,11 @@
             <groupId>com.exp-blog</groupId>
             <artifactId>exp-libs-base-ext</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.exp-blog</groupId>
+            <artifactId>exp-libs-ui</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

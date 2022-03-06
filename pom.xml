@@ -72,6 +72,11 @@
             </dependency>
             <dependency>
                 <groupId>com.exp-blog</groupId>
+                <artifactId>exp-libs-base-ext</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-conf</artifactId>
                 <version>${modules.version}</version>
             </dependency>
@@ -93,11 +98,6 @@
             <dependency>
                 <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-db</artifactId>
-                <version>${modules.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.exp-blog</groupId>
-                <artifactId>exp-libs-base-ext</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
