@@ -252,7 +252,7 @@ public class ChunkedInputStream extends InputStream {
 
                 /**
                  * 修正方法
-                 * @author EXP
+                 * author by EXP
                  */
                 System.err.println("chunked stream ended unexpectedly");
                 return 0;

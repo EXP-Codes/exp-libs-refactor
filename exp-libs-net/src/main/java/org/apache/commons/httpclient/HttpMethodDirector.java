@@ -141,7 +141,7 @@ class HttpMethodDirector {
          * 修正方法: 用于修正 commons-httpclient 自动重定向页面后导致响应 cookies 丢失问题
          *
          * 记录本次访问的 URL（若发页面生重定向）所返回的所有可能响应 cookie
-         * @author EXP
+         * author by EXP
          */
         Set<Header> responseCookies = new HashSet<Header>();
         try {

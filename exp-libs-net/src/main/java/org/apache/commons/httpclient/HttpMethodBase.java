@@ -2555,7 +2555,7 @@ public abstract class HttpMethodBase implements HttpMethod {
      * 追加方法: 用于修正 commons-httpclient 自动重定向页面后导致响应 cookies 丢失问题
      * @param headerName header 键
      * @param headerValue header 值
-     * @author EXP
+     * @return author by EXP
      */
     public void addResponseHeader(String headerName, String headerValue) {
         addResponseHeader(new Header(headerName, headerValue));
@@ -2564,7 +2564,7 @@ public abstract class HttpMethodBase implements HttpMethod {
     /**
      * 追加方法: 用于修正 commons-httpclient 自动重定向页面后导致响应 cookies 丢失问题
      * @param header 响应头
-     * @author EXP
+     * @return author by EXP
      */
     public void addResponseHeader(Header header) {
         if (header != null) {

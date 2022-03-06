@@ -578,14 +578,14 @@ public interface HttpMethod {
      * 追加方法: 用于修正 commons-httpclient 自动重定向页面后导致响应 cookies 丢失问题
      * @param headerName header 键
      * @param headerValue header 值
-     * @author EXP
+     * @return author by EXP
      */
     public abstract void addResponseHeader(String headerName, String headerValue);
 
     /**
      * 追加方法: 用于修正 commons-httpclient 自动重定向页面后导致响应 cookies 丢失问题
      * @param header 响应头
-     * @author EXP
+     * @return author by EXP
      */
     public abstract void addResponseHeader(Header header);
 
