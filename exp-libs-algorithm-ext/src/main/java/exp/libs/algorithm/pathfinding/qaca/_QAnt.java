@@ -1,8 +1,5 @@
 package exp.libs.algorithm.pathfinding.qaca;
 
-import exp.libs.algorithm.np.qaca.QRst;
-import exp.libs.algorithm.np.qaca._QEnv;
-import exp.libs.algorithm.np.qaca.__QPA;
 import exp.libs.utils.other.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +56,7 @@ final class _QAnt {
 	private boolean[] tabus;
 
 	/** 蚂蚁当前的移动数据(当前局部解) */
-	private exp.libs.algorithm.np.qaca.QRst curRst;
+	private QRst curRst;
 	
 	/** 该蚂蚁累计求得可行解的次数 */
 	private int solveCnt;
@@ -84,7 +81,7 @@ final class _QAnt {
 		
 		this.generation = 0;
 		this.tabus = new boolean[ENV.size()];
-		this.curRst = new exp.libs.algorithm.np.qaca.QRst(antId, ENV);
+		this.curRst = new QRst(antId, ENV);
 		this.solveCnt = 0;
 		this.unsolveCnt = 0;
 	}
@@ -94,7 +91,7 @@ final class _QAnt {
 	 * @param bestRst 当前最优解（用于计算信息素的参考值）
 	 * @return 是否得到可行解
 	 */
-	protected boolean solve(final exp.libs.algorithm.np.qaca.QRst bestRst) {
+	protected boolean solve(final QRst bestRst) {
 		boolean isFeasible = false;
 		try {
 			isFeasible = _solve(bestRst);
@@ -104,7 +101,7 @@ final class _QAnt {
 		return isFeasible;
 	}
 	
-	private boolean _solve(final exp.libs.algorithm.np.qaca.QRst bestRst) {
+	private boolean _solve(final QRst bestRst) {
 		boolean isFeasible = true;
 		evolve();	// 进化(清空父代移动痕迹, 并继承父代量子编码)
 		final double pGn = ((double) generation) / ENV.MAX_GENERATION(); // 代数比
@@ -164,13 +161,13 @@ final class _QAnt {
 
 	/**
 	 * 移动到下一位置
-	 * @param int nextId
+	 * @param nextId
 	 */
 	private int move(int nextId) {
 		int curId = curRst.getCurId();
 		int moveCost = (curId >= 0 ? ENV.dist(curId, nextId) : 0);
 		tabus[nextId] = true;
-		curId = curRst.move(nextId, moveCost) ? nextId : exp.libs.algorithm.np.qaca.QRst.INVAILD_ID;
+		curId = curRst.move(nextId, moveCost) ? nextId : QRst.INVAILD_ID;
 		return curId;
 	}
 	
@@ -182,8 +179,8 @@ final class _QAnt {
 	 * @return
 	 */
 	private int selectFirstId() {
-		int firstId = exp.libs.algorithm.np.qaca.QRst.INVAILD_ID;
-		if(SRC_ID > exp.libs.algorithm.np.qaca.QRst.INVAILD_ID) {
+		int firstId = QRst.INVAILD_ID;
+		if(SRC_ID > QRst.INVAILD_ID) {
 			firstId = SRC_ID;
 			
 		} else {
@@ -197,7 +194,7 @@ final class _QAnt {
 	 * @return 
 	 */
 	private int selectNextId(int curId) {
-		int nextId = exp.libs.algorithm.np.qaca.QRst.INVAILD_ID;
+		int nextId = QRst.INVAILD_ID;
 		if(curId < 0) {
 			return nextId;
 		}
@@ -239,7 +236,8 @@ final class _QAnt {
 	
 	/**
 	 * 检查下一跳是否可行
-	 * @param nodeId
+	 * @param curId
+	 * @param nextId
 	 * @return
 	 */
 	private boolean _isTabu(int curId, int nextId) {
@@ -323,7 +321,7 @@ final class _QAnt {
 	 * @param pGn
 	 * @param bestRst
 	 */
-	private void addMoveQPA(int curId, int nextId, double pGn, exp.libs.algorithm.np.qaca.QRst bestRst) {
+	private void addMoveQPA(int curId, int nextId, double pGn, QRst bestRst) {
 		double theta = _getTheta(curId, nextId, pGn, bestRst);
 		_updateQPA(curId, nextId, theta);
 	}
@@ -334,7 +332,7 @@ final class _QAnt {
 	 * @param pGn
 	 * @param bestRst
 	 */
-	private void minusRouteQPAs(exp.libs.algorithm.np.qaca.QRst rst, double pGn, exp.libs.algorithm.np.qaca.QRst bestRst) {
+	private void minusRouteQPAs(QRst rst, double pGn, QRst bestRst) {
 		int[] route = rst.getRoutes();
 		if(route.length > 1) {
 			for(int step = 0; step < rst.getStep() - 1; step++) {
@@ -347,14 +345,14 @@ final class _QAnt {
 	}
 	
 	/**
-	 * 计算量子旋转门的旋转角θ
+	 * 计算量子旋转门的旋转角 θ
+	 * @param curId
+	 * @param nextId
 	 * @param pGn 该量子蚂蚁的代数 与 最大代数 的代数比
-	 * @param deltaBeta 某只量子蚂蚁当前从i->j转移时释放的信息素
-	 * @param curQPA 该量子蚂蚁当前从i->j转移的量子编码(当前的路径信息素概率幅)
-	 * @param bestQPA 最优解路径概率幅矩阵中，路径i->j的信息素概率幅
-	 * @return 旋转角θ
+	 * @param bestRst
+	 * @return 旋转角 θ
 	 */
-	private double _getTheta(int curId, int nextId, double pGn, exp.libs.algorithm.np.qaca.QRst bestRst) {
+	private double _getTheta(int curId, int nextId, double pGn, QRst bestRst) {
 		double deltaBeta = __getDeltaBeta(curId, nextId, bestRst); // 蚂蚁移动时释放的信息素增量
 		double theta = (_QEnv.MAX_THETA - _QEnv.DELTA_THETA * pGn) * deltaBeta;
 		return theta;
@@ -367,7 +365,7 @@ final class _QAnt {
 	 * @param bestRst
 	 * @return srcId->snkId路径上的 [量子信息素增量] 的 β概率幅的平方
 	 */
-	private double __getDeltaBeta(int srcId, int snkId, final exp.libs.algorithm.np.qaca.QRst bestRst) {
+	private double __getDeltaBeta(int srcId, int snkId, final QRst bestRst) {
 		double beta = ENV.deltaBeta(srcId, snkId);
 		beta = (beta + bestRst.QPA(srcId, snkId).getBeta()) / 2.0D;
 		return beta * beta;
@@ -381,8 +379,8 @@ final class _QAnt {
 	 * @param theta 旋转角: 正向(>0)为增加, 逆向(<0)为减少
 	 */
 	private void _updateQPA(final int srcId, final int snkId, final double theta) {
-		final exp.libs.algorithm.np.qaca.__QPA azQPA = curRst.QPA(srcId, snkId);
-		final exp.libs.algorithm.np.qaca.__QPA zaQPA = curRst.QPA(snkId, srcId);
+		final __QPA azQPA = curRst.QPA(srcId, snkId);
+		final __QPA zaQPA = curRst.QPA(snkId, srcId);
 		final double cosTheta = Math.cos(theta);
 		final double sinTheta = Math.sin(theta);
 		final double alpha = azQPA.getAlpha();
@@ -403,8 +401,8 @@ final class _QAnt {
 					continue;
 				}
 				
-				final exp.libs.algorithm.np.qaca.__QPA azQPA = curRst.QPA(i, j);
-				final exp.libs.algorithm.np.qaca.__QPA zaQPA = curRst.QPA(j, i);
+				final __QPA azQPA = curRst.QPA(i, j);
+				final __QPA zaQPA = curRst.QPA(j, i);
 				final double beta = azQPA.getBeta();
 				azQPA.setBeta(azQPA.getAlpha());
 				azQPA.setAlpha(beta);
@@ -423,7 +421,7 @@ final class _QAnt {
 	 */
 	@SuppressWarnings("unused")
 	@Deprecated
-	private int __getThetaDirection(exp.libs.algorithm.np.qaca.__QPA curQPA, exp.libs.algorithm.np.qaca.__QPA bestQPA) {
+	private int __getThetaDirection(__QPA curQPA, __QPA bestQPA) {
 		double pBest = bestQPA.getBeta() / bestQPA.getAlpha();
 		double pCur = curQPA.getBeta() / curQPA.getAlpha();
 		double atanBest = Math.atan(pBest);

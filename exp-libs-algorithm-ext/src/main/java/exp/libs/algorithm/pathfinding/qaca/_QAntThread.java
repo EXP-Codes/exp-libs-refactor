@@ -1,8 +1,5 @@
 package exp.libs.algorithm.pathfinding.qaca;
 
-import exp.libs.algorithm.np.qaca.QRst;
-import exp.libs.algorithm.np.qaca._QAnt;
-
 import java.util.concurrent.Callable;
 
 /**
@@ -16,13 +13,13 @@ import java.util.concurrent.Callable;
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+
  */
-final class _QAntThread implements Callable<exp.libs.algorithm.np.qaca.QRst> {
+final class _QAntThread implements Callable<QRst> {
 
-	private final exp.libs.algorithm.np.qaca._QAnt qAnt;
+	private final _QAnt qAnt;
 
-	private final exp.libs.algorithm.np.qaca.QRst bestRst;
+	private final QRst bestRst;
 
-	protected _QAntThread(final exp.libs.algorithm.np.qaca._QAnt qAnt, final exp.libs.algorithm.np.qaca.QRst bestRst) {
+	protected _QAntThread(final _QAnt qAnt, final QRst bestRst) {
 		this.qAnt = qAnt;
 		this.bestRst = bestRst;
 	}

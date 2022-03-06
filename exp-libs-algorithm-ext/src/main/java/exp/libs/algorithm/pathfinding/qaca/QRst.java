@@ -1,7 +1,5 @@
 package exp.libs.algorithm.pathfinding.qaca;
 
-import exp.libs.algorithm.np.qaca._QEnv;
-import exp.libs.algorithm.np.qaca.__QPA;
 import exp.libs.ext.format.ESCUtils;
 
 import java.util.ArrayList;

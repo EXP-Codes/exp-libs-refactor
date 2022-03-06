@@ -29,6 +29,7 @@
     <version>2.0.0-SNAPSHOT</version>
     <modules>
         <module>exp-libs-base</module>
+        <module>exp-libs-base-ext</module>
         <module>exp-libs-conf</module>
         <module>exp-libs-log</module>
         <module>exp-libs-crypt</module>
@@ -43,12 +44,11 @@
         <module>exp-libs-xls</module>
         <module>exp-libs-cep</module>
         <module>exp-libs-image</module>
-        <module>exp-libs-base-ext</module>
         <module>exp-libs-ui</module>
         <module>exp-libs-version</module>
-        <module>exp-libs-tensorflow</module>
-        <module>exp-libs-algorithm-ext</module>
         <module>exp-libs-algorithm</module>
+        <module>exp-libs-algorithm-ext</module>
+        <module>exp-libs-tensorflow</module>
     </modules>
 
     <!-- 父项目打包为 pom，即父子聚合项目 -->

@@ -1,6 +1,5 @@
 package exp.libs.algorithm.pathfinding.qaca;
 
-import exp.libs.algorithm.np.qaca.__QGraph;
 import exp.libs.utils.num.NumUtils;
 
 import java.util.Collection;

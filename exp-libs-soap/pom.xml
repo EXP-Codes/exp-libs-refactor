@@ -48,6 +48,11 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/soapui-1.7.1.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>5.0.3</version>
+        </dependency>
 
         <!-- Apache Axis2 构件 -->
         <dependency>

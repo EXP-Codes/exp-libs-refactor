@@ -1,9 +1,5 @@
 package exp.libs.algorithm.pathfinding.qaca;
 
-import exp.libs.algorithm.np.qaca.QRst;
-import exp.libs.algorithm.np.qaca._QAnt;
-import exp.libs.algorithm.np.qaca._QAntThread;
-import exp.libs.algorithm.np.qaca._QEnv;
 import exp.libs.utils.concurrent.BaseThreadPool;
 import exp.libs.utils.concurrent.ThreadUtils;
 import org.slf4j.Logger;
