@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>exp-libs-refactor</artifactId>
+        <groupId>com.exp-bolg</groupId>
+        <version>2.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>exp-libs-soap</artifactId>
+
+    <properties>
+        <axis2.version>1.8.0</axis2.version>
+        <cxf.version>3.5.1</cxf.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.exp-bolg</groupId>
+            <artifactId>exp-libs-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.exp-bolg</groupId>
+            <artifactId>exp-libs-net</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-net</groupId>
+                    <artifactId>commons-net</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>mail</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.jcraft</groupId>
+                    <artifactId>jsch</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- SoapUI: webservice-client 构件 -->
+        <dependency>
+            <groupId>net.webservices.client</groupId>
+            <artifactId>soapui</artifactId>
+            <version>1.7.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/soapui-1.7.1.jar</systemPath>
+        </dependency>
+
+        <!-- Apache Axis2 构件 -->
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-kernel</artifactId>
+            <version>${axis2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-adb</artifactId>
+            <version>${axis2.version}</version>
+        </dependency>
+
+        <!-- Apache CXF 构件 -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>

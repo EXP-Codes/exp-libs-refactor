@@ -41,6 +41,7 @@
         <module>exp-libs-cep</module>
         <module>exp-libs-image</module>
         <module>exp-libs-ext</module>
+        <module>exp-libs-soap</module>
         <module>exp-libs-ui</module>
         <module>exp-libs-version</module>
     </modules>

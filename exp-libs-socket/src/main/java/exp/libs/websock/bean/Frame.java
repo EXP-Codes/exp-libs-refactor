@@ -7,6 +7,8 @@ import org.java_websocket.framing.Framedata;
 import java.nio.ByteBuffer;
 
 /**
+ * // FIXME 原生的实现是 FramedataImpl1
+ *
  * <PRE>
  * 数据帧.
  * 	注意: <b>数据帧是有时间戳的</b>，即使内容相同，时间戳不匹配当前时间的话是无法发送出去的.

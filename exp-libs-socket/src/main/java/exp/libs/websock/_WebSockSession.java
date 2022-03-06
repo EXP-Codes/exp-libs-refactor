@@ -197,6 +197,8 @@ class _WebSockSession extends WebSocketClient implements ISession {
 	public void onMessage(String msg) {
 		log.debug("接收到 [String] 类型数据: {}", msg);
 		handler.onMessage(msg);
+
+		// FIXME onFragment 已经在最新版被删除了
 	}
 	
 	@Override
