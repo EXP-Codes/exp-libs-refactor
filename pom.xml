@@ -46,6 +46,7 @@
         <module>exp-libs-ext</module>
         <module>exp-libs-ui</module>
         <module>exp-libs-version</module>
+        <module>exp-libs-tensorflow</module>
     </modules>
 
     <!-- 父项目打包为 pom，即父子聚合项目 -->
@@ -95,6 +96,11 @@
             <dependency>
                 <groupId>com.exp-bolg</groupId>
                 <artifactId>exp-libs-ext</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.exp-bolg</groupId>
+                <artifactId>exp-libs-image</artifactId>
                 <version>${modules.version}</version>
             </dependency>
             <dependency>
