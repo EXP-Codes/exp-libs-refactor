@@ -576,16 +576,16 @@ public interface HttpMethod {
 
     /**
      * 追加方法: 用于修正 commons-httpclient 自动重定向页面后导致响应 cookies 丢失问题
+     * author by EXP
      * @param headerName header 键
      * @param headerValue header 值
-     * @return author by EXP
      */
     public abstract void addResponseHeader(String headerName, String headerValue);
 
     /**
      * 追加方法: 用于修正 commons-httpclient 自动重定向页面后导致响应 cookies 丢失问题
+     * author by EXP
      * @param header 响应头
-     * @return author by EXP
      */
     public abstract void addResponseHeader(Header header);
 
