@@ -6,4 +6,3 @@ exp.libs.net.http
 exp.libs.net.mail
 exp.libs.net.ping
 exp.libs.net.telnet
-org.apache.commons.httpclient
