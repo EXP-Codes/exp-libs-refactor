@@ -26,9 +26,9 @@
 
         <!-- Apacht http 构件 -->
         <dependency>
-            <groupId>commons-httpclient</groupId>
+            <groupId>com.exp-blog</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
+            <version>3.2-alpha-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-codec</groupId>
