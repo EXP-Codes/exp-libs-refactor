@@ -42,9 +42,10 @@
 
         <!-- SoapUI: webservice-client 构件 -->
         <dependency>
-            <groupId>net.webservices.client</groupId>
+            <groupId>com.exp-blog</groupId>
             <artifactId>soapui</artifactId>
             <version>1.7.1</version>
+<!--            如果无法从 maven 中央仓库下载，可以把注释取消直接用本地的 -->
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/soapui-1.7.1.jar</systemPath>
         </dependency>
