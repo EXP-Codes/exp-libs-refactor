@@ -28,7 +28,7 @@ import java.io.*;
  * 使得 ini文件可以支持除了 ASCII 以外的字符编码.
  * 
  * 注：
- * javaini-1.1.0-SNAPSHOT.jar 包内的 MANIFEST.MF 文件强制声明了 Seal（加封）安全机制:
+ * javaini-1.1.0.jar 包内的 MANIFEST.MF 文件强制声明了 Seal（加封）安全机制:
  * Sealed: true （只能引用同jar下的类）
  * 因此不能通过覆写类路径的方式修改 org.dtools.ini.IniFileReader 的内容
  * 

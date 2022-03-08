@@ -34,7 +34,7 @@
             <version>1.1.0-SNAPSHOT</version>
 <!--            如果无法从 maven 中央仓库下载，可以把注释取消直接用本地的 -->
 <!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/libs/javaini-1.1.0-SNAPSHOT.jar</systemPath>-->
+<!--            <systemPath>${project.basedir}/libs/javaini-1.1.0.jar</systemPath>-->
         </dependency>
     </dependencies>
 
