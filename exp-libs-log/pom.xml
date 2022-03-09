@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-log</artifactId>
 
+    <name>exp-libs-log</name>
+    <description>日志模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
         <logback.version>1.2.10</logback.version>
         <log4j2.version>2.17.2</log4j2.version>

@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-xls</artifactId>
 
+    <name>exp-libs-xls</name>
+    <description>Excle 工具模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
     </properties>
 

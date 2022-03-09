@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-base-ext</artifactId>
 
+    <name>exp-libs-base-ext</name>
+    <description>扩展工具模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
     </properties>
 

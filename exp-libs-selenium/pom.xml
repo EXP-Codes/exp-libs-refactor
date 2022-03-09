@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-selenium</artifactId>
 
+    <name>exp-libs-selenium</name>
+    <description>爬虫模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
     </properties>
 

@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-db</artifactId>
 
+    <name>exp-libs-db</name>
+    <description>数据库模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
     </properties>
 

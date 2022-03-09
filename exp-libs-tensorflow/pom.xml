@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-tensorflow</artifactId>
 
+    <name>exp-libs-tensorflow</name>
+    <description>Tensorflow 模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
         <tensorflow.version>1.15.0</tensorflow.version>
     </properties>

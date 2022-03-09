@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-cep</artifactId>
 
+    <name>exp-libs-cep</name>
+    <description>函数解析模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
     </properties>
 

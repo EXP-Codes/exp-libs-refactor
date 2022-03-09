@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-socket</artifactId>
 
+    <name>exp-libs-socket</name>
+    <description>Socket/WebSocket 模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
     </properties>
 

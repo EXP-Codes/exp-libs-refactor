@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-crypt</artifactId>
 
+    <name>exp-libs-crypt</name>
+    <description>加解密模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
     </properties>
 

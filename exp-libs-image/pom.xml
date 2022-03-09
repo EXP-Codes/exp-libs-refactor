@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-image</artifactId>
 
+    <name>exp-libs-image</name>
+    <description>图像处理模块 ; OCR 识别模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
         <zxing.version>3.4.1</zxing.version>
         <imageio.version>1.4.0</imageio.version>

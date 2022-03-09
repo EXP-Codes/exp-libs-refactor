@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-soap</artifactId>
 
+    <name>exp-libs-soap</name>
+    <description>WebServices 模块（ SOAP ）</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
         <axis2.version>1.8.0</axis2.version>
         <cxf.version>3.5.1</cxf.version>

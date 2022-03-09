@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-conf</artifactId>
 
+    <name>exp-libs-conf</name>
+    <description>配置解析模块</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
     </properties>
 

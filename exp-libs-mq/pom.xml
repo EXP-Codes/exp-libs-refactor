@@ -11,6 +11,10 @@
 
     <artifactId>exp-libs-mq</artifactId>
 
+    <name>exp-libs-mq</name>
+    <description>消息队列模块（MQ、kafka）</description>
+    <url>https://github.com/lyy289065406/exp-libs-refactor</url>
+
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
