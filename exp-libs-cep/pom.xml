@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.exp-blog</groupId>
             <artifactId>jep</artifactId>
-            <version>3.4.0-SNAPSHOT</version>
+            <version>3.4.0</version>
 <!--            <scope>system</scope>-->
 <!--            <systemPath>${project.basedir}/libs/jep-3.4.0.jar</systemPath>-->
         </dependency>

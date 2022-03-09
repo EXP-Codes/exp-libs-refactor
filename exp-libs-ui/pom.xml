@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.exp-blog</groupId>
             <artifactId>beauty-eye</artifactId>
-            <version>3.7.0-SNAPSHOT</version>
+            <version>3.7.0</version>
 <!--            如果无法从 maven 中央仓库下载，可以把注释取消直接用本地的 -->
 <!--            <scope>system</scope>-->
 <!--            <systemPath>${project.basedir}/libs/beauty-eye-3.7.0.jar</systemPath>-->
@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.exp-blog</groupId>
             <artifactId>schemaeditor</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
 <!--            如果无法从 maven 中央仓库下载，可以把注释取消直接用本地的 -->
 <!--            <scope>system</scope>-->
 <!--            <systemPath>${project.basedir}/libs/schemaeditor-1.0.0.jar</systemPath>-->
