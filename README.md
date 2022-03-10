@@ -13,23 +13,17 @@
 正在作业中，原项目基本已废弃：https://github.com/lyy289065406/exp-libs
 
 
-settings 仓库配置
+## 使用
+
+settings 仓库追加 sonatype 中央仓库配置（本项目发布到该中央仓库）：
 
 ```xml
-<mirror>
-    <id>alimaven</id>
-    <name>aliyun maven</name>
-    <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-    <mirrorOf>central</mirrorOf>
-</mirror>
-
 <mirror>
     <id>mvnrepository</id>
     <mirrorOf>mvnrepository</mirrorOf>
     <url>http://mvnrepository.com/</url>
 </mirror>
 
-<!-- 本项目发布到 sonatype 中央仓库 -->
 <mirror>
     <id>sonatype</id>
     <mirrorOf>sonatype</mirrorOf>
