@@ -1,2 +1,3 @@
 exp.libs.img
-exp.libs.ocr
+exp.libs.img.ocr
+exp.libs.img.utils
