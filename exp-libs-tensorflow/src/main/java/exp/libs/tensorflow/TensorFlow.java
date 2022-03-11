@@ -1,7 +1,7 @@
 package exp.libs.tensorflow;
 
 
-import exp.libs.img.ImageUtils;
+import exp.libs.img.utils.ImageUtils;
 
 import java.awt.image.BufferedImage;
 import java.util.Arrays;

@@ -1,6 +1,6 @@
 package exp.libs.conf.xml;
 
-import exp.libs.socket.bean.SocketBean;
+import exp.libs.sock.socket.bean.SocketBean;
 import exp.libs.utils.num.NumUtils;
 import exp.libs.utils.str.StrUtils;
 

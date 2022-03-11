@@ -5,14 +5,14 @@
     <parent>
         <artifactId>exp-libs-refactor</artifactId>
         <groupId>com.exp-blog</groupId>
-        <version>2.0.0</version>
+        <version>2.1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>exp-libs-socket</artifactId>
 
     <name>exp-libs-socket</name>
-    <description>Socket/WebSocket 模块</description>
+    <description>Socket 模块</description>
     <url>https://github.com/lyy289065406/exp-libs-refactor</url>
 
     <properties>

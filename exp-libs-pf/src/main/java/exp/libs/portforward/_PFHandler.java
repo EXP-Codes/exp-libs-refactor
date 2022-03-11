@@ -1,8 +1,8 @@
 package exp.libs.portforward;
 
-import exp.libs.socket.io.client.SocketClient;
-import exp.libs.socket.io.common.IHandler;
-import exp.libs.socket.io.common.ISession;
+import exp.libs.sock.socket.io.client.SocketClient;
+import exp.libs.sock.socket.io.common.IHandler;
+import exp.libs.sock.socket.io.common.ISession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

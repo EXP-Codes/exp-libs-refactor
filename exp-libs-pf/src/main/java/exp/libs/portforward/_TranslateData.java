@@ -1,6 +1,6 @@
 package exp.libs.portforward;
 
-import exp.libs.socket.bean.SocketBean;
+import exp.libs.sock.socket.bean.SocketBean;
 import exp.libs.utils.concurrent.ThreadUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
