@@ -308,6 +308,20 @@ public class RandomUtils {
         }
         return e;
     }
+
+    /**
+     * 获取随机 IP
+     * @return 返回随机数 IP
+     */
+    public static String genIP() {
+        StringBuilder ip = new StringBuilder();
+        int A = genInt(1, 255);
+        int B = genInt(0, 255);
+        int C = genInt(0, 255);
+        int D = genInt(0, 255);
+        ip.append(A).append(".").append(B).append(".").append(C).append(".").append(D);
+        return ip.toString();
+    }
     
     /**
      * 获取高斯随机数
