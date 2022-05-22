@@ -328,7 +328,7 @@ public class RandomUtils {
     }
     
     /**
-     * 随机生成0-9之间的一个数字
+     * 随机生成 0-9 之间的一个数字
      * @return 随机数字
      */
     public static int genDigit() {
@@ -369,17 +369,15 @@ public class RandomUtils {
     public static String genString(int len) {
         len = len < 1 ? 1 : len;
         StringBuilder sb = new StringBuilder();
-        int[] scope = genRange();
         for (int i = 0; i < len; i++) {
-            int idx = genInt(scope.length);
-            sb.append((char) scope[idx]);
+            sb.append(genCharacter());
         }
         return sb.toString();
     }
 
     /**
-     * 生成随机数范围
-     * @return 随机数范围
+     * 生成随机字符的范围
+     * @return 随机字符的范围
      */
     private static int[] genRange() {
         int digit = genInt(48, 57);    // 0-9
