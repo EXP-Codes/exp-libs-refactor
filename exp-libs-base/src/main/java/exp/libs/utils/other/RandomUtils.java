@@ -352,16 +352,6 @@ public class RandomUtils {
     }
     
     /**
-     * 随机生成一个 0-9A-Za-z 内的字符
-     * @return 返回随机单词字符
-     */
-    public static char genCharacter() {
-        int[] scope = genRange();
-        int idx = genInt(scope.length);
-        return (char) scope[idx];
-    }
-
-    /**
      * 随机生成一个 0-9A-Za-z 范围内的字符串
      * @param len 字符串长度
      * @return 随机字符串
@@ -373,6 +363,16 @@ public class RandomUtils {
             sb.append(genCharacter());
         }
         return sb.toString();
+    }
+
+    /**
+     * 随机生成一个 0-9A-Za-z 内的字符
+     * @return 返回随机单词字符
+     */
+    public static char genCharacter() {
+        int[] scope = genRange();
+        int idx = genInt(scope.length);
+        return (char) scope[idx];
     }
 
     /**
