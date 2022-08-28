@@ -18,7 +18,11 @@ import java.io.FileInputStream;
  */
 public class LogUtils {
 
-	// FIXME 彩色日志
+	// FIXME 
+	//  1. 彩色日志
+	//  2. loadLogBackConfig 有问题，在 1.8 无效，需调整
+
+
 
 	/** logback 默认配置文件路径 */
 	private final static String LOGBACK_PATH = "./conf/logback.xml";

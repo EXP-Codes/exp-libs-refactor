@@ -322,7 +322,7 @@ public class RandomUtils {
         ip.append(A).append(".").append(B).append(".").append(C).append(".").append(D);
         return ip.toString();
     }
-    
+
     /**
      * 获取高斯随机数
      * @return 返回随机数范围 (-∞,+∞)
