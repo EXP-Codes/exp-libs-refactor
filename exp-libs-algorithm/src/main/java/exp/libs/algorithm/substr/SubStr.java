@@ -9,6 +9,7 @@ import exp.libs.utils.str.StrUtils;
  */
 public class SubStr {
 
+
     public static int indexOf(String str, String pattern) {
         return indexOf(str, pattern, SubStrAlgorithm.DEFAULT);
     }
@@ -16,15 +17,16 @@ public class SubStr {
 
     public static int indexOf(String str, String pattern, SubStrAlgorithm algorithm) {
         int index = -1;
-        algorithm = (algorithm == null ? SubStrAlgorithm.DEFAULT : algorithm);
+        Pattern ptn = new Pattern(pattern, algorithm);
+
         if (!StrUtils.isNotEmpty(str, pattern)) {
             index = -1;
 
         } else if (algorithm == SubStrAlgorithm.KMP) {
-            index = indexOfKMP(str, pattern);
+            index = indexOfKMP(str, ptn);
 
         } else if (algorithm == SubStrAlgorithm.SUNDAY) {
-            index = indexOfSunday(str, pattern);
+            index = indexOfSunday(str, ptn);
 
         } else {
             index = str.indexOf(pattern);
@@ -33,63 +35,35 @@ public class SubStr {
     }
 
 
-    private static int indexOfKMP(String str, String pattern) {
-        int index = -1;
-        int[] nextArray = toNextArray(pattern);
-        int tar = 0;
-        int pos = 0;
-        while (tar < str.length()) {
-            if (str.charAt(tar) == pattern.charAt(pos)) {
-                tar++;
-                pos++;
+    private static int indexOfKMP(String str, Pattern pattern) {
+        int i = 0;  // 主串的指针
+        int j = 0;  // 模式串的指针
+        while (i < str.length() && j < pattern.length()) {
 
-            } else if (pos != 0) {
-                pos = nextArray[pos - 1];
+            // 当 j 为 -1 时，要移动的是 i，当然 j 也要归 0
+            if (j == -1 || str.charAt(i) == pattern.charAt(j)) {
+                i++;
+                j++;
 
+            // j 回到指定位置
             } else {
-                tar++;
-            }
-
-            if (pos == pattern.length()) {
-                pos = nextArray[pos - 1];
+                j = pattern.nextAt(j);
             }
         }
-        return index;
+        return (j == pattern.length() ? (i - j) : -1);
     }
 
-    private static int[] toNextArray(String pattern) {
-        int[] nextArray = new int[pattern.length()];
-        int i = 1;
-        int now = 0;
-        while (i < pattern.length()) {
-            if (pattern.charAt(i) == pattern.charAt(now)) {
-                now++;
-                nextArray[i] = now;
-                i++;
-
-            } else if (now != 0) {
-                now = nextArray[now - 1];
-
-            } else {
-                i++;
-                nextArray[i] = now;
-            }
-        }
-        return nextArray;
-    }
-
-
-
-    private static int indexOfSunday(String str, String pattern) {
+    private static int indexOfSunday(String str, Pattern pattern) {
         int index = -1;
 
         // 计算 pattern 每个字符在模式串最后出现的位置索引
         return index;
     }
 
+    
     public static void main(String[] args) {
-        String str = "sadfasdftherg";
-        String ptn = "fas";
+        String str = "sadfasdftfasfadherg";
+        String ptn = "fasfad";
         System.out.println(SubStr.indexOf(str, ptn, SubStrAlgorithm.KMP));
     }
 
