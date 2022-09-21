@@ -28,6 +28,9 @@ public class SubStr {
         } else if (algorithm == SubStrAlgorithm.SUNDAY) {
             index = indexOfSunday(str, ptn);
 
+        } else if (algorithm == SubStrAlgorithm.BM) {
+            index = indexOfBM(str, ptn);
+
         } else {
             index = str.indexOf(pattern);
         }
@@ -35,6 +38,7 @@ public class SubStr {
     }
 
 
+    // https://www.cnblogs.com/dusf/p/kmp.html?share_token=c86cd6c3-f95b-46d2-83be-96e64cc7f81b
     private static int indexOfKMP(String str, Pattern pattern) {
         int i = 0;  // 主串的指针
         int j = 0;  // 模式串的指针
@@ -53,6 +57,17 @@ public class SubStr {
         return (j == pattern.length() ? (i - j) : -1);
     }
 
+
+    // https://blog.csdn.net/appleprince88/article/details/11881323
+    private static int indexOfBM(String str, Pattern pattern) {
+        int index = -1;
+
+        // 计算 pattern 每个字符在模式串最后出现的位置索引
+        return index;
+    }
+
+
+    // https://cloud.tencent.com/developer/article/1491859
     private static int indexOfSunday(String str, Pattern pattern) {
         int index = -1;
 

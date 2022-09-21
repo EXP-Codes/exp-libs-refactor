@@ -12,7 +12,11 @@ class Pattern {
 
     private int length;
 
+    /* for KMP */
     private int[] next;
+
+    /* for Sunday */
+    private int[] move;
 
     protected Pattern(String pattern) {
         this(pattern, null);
@@ -31,18 +35,18 @@ class Pattern {
 
     private void genNextArray() {
         this.next = new int[this.length];
-        this.next[0] = -1;
+        next[0] = -1;
         int j = 0;
         int k = -1;
-        while (j < this.length - 1) {
+        while (j < length - 1) {
             if (k == -1 || charAt(j) == charAt(k)) {
                 if (charAt(++j) == charAt(++k)) {       // 当两个字符相等时要跳过
-                    this.next[j] = this.next[k];
+                    next[j] = next[k];
                 } else {
-                    this.next[j] = k;
+                    next[j] = k;
                 }
             } else {
-                k = this.next[k];
+                k = next[k];
             }
         }
     }

@@ -6,12 +6,16 @@ package exp.libs.algorithm.substr;
  */
 public enum SubStrAlgorithm {
 
+    /* 暴力搜索 */
     DEFAULT("Brute-Force"),
 
-    BF("Brute-Force"),
-
+    /* KMP 算法 */
     KMP("KMP"),
 
+    /* BM 算法 */
+    BM("Boyer-Moore"),
+
+    /* Sunday 算法 */
     SUNDAY("Sunday"),
 
     ;
