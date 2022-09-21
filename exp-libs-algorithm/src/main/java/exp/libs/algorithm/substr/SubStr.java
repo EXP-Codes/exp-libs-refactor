@@ -60,10 +60,10 @@ public class SubStr {
         return index;
     }
 
-    
+
     public static void main(String[] args) {
-        String str = "sadfasdftfasfadherg";
-        String ptn = "fasfad";
+        String str = "sadfasdfdfdft中fasfadherg";
+        String ptn = "中fasfad";
         System.out.println(SubStr.indexOf(str, ptn, SubStrAlgorithm.KMP));
     }
 

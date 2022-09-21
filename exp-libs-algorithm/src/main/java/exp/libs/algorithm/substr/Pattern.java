@@ -28,6 +28,7 @@ class Pattern {
         }
     }
 
+
     private void genNextArray() {
         this.next = new int[this.length];
         this.next[0] = -1;
@@ -35,12 +36,17 @@ class Pattern {
         int k = -1;
         while (j < this.length - 1) {
             if (k == -1 || charAt(j) == charAt(k)) {
-                this.next[++j] = ++k;
+                if (charAt(++j) == charAt(++k)) {       // 当两个字符相等时要跳过
+                    this.next[j] = this.next[k];
+                } else {
+                    this.next[j] = k;
+                }
             } else {
                 k = this.next[k];
             }
         }
     }
+
 
     protected int nextAt(int index) {
         return this.next[index];
