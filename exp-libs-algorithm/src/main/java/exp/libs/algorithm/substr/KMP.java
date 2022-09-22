@@ -1,10 +1,15 @@
 package exp.libs.algorithm.substr;
 
 /**
+ * <PRE>
+ * 字符串模式匹配：KMP
  * https://www.cnblogs.com/dusf/p/kmp.html?share_token=c86cd6c3-f95b-46d2-83be-96e64cc7f81b
- * description
- *
- * @author exp 2022/09/22 22:20
+ * </PRE>
+ * <br/><B>PROJECT : </B> exp-libs
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
+ * @version   2022-09-22
+ * @author    EXP: exp.lqb@foxmail.com
+ * @since     JDK 1.8+
  */
 public class KMP extends _SubStr {
 

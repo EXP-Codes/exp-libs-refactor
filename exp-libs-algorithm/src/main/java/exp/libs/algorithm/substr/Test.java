@@ -49,7 +49,7 @@ public class Test {
     }
 
 
-    // https://blog.csdn.net/appleprince88/article/details/11881323
+
     private static int indexOfBM(String str, Pattern pattern) {
         int index = -1;
 
@@ -58,7 +58,6 @@ public class Test {
     }
 
 
-    // https://cloud.tencent.com/developer/article/1491859
     private static int indexOfSunday(String str, Pattern pattern) {
         int index = -1;
 
