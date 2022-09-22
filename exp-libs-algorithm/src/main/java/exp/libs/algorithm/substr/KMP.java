@@ -32,7 +32,7 @@ public class KMP extends _SubStr {
 
     @Override
     protected int _indexOf(String str, String pattern) {
-        Pattern ptn = new Pattern(pattern, algorithm);
+        KMPPattern ptn = new KMPPattern(pattern);
 
         int ps = 0;  // 主串的指针
         int pp = 0;  // 模式串的指针

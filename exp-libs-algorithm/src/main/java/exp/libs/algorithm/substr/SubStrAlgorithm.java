@@ -1,7 +1,7 @@
 package exp.libs.algorithm.substr;
 
 /**
- * @author exp
+ * @version   2022-09-22
  * @date 2022-09-21 0:27
  */
 public enum SubStrAlgorithm {

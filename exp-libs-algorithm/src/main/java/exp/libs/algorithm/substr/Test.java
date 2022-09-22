@@ -50,7 +50,7 @@ public class Test {
 
 
 
-    private static int indexOfBM(String str, Pattern pattern) {
+    private static int indexOfBM(String str, _Pattern pattern) {
         int index = -1;
 
         // 计算 pattern 每个字符在模式串最后出现的位置索引
@@ -58,7 +58,7 @@ public class Test {
     }
 
 
-    private static int indexOfSunday(String str, Pattern pattern) {
+    private static int indexOfSunday(String str, _Pattern pattern) {
         int index = -1;
 
         // 计算 pattern 每个字符在模式串最后出现的位置索引

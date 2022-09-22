@@ -11,19 +11,19 @@ package exp.libs.algorithm.substr;
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+
  */
-public class BoyerMoore extends _SubStr {
+public class BM extends _SubStr {
 
-    private static volatile BoyerMoore instance;
+    private static volatile BM instance;
 
-    public BoyerMoore() {
+    public BM() {
         super(SubStrAlgorithm.BM);
     }
 
-    public static BoyerMoore getInstn() {
+    public static BM getInstn() {
         if(instance == null) {
-            synchronized (BoyerMoore.class) {
+            synchronized (BM.class) {
                 if(instance == null) {
-                    instance = new BoyerMoore();
+                    instance = new BM();
                 }
             }
         }

@@ -107,6 +107,11 @@
             </dependency>
             <dependency>
                 <groupId>com.exp-blog</groupId>
+                <artifactId>exp-libs-algorithm</artifactId>
+                <version>${modules.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.exp-blog</groupId>
                 <artifactId>exp-libs-image</artifactId>
                 <version>${modules.version}</version>
             </dependency>
