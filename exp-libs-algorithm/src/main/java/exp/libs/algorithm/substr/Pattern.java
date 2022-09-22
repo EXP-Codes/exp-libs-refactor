@@ -6,9 +6,9 @@ package exp.libs.algorithm.substr;
  */
 class Pattern {
 
-    private String pattern;
-
     private SubStrAlgorithm algorithm;
+
+    private String pattern;
 
     private int length;
 
@@ -23,8 +23,8 @@ class Pattern {
     }
 
     protected Pattern(String pattern, SubStrAlgorithm algorithm) {
-        this.pattern = (pattern == null ? "" : pattern);
         this.algorithm = (algorithm == null ? SubStrAlgorithm.DEFAULT : algorithm);
+        this.pattern = (pattern == null ? "" : pattern);
         this.length = this.pattern.length();
 
         if (algorithm == SubStrAlgorithm.KMP) {

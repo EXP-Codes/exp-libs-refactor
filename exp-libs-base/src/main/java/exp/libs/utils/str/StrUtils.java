@@ -681,7 +681,7 @@ public class StrUtils {
         }
         return sub;
     }
-    
+
     /**
      * <PRE>
      * 截取字符串摘要.
