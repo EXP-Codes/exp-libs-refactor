@@ -13,8 +13,11 @@ class SundayPattern extends _Pattern {
 
     private Map<Character, Integer> next;
 
+    private int pLast;
+
     protected SundayPattern(String pattern) {
         super(pattern);
+        this.pLast = length - 1;
     }
 
     @Override
@@ -31,10 +34,13 @@ class SundayPattern extends _Pattern {
 
         // 从后往前检索
         } else {
-            for (int i = length - 1; i >= 0; i--) {
-                if (charAt(i) == ch) {
+            for (int i = pLast; i >= 0; i--) {
+                char pch = charAt(i);
+                next.putIfAbsent(pch, i);   // 把所有字符的最后出现的索引放进 next 表
+                pLast = i - 1;              // 更新下次开始检索的起始位置，确保 模式串 最多只会迭代一轮
+
+                if (pch == ch) {
                     index = i;
-                    next.put(ch, index);
                     break;
                 }
             }

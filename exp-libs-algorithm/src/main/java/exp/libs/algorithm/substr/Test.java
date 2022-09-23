@@ -67,7 +67,7 @@ public class Test {
 
 
     public static void main(String[] args) {
-        String str = "sadfasdfdfdft中fasfadherg";
+        String str = "s蚊dfasdfdfft中fasfadherg";
         String ptn = "中fasfad";
         System.out.println(Test.substrIndex(str, ptn, SubStrAlgorithm.SUNDAY));
     }

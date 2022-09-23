@@ -75,25 +75,4 @@ public class Sunday extends _SubStr {
         return index;
     }
 
-    public int lastIndex(String pattern, char ch) {
-        Map<Character, Integer> indexs = new HashMap<>(
-                MapUtils.genSize(pattern.length())
-        );
-        int index = -1;
-        Integer val = indexs.get(ch);
-        if (val == null) {
-
-            // 从后往前检索
-            for (int j = pattern.length() - 1; j >= 0; j--) {
-                if (pattern.charAt(j) == ch) {
-                    index = j;
-                    indexs.put(ch, index);
-                    break;
-                }
-            }
-        } else {
-            index = val.intValue();
-        }
-        return -1;
-    }
 }
