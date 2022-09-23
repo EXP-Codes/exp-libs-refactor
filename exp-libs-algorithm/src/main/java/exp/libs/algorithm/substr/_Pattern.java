@@ -13,11 +13,10 @@ abstract class _Pattern {
     protected _Pattern(String pattern) {
         this.pattern = (pattern == null ? "" : pattern);
         this.length = this.pattern.length();
-
-        genNext();
+        init();
     }
 
-    abstract protected void genNext();
+    abstract protected void init();
 
     protected char charAt(int index) {
         return this.pattern.charAt(index);

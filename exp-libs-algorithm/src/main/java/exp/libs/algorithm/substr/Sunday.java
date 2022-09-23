@@ -1,13 +1,9 @@
 package exp.libs.algorithm.substr;
 
-import exp.libs.utils.other.MapUtils;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * <PRE>
  * 字符串模式匹配：Sunday
+ * https://blog.csdn.net/Aries_Chen_CSDN/article/details/104030885?share_token=e819d1f5-d592-46a6-9f43-792e65d6f82d
  * https://www.cnblogs.com/MacrossFT/p/14159106.html?share_token=7fe0d33e-f127-44c4-afd5-e5adb36bcc96
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs

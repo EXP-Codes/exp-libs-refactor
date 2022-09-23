@@ -1,12 +1,15 @@
 package exp.libs.algorithm.substr;
 
+import java.util.Arrays;
+import java.util.Random;
+
 /**
  * <PRE>
  * 字符串模式匹配：BM （Boyer-Moore）
- * https://blog.csdn.net/appleprince88/article/details/11881323
+ * https://blog.csdn.net/u013035314/article/details/50302371
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs
- * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" str="_blank">https://exp-blog.com</a>
  * @version   2022-09-22
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+
@@ -32,6 +35,30 @@ public class BM extends _SubStr {
 
     @Override
     protected int _indexOf(String str, String pattern) {
-        return 0;
+        int tLen = str.length();
+        BMPattern ptn = new BMPattern(pattern);
+        int pLen = ptn.length();
+
+        if (pLen > tLen) {
+            return -1;
+        }
+
+        for (int i = pLen - 1, j; i < tLen;) {
+            System.out.println("跳跃位置：" + i);
+            for (j = pLen - 1; str.charAt(i) == ptn.charAt(j); i--, j--) {
+                if (j == 0) {
+                    System.out.println("匹配成功，位置：" + i);
+//					i++;   // 多次匹配
+//					break;
+                    return i;
+                }
+            }
+            i += Math.max(
+                    ptn.goodAt(pLen - j - 1),
+                    ptn.badAt(str.charAt(i))
+            );
+        }
+        return -1;
     }
+
 }

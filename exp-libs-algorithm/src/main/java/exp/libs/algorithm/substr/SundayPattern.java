@@ -21,7 +21,7 @@ class SundayPattern extends _Pattern {
     }
 
     @Override
-    protected void genNext() {
+    protected void init() {
         this.next = new HashMap<>(MapUtils.genSize(length));
     }
 
@@ -47,6 +47,5 @@ class SundayPattern extends _Pattern {
         }
         return index;
     }
-
 
 }

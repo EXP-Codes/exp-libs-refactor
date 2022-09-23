@@ -13,7 +13,7 @@ class KMPPattern extends _Pattern {
     }
 
     @Override
-    protected void genNext() {
+    protected void init() {
         this.next = new int[this.length];
         next[0] = -1;
         int j = 0;
