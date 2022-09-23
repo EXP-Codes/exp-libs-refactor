@@ -10,16 +10,14 @@ abstract class _Pattern {
 
     protected int length;
 
-    protected int[] next;
-
     protected _Pattern(String pattern) {
         this.pattern = (pattern == null ? "" : pattern);
         this.length = this.pattern.length();
 
-        genNextArray();
+        genNext();
     }
 
-    abstract protected void genNextArray();
+    abstract protected void genNext();
 
     protected char charAt(int index) {
         return this.pattern.charAt(index);

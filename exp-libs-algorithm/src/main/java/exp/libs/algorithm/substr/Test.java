@@ -18,7 +18,7 @@ public class Test {
      * @return 存在模式串则范围其首字符在主串中的下标; 不存在则返回 -1
      */
     public static int substrIndex(String str, String pattern) {
-        return substrIndex(str, pattern, exp.libs.algorithm.substr.SubStrAlgorithm.DEFAULT);
+        return substrIndex(str, pattern, SubStrAlgorithm.DEFAULT);
     }
 
     /**
@@ -31,15 +31,15 @@ public class Test {
      * @param algorithm 检索算法： 暴力检索（java 默认）、 KMP、 BM(Boyer-Moore)、 Sunday
      * @return 存在模式串则范围其首字符在主串中的下标; 不存在则返回 -1
      */
-    public static int substrIndex(String str, String pattern, exp.libs.algorithm.substr.SubStrAlgorithm algorithm) {
+    public static int substrIndex(String str, String pattern, SubStrAlgorithm algorithm) {
         int index = -1;
-        if (algorithm == exp.libs.algorithm.substr.SubStrAlgorithm.KMP) {
-            index = exp.libs.algorithm.substr.KMP.getInstn().indexOf(str, pattern);
+        if (algorithm == SubStrAlgorithm.KMP) {
+            index = KMP.getInstn().indexOf(str, pattern);
 
-        } else if (algorithm == exp.libs.algorithm.substr.SubStrAlgorithm.SUNDAY) {
-//            index = indexOfSunday(str, ptn);
+        } else if (algorithm == SubStrAlgorithm.SUNDAY) {
+            index = Sunday.getInstn().indexOf(str, pattern);
 
-        } else if (algorithm == exp.libs.algorithm.substr.SubStrAlgorithm.BM) {
+        } else if (algorithm == SubStrAlgorithm.BM) {
 //            index = indexOfBM(str, ptn);
 
         } else {
@@ -69,7 +69,7 @@ public class Test {
     public static void main(String[] args) {
         String str = "sadfasdfdfdft中fasfadherg";
         String ptn = "中fasfad";
-        System.out.println(Test.substrIndex(str, ptn, SubStrAlgorithm.KMP));
+        System.out.println(Test.substrIndex(str, ptn, SubStrAlgorithm.SUNDAY));
     }
 
 }

@@ -1,5 +1,10 @@
 package exp.libs.algorithm.substr;
 
+import exp.libs.utils.other.MapUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <PRE>
  * 字符串模式匹配：Sunday
@@ -32,53 +37,62 @@ public class Sunday extends _SubStr {
 
     @Override
     protected int _indexOf(String str, String pattern) {
-//        _Pattern ptn = new _Pattern(pattern, algorithm);
-
-
         int index = -1;
+        SundayPattern ptn = new SundayPattern(pattern);
+        int sLen = str.length();
+        int pLen = ptn.length();
 
-        return 0;
-    }
+        int ps = 0;  // 主串的指针
+        int pp = 0;  // 模式串的指针
 
-    public int Sunday(String haystack, String needle) {
-        int hayLen = haystack.length();
-        int nLen = needle.length();
+        // 主串 剩余字符少于 模式串 时跳过比较
+        while (ps <= sLen - pLen) {
 
-        int i = 0;//haystack串的游标索引
-        int j = 0;// needle串的游标索引
-
-        // haystack剩余字符少于needle串时跳过比较
-        while (i <= hayLen - nLen) {
-            // 将needle串与haystack串中参与比较的子串进行逐个字符比对
-            while (j < nLen && haystack.charAt(i + j) == needle.charAt(j)) {
-                j++;
+            // 将 模式串 与 主串 中参与比较的子串进行逐个字符比对
+            while (pp < pLen && str.charAt(ps + pp) == ptn.charAt(pp)) {
+                pp++;
             }
 
-            // 如果j等于needle串的长度说明此时匹配成功，可以直接返回此时主串的游标索引
-            if (j == nLen) {
-                return i;
+            // 如果 pp 等于 模式串 的长度说明此时匹配成功，可以直接返回此时 主串 的指针
+            if (pp == pLen) {
+                index = ps;
+                break;
             }
 
-            // 不匹配时计算需要跳过的字符数，移动主串游标i
-            if (i < hayLen - nLen) {
-                // 对照字符在needle串存在，则需要跳过的字符数为从对照字符在needle串中最后出现的位置起剩余的字符个数
-                // 不存在则跳过的字符数为needle串长度+1，也就是代码nLen-(-1)的情况
-                i += (nLen - lastIndex(needle, haystack.charAt(i + nLen)));
+            // 不匹配时计算需要跳过的字符数，移动 主串 的指针
+            if (ps < sLen - pLen) {
+
+                // 对照字符在 模式串 中存在，则需要跳过的字符数为从对照字符在 模式串 中最后出现的位置起剩余的字符个数
+                // 不存在则跳过的字符数为 模式串 长度 + 1，也就是代码 pLen - (-1) 的情况
+                char ch = str.charAt(ps + pLen);
+                ps += (pLen - ptn.nextAt(ch));
+
             } else {
-                return -1;
+                break;
             }
-            // 每次比较之后将needle游标置为0
-            j=0;
+            pp = 0;     // 每次比较之后将 模式串 的指针置 0
         }
-
-        return -1;
+        return index;
     }
-    public int lastIndex(String str, char ch) {
-        // 从后往前检索
-        for (int j = str.length() - 1; j >= 0; j--) {
-            if (str.charAt(j) == ch) {
-                return j;
+
+    public int lastIndex(String pattern, char ch) {
+        Map<Character, Integer> indexs = new HashMap<>(
+                MapUtils.genSize(pattern.length())
+        );
+        int index = -1;
+        Integer val = indexs.get(ch);
+        if (val == null) {
+
+            // 从后往前检索
+            for (int j = pattern.length() - 1; j >= 0; j--) {
+                if (pattern.charAt(j) == ch) {
+                    index = j;
+                    indexs.put(ch, index);
+                    break;
+                }
             }
+        } else {
+            index = val.intValue();
         }
         return -1;
     }

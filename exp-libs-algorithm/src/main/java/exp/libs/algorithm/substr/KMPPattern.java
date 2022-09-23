@@ -6,12 +6,14 @@ package exp.libs.algorithm.substr;
  */
 class KMPPattern extends _Pattern {
 
+    private int[] next;
+
     protected KMPPattern(String pattern) {
         super(pattern);
     }
 
     @Override
-    protected void genNextArray() {
+    protected void genNext() {
         this.next = new int[this.length];
         next[0] = -1;
         int j = 0;

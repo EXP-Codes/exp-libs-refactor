@@ -1,28 +1,45 @@
 package exp.libs.algorithm.substr;
 
+import exp.libs.utils.other.MapUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author exp
  * @date 2022-09-23 2:53
  */
 class SundayPattern extends _Pattern {
 
+    private Map<Character, Integer> next;
+
     protected SundayPattern(String pattern) {
         super(pattern);
     }
 
     @Override
-    protected void genNextArray() {
-
+    protected void genNext() {
+        this.next = new HashMap<>(MapUtils.genSize(length));
     }
 
-    protected int lastIndex(String str, char ch) {
+    protected int nextAt(char ch) {
+        int index = -1;
+        Integer val = next.get(ch);
+
+        if (val != null) {
+            index = val.intValue();
+
         // 从后往前检索
-        for (int j = str.length() - 1; j >= 0; j--) {
-            if (str.charAt(j) == ch) {
-                return j;
+        } else {
+            for (int i = length - 1; i >= 0; i--) {
+                if (charAt(i) == ch) {
+                    index = i;
+                    next.put(ch, index);
+                    break;
+                }
             }
         }
-        return -1;
+        return index;
     }
 
 
