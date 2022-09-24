@@ -11,6 +11,9 @@ on:
   pull_request:
     branches: [v*]
 
+  push:
+    branches: [feature-*]
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -26,7 +29,7 @@ jobs:
           server-id: sonatype         # 要与 distributionManagement 定义的 id 一致
           server-username: ${{ secrets.SONATYPE_USERNAME }}
           server-password: ${{ secrets.SONATYPE_PASSWORD }}
-          gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE_KEY }}
+          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE_KEY }}
 
       - name: Publish to Maven Central Repo
         uses: samuelmeuli/action-maven-publish@v1
@@ -34,5 +37,5 @@ jobs:
           server_id: sonatype         # 要与 distributionManagement 定义的 id 一致
           nexus_username: ${{ secrets.SONATYPE_USERNAME }}
           nexus_password: ${{ secrets.SONATYPE_PASSWORD }}
-          gpg_private_key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
-          gpg_passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE_KEY }}
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ secrets.GPG_PASSPHRASE_KEY }}
