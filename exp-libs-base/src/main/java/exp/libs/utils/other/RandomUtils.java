@@ -399,23 +399,51 @@ public class RandomUtils {
         int lower = genInt(97, 122);    // a-z
         return new int[] { digit, upper, lower };
     }
-    
+
+    /**
+     * 随机生成一串汉字
+     * @param len 字符串长度
+     * @return 随机汉字串
+     */
+    public static String genKanji(int len) {
+        len = len < 1 ? 1 : len;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < len; i++) {
+            sb.append(genOneKanji());
+        }
+        return sb.toString();
+    }
+
     /**
      * 随机生成一个汉字(约20000个汉字中的一个)
      * @return 随机汉字
      */
-    public static char genAllKanji() {
+    public static char genOneKanji() {
         int min = 0x4E00;
         int max = 0x9FA5;
         int random = genInt(min, max);    // unicode的汉字范围为4E00-9FA5
         return (char) random;
     }
-    
+
+    /**
+     * 随机生成一串常用汉字
+     * @param len 字符串长度
+     * @return 随机常用汉字
+     */
+    public static String genUsedKanji(int len) {
+        len = len < 1 ? 1 : len;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < len; i++) {
+            sb.append(genOneUsedKanji());
+        }
+        return sb.toString();
+    }
+
     /**
      * 随机生成常用的1000个汉字中的一个
      * @return 随机常用汉字
      */
-    public static char genUsedKanji() {
+    public static char genOneUsedKanji() {
         int idx = genInt(KANJI.length);
         return KANJI[idx];
     }

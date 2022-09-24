@@ -35,30 +35,33 @@ public class BM extends _SubStr {
 
     @Override
     protected int _indexOf(String str, String pattern) {
-        int tLen = str.length();
+        int index = -1;
+
         BMPattern ptn = new BMPattern(pattern);
         int pLen = ptn.length();
+        int sLen = str.length();
+        if (pLen > sLen) {
+            index = -1;
 
-        if (pLen > tLen) {
-            return -1;
-        }
-
-        for (int i = pLen - 1, j; i < tLen;) {
-            System.out.println("跳跃位置：" + i);
-            for (j = pLen - 1; str.charAt(i) == ptn.charAt(j); i--, j--) {
-                if (j == 0) {
-                    System.out.println("匹配成功，位置：" + i);
-//					i++;   // 多次匹配
-//					break;
-                    return i;
+        } else {
+            for (int i = pLen - 1, j; i < sLen;) {
+                for (j = pLen - 1; str.charAt(i) == ptn.charAt(j); i--, j--) {
+                    if (j == 0) {
+                        index = i;
+                        break;
+                    }
                 }
+                if (index > 0) {
+                    break;
+                }
+
+                i += Math.max(
+                        ptn.goodAt(pLen - j - 1),
+                        ptn.badAt(str.charAt(i))
+                );
             }
-            i += Math.max(
-                    ptn.goodAt(pLen - j - 1),
-                    ptn.badAt(str.charAt(i))
-            );
         }
-        return -1;
+        return index;
     }
 
 }

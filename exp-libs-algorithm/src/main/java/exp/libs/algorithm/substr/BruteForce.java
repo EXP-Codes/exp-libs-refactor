@@ -2,7 +2,7 @@ package exp.libs.algorithm.substr;
 
 /**
  * <PRE>
- * 字符串模式匹配：暴力匹配 （java 默认）
+ * 字符串模式匹配：暴力匹配 （java 默认，但是被优化得超高效 ？）
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs
  * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
