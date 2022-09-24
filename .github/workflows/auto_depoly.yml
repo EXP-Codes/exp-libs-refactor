@@ -30,7 +30,7 @@ jobs:
       # 发布签名 jar 包到 Maven 中央仓库
       # 配置参考： https://github.com/samuelmeuli/action-maven-publish/blob/master/docs/deployment-setup.md
       - name: Publish to Maven Central Repo
-        uses: samuelmeuli/action-maven-publish@v1.1
+        uses: samuelmeuli/action-maven-publish@v1.4
         with:
           server_id: sonatype         # 要与 distributionManagement 定义的 id 一致
           nexus_username: ${{ secrets.SONATYPE_USERNAME }}
