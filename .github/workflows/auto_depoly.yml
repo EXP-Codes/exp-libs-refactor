@@ -34,5 +34,5 @@ jobs:
           server_id: sonatype         # 要与 distributionManagement 定义的 id 一致
           nexus_username: ${{ secrets.SONATYPE_USERNAME }}
           nexus_password: ${{ secrets.SONATYPE_PASSWORD }}
-          gpg_private_key: ${{ secrets.MAVEN_GPG_PASSPHRASE_KEY }}
-          gpg_passphrase: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg_private_key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg_passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE_KEY }}
