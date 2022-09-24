@@ -7,9 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * description
- *
- * @author exp 2022/09/24 19:32
+ * <PRE>
+ * 字符串匹配算法测试
+ * </PRE>
+ * <br/><B>PROJECT : </B> exp-libs
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" str="_blank">https://exp-blog.com</a>
+ * @version   2022-09-22
+ * @author    EXP: exp.lqb@foxmail.com
+ * @since     JDK 1.8+
  */
 class SubStrUtilsTest {
 

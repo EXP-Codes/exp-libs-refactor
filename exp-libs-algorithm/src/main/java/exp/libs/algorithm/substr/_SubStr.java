@@ -3,9 +3,14 @@ package exp.libs.algorithm.substr;
 import exp.libs.utils.str.StrUtils;
 
 /**
- * description
- *
- * @author exp 2022/09/22 22:14
+ * <PRE>
+ * 字符串匹配算法对象
+ * </PRE>
+ * <br/><B>PROJECT : </B> exp-libs
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
+ * @version   2022-03-06
+ * @author    EXP: exp.lqb@foxmail.com
+ * @since     JDK 1.8+
  */
 abstract class _SubStr {
 
