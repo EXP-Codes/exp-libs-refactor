@@ -1,8 +1,14 @@
 package exp.libs.algorithm.substr;
 
 /**
+ * <PRE>
+ * 枚举类：字符串匹配算法
+ * </PRE>
+ * <br/><B>PROJECT : </B> exp-libs
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" str="_blank">https://exp-blog.com</a>
  * @version   2022-09-22
- * @date 2022-09-21 0:27
+ * @author    EXP: exp.lqb@foxmail.com
+ * @since     JDK 1.8+
  */
 public enum SubStrAlgorithm {
 

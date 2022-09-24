@@ -6,8 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author exp
- * @date 2022-09-23 2:53
+ * <PRE>
+ * Sunday 模式串对象
+ * </PRE>
+ * <br/><B>PROJECT : </B> exp-libs
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" str="_blank">https://exp-blog.com</a>
+ * @version   2022-09-22
+ * @author    EXP: exp.lqb@foxmail.com
+ * @since     JDK 1.8+
  */
 class SundayPattern extends _Pattern {
 
