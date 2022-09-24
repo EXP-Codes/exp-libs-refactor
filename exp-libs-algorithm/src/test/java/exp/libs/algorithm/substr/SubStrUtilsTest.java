@@ -2,6 +2,7 @@ package exp.libs.algorithm.substr;
 
 import exp.libs.utils.other.RandomUtils;
 import exp.libs.utils.str.StrUtils;
+import exp.libs.utils.time.QuickTimer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,8 @@ import org.junit.jupiter.api.Test;
  * @since     JDK 1.8+
  */
 class SubStrUtilsTest {
+
+    private QuickTimer qt;
 
     private static final int STR_LEN = 100000000;
 
@@ -38,6 +41,8 @@ class SubStrUtilsTest {
 
     @BeforeEach
     void setup() {
+        this.qt = new QuickTimer();
+
         System.out.println("正在生成测试用 [主串] ...");
         boolean flop = true;
         StringBuffer sb = new StringBuffer();
@@ -83,31 +88,27 @@ class SubStrUtilsTest {
 
     private void testBruteForce() {
         System.out.println("正在验证 [暴力匹配(JDK)] 算法，时间复杂度 O(m * n) ...");
-        long bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         int index = SubStrUtils.substrIndex(str, headPattren);
-        long endTime = System.currentTimeMillis();
         Assertions.assertEquals(0, index);
-        System.out.println(" > 验证 [头部匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [头部匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, bodyPattren);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(pattrenBgnIdx, index);
-        System.out.println(" > 验证 [中段匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [中段匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, tailPattren);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(pattrenEndIdx, index);
-        System.out.println(" > 验证 [尾部匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [尾部匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, notMatchPattren);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(-1, index);
-        System.out.println(" > 验证 [不匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [不匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex("", "");
         Assertions.assertEquals(-1, index);
         index = SubStrUtils.substrIndex(null, null);
@@ -116,37 +117,32 @@ class SubStrUtilsTest {
         Assertions.assertEquals(-1, index);
         index = SubStrUtils.substrIndex(null, "");
         Assertions.assertEquals(-1, index);
-        endTime = System.currentTimeMillis();
-        System.out.println(" > 验证 [异常] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [异常] 成功，耗时: " + qt.checkpoint() + " ms");
     }
 
     private void testKMP() {
         System.out.println("正在验证 [KMP 匹配] 算法，时间复杂度 O(m + n) ...");
-        long bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         int index = SubStrUtils.substrIndex(str, headPattren, SubStrAlgorithm.KMP);
-        long endTime = System.currentTimeMillis();
         Assertions.assertEquals(0, index);
-        System.out.println(" > 验证 [头部匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [头部匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, bodyPattren, SubStrAlgorithm.KMP);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(pattrenBgnIdx, index);
-        System.out.println(" > 验证 [中段匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [中段匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, tailPattren, SubStrAlgorithm.KMP);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(pattrenEndIdx, index);
-        System.out.println(" > 验证 [尾部匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [尾部匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, notMatchPattren, SubStrAlgorithm.KMP);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(-1, index);
-        System.out.println(" > 验证 [不匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [不匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex("", "", SubStrAlgorithm.KMP);
         Assertions.assertEquals(-1, index);
         index = SubStrUtils.substrIndex(null, null, SubStrAlgorithm.KMP);
@@ -155,37 +151,32 @@ class SubStrUtilsTest {
         Assertions.assertEquals(-1, index);
         index = SubStrUtils.substrIndex(null, "", SubStrAlgorithm.KMP);
         Assertions.assertEquals(-1, index);
-        endTime = System.currentTimeMillis();
-        System.out.println(" > 验证 [异常] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [异常] 成功，耗时: " + qt.checkpoint() + " ms");
     }
 
     private void testBM() {
         System.out.println("正在验证 [Boyer-Moore 匹配] 算法，时间复杂度 O(m / n) ...");
-        long bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         int index = SubStrUtils.substrIndex(str, headPattren, SubStrAlgorithm.BM);
-        long endTime = System.currentTimeMillis();
         Assertions.assertEquals(0, index);
-        System.out.println(" > 验证 [头部匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [头部匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, bodyPattren, SubStrAlgorithm.BM);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(pattrenBgnIdx, index);
-        System.out.println(" > 验证 [中段匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [中段匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, tailPattren, SubStrAlgorithm.BM);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(pattrenEndIdx, index);
-        System.out.println(" > 验证 [尾部匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [尾部匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, notMatchPattren, SubStrAlgorithm.BM);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(-1, index);
-        System.out.println(" > 验证 [不匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [不匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex("", "", SubStrAlgorithm.BM);
         Assertions.assertEquals(-1, index);
         index = SubStrUtils.substrIndex(null, null, SubStrAlgorithm.BM);
@@ -194,37 +185,32 @@ class SubStrUtilsTest {
         Assertions.assertEquals(-1, index);
         index = SubStrUtils.substrIndex(null, "", SubStrAlgorithm.BM);
         Assertions.assertEquals(-1, index);
-        endTime = System.currentTimeMillis();
-        System.out.println(" > 验证 [异常] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [异常] 成功，耗时: " + qt.checkpoint() + " ms");
     }
 
     private void testSunday() {
         System.out.println("正在验证 [Sunday 匹配] 算法，时间复杂度 O(m / n) ...");
-        long bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         int index = SubStrUtils.substrIndex(str, headPattren, SubStrAlgorithm.SUNDAY);
-        long endTime = System.currentTimeMillis();
         Assertions.assertEquals(0, index);
-        System.out.println(" > 验证 [头部匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [头部匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, bodyPattren, SubStrAlgorithm.SUNDAY);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(pattrenBgnIdx, index);
-        System.out.println(" > 验证 [中段匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [中段匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, tailPattren, SubStrAlgorithm.SUNDAY);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(pattrenEndIdx, index);
-        System.out.println(" > 验证 [尾部匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [尾部匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex(str, notMatchPattren, SubStrAlgorithm.SUNDAY);
-        endTime = System.currentTimeMillis();
         Assertions.assertEquals(-1, index);
-        System.out.println(" > 验证 [不匹配] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [不匹配] 成功，耗时: " + qt.checkpoint() + " ms");
 
-        bgnTime = System.currentTimeMillis();
+        qt.checkpoint();
         index = SubStrUtils.substrIndex("", "", SubStrAlgorithm.SUNDAY);
         Assertions.assertEquals(-1, index);
         index = SubStrUtils.substrIndex(null, null, SubStrAlgorithm.SUNDAY);
@@ -233,8 +219,7 @@ class SubStrUtilsTest {
         Assertions.assertEquals(-1, index);
         index = SubStrUtils.substrIndex(null, "", SubStrAlgorithm.SUNDAY);
         Assertions.assertEquals(-1, index);
-        endTime = System.currentTimeMillis();
-        System.out.println(" > 验证 [异常] 成功，耗时: " + (endTime - bgnTime) + " ms");
+        System.out.println(" > 验证 [异常] 成功，耗时: " + qt.checkpoint() + " ms");
     }
 
 }
