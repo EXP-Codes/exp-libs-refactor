@@ -1,12 +1,10 @@
 package exp.libs.algorithm.substr;
 
-import java.util.Arrays;
-import java.util.Random;
 
 /**
  * <PRE>
  * 字符串模式匹配：BM （Boyer-Moore）
- * https://blog.csdn.net/u013035314/article/details/50302371
+ * 时间复杂度： O(m/n)
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs
  * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" str="_blank">https://exp-blog.com</a>
