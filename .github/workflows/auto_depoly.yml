@@ -23,12 +23,16 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+          server-id: sonatype         # 要与 distributionManagement 定义的 id 一致
+          server-username: ${{ secrets.SONATYPE_USERNAME }}
+          server-password: ${{ secrets.SONATYPE_PASSWORD }}
+          gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE_KEY }}
 
       - name: Publish to Maven Central Repo
         uses: samuelmeuli/action-maven-publish@v1
         with:
           server_id: sonatype         # 要与 distributionManagement 定义的 id 一致
-          gpg_private_key: ${{ secrets.MAVEN_GPG_PASSPHRASE_KEY }}
-          gpg_passphrase: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           nexus_username: ${{ secrets.SONATYPE_USERNAME }}
           nexus_password: ${{ secrets.SONATYPE_PASSWORD }}
+          gpg_private_key: ${{ secrets.MAVEN_GPG_PASSPHRASE_KEY }}
+          gpg_passphrase: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
