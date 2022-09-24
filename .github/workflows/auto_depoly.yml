@@ -3,7 +3,7 @@ on:
   # 支持手动触发构建
   workflow_dispatch:
 
-  # 创建 release 的时候触发
+  # （从版本分支）创建 release 的时候触发
   release:
     types: [published]
 
@@ -16,28 +16,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: pull repository
+      - name: Check out repo
         uses: actions/checkout@v2
 
-      - name: Set up JDK 1.8
+      - name: Set up Java env
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
 
-      - name: Set up Sonatype Maven Central
-        uses: actions/setup-java@v1
+      - name: Publish to Maven Central Repo
+        uses: samuelmeuli/action-maven-publish@v1
         with:
-          java-version: 1.8
-          server-id: releases
-          server-username: ${{ secrets.SONATYPE_USERNAME }}
-          server-password: ${{ secrets.SONATYPE_PASSWORD }}
-          gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE_KEY }}
-          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
-
-      - name: Publish jars to Sonatype Maven Central
-        run: mvn clean deploy
-        env:
-          MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE_KEY }}
-
+          server_id: sonatype         # 要与 distributionManagement 定义的 id 一致
+          gpg_private_key: ${{ secrets.MAVEN_GPG_PASSPHRASE_KEY }}
+          gpg_passphrase: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          nexus_username: ${{ secrets.SONATYPE_USERNAME }}
+          nexus_password: ${{ secrets.SONATYPE_PASSWORD }}
