@@ -29,7 +29,6 @@ jobs:
 
       - name: Deploy Javadoc
         run: |-
-#          git diff
           git config --global user.email "github-bot@example.com"
           git config --global user.name "Github-Bot"
           git add -A
