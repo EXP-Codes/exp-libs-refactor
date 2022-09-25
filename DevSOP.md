@@ -37,7 +37,7 @@ sequenceDiagram
     Note left of Local: 版本号 +1<br/>末尾增加 -SNAPSHOT
     Local->>Github: 提交 [版本分支]<br/>git push
     Local->>Local: 检出 [特性分支]<br/>git checkout -b feature-${xxx}
-    loop 需求开发
+    loop 当前版本需求开发
         Local->>Local: 修改代码
         Local->>Github: 提交修改<br/>git push
         Github->>Github: 合并 [特性分支] 到 [版本分支]
