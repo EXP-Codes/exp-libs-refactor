@@ -7,7 +7,7 @@
 # ------------------------------------------------
 
 echo "Generate javadoc-jar for all modules ..."
-mvn clean package -Dmaven.test.skip=true
+#mvn clean package -Dmaven.test.skip=true
 
 items=`ls | grep 'exp-libs-'`
 for item in $items
@@ -27,7 +27,7 @@ do
           rm -rf $snkPath
         fi
         mkdir -p $snkPath
-        tar -xvf $srcPath -C $snkPath
+        unzip -d $snkPath $srcPath
       fi
     fi
 done
