@@ -28,7 +28,12 @@ sequenceDiagram
     participant Local
     participant Github
     participant Github Action
-    Github->>Local: git checkout -b v${x.y.z}
+    Github->>Local: 拉取 master 最新内容<br/>git pull
+    Local->>Local: 检出 [版本分支]<br/>git checkout -b v${x.y.z}
+    Note left of Local: 版本号 +1<br/>末尾增加 -SNAPSHOT
+    Local->>Local: 修改 pom.xml 版本
+    Local->>Github: 推送 [版本分支]<br/>git push
+    
 ```
 
 
