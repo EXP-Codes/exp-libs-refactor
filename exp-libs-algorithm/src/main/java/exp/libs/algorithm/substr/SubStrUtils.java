@@ -2,8 +2,14 @@ package exp.libs.algorithm.substr;
 
 
 /**
- * @author exp
- * @date 2022-09-21 0:24
+ * <PRE>
+ * 字符串匹配
+ * </PRE>
+ * <br/><B>PROJECT : </B> exp-libs
+ * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" str="_blank">https://exp-blog.com</a>
+ * @version   2022-09-22
+ * @author    EXP: exp.lqb@foxmail.com
+ * @since     JDK 1.8+
  */
 public class SubStrUtils {
 
