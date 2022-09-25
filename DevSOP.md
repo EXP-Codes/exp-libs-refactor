@@ -28,12 +28,20 @@ sequenceDiagram
     participant Local
     participant Github
     participant Github Action
+    participant Sonatype
     Github->>Local: 拉取 master 最新内容<br/>git pull
     Local->>Local: 检出 [版本分支]<br/>git checkout -b v${x.y.z}
     Note left of Local: 版本号 +1<br/>末尾增加 -SNAPSHOT
     Local->>Local: 修改 pom.xml 版本
     Local->>Github: 推送 [版本分支]<br/>git push
-    
+    Local->>Local: 检出 [特性分支]<br/>git checkout -b feature-${xxx}
+    loop 需求发布
+        Local->>Local: 修改代码
+        Local->>Github: 推送修改<br/>git push
+    end
+    Github->>Github: 合并 [特性分支] 到 [版本分支]
+    Github->>Github Action: 触发流水线
+    Github Action->>Sonatype: 发布 SNAPSHOT 版本
 ```
 
 
