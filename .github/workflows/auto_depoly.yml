@@ -30,7 +30,13 @@ jobs:
           server-username: MAVEN_USERNAME
           server-password: MAVEN_CENTRAL_TOKEN
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
-          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+
+#      - name: Configure GPG Key
+#        run: |
+#          echo -n "${GPG_PRIVATE_KEY}" | base64 --decode | gpg --import
+#        env:
+#          GPG_SIGNING_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
 
       - name: Publish to Sonatype Maven Central
         run: mvn clean deploy -P deploy
