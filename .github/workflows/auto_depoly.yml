@@ -33,7 +33,7 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
 
       - name: Publish to Sonatype Maven Central
-        run: mvn clean deploy
+        run: mvn clean deploy -P deploy
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
