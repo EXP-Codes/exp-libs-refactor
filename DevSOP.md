@@ -16,12 +16,12 @@
 10. 拉取 `[版本分支]` 最新代码: `git pull`
 11. 修改 `pom.xml` 中的 `<version>`: 移除末尾的 `-SNAPSHOT` 快照标识
 12. 提交 `[版本分支]` 到 Github
-13. 在 Github 对 `[版本分支]` 发起 `Releases` 动作（会要求新建 `Tag`，名称和 `[版本分支]` 名一致），此时会触发流水线自动 deploy `Release` 版本到 Maven 中央仓库
+13. 在 Github 对 `[版本分支]` 发起 `Releases` 动作（会强制新建 `Tag`，名称和 `[版本分支]` 一致），此时会触发流水线自动 deploy `Release` 版本到 Maven 中央仓库
 14. 在 Github 合并 `[版本分支]` 到 master，此时会触发流水线自动生成 javadoc
 15. 重复步骤 1， 进入下一轮迭代
 
 <details>
-<summary><b>发布流程示意图</b></summary>
+<summary><b>发版流程示意图</b></summary>
 <br/>
 
 ```mermaid
@@ -52,7 +52,7 @@ sequenceDiagram
     Note left of Local: 移除末尾的 -SNAPSHOT
     Local->>Github: 提交 [版本分支]<br/>git push
     Github->>Github: 对 [版本分支] 发起 Releases
-    Note left of Github: 新建 `Tag`<br/>名称和 [版本分支] 一致
+    Note left of Github: 强制新建 `Tag`<br/>名称和 [版本分支] 一致
     Github->>Github Action: 触发流水线
     Github Action->>Sonatype: 发布 Release 版本
     Github->>Github: 合并 [版本分支] 到 master
