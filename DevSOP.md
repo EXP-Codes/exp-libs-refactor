@@ -32,8 +32,8 @@ sequenceDiagram
     participant Sonatype
     Github->>Local: 拉取 master 最新代码<br/>git pull
     Local->>Local: 检出 [版本分支]<br/>git checkout -b v${x.y.z}
-    Note left of Local: 版本号 +1<br/>末尾增加 -SNAPSHOT
     Local->>Local: 修改 pom.xml 的版本
+    Note left of Local: 版本号 +1<br/>末尾增加 -SNAPSHOT
     Local->>Github: 推送 [版本分支]<br/>git push
     Local->>Local: 检出 [特性分支]<br/>git checkout -b feature-${xxx}
     loop 需求开发
@@ -47,8 +47,8 @@ sequenceDiagram
     Github->>Github: 删除所有 [特性分支]
     Local->>Local: 切换到 [版本分支]<br/>git checkout v${x.y.z}
     Local->>Local: 拉取 [版本分支] 最新代码<br/>git pull
-    Note left of Local: 移除末尾的 -SNAPSHOT
     Local->>Local: 修改 pom.xml 的版本
+    Note left of Local: 移除末尾的 -SNAPSHOT
 ```
 
 
