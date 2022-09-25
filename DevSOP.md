@@ -29,12 +29,10 @@
 graph LR
     master((master)) -- checkout --> version[vX.Y.Z<br/>版本分支]
     version -- checkout --> featureA(feature-AAA<br/>特性分支 A)
-    version -- checkout --> featureB(feature-BBB<br/>特性分支 B)
     version -- checkout --> featureN(feature-...<br/>特性分支 N)
-    featureA -- merge --> version
-    featureB -- merge --> version
-    featureN -- merge --> version
-    version -- merge --> master
+    featureA -- merge:SNAPSHOT --> version
+    featureN -- merge:SNAPSHOT --> version
+    version -- merge:RELEASE --> master
 ```
 
 </details>
