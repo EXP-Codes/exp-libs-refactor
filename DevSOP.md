@@ -6,7 +6,7 @@
 
 1. 拉取 master 最新代码: `git pull`
 2. 从 master 检出 `[版本分支]`: `git checkout -b v${x.y.z}`
-3. 修改 `pom.xml` 中的 `<version>`: 版本号 `+1`， 末尾增加 `-SNAPSHOT` 快照标识， push `[版本分支]` 到 Github
+3. 批量修改父子所有 `pom.xml` 中的 `<version>`: 版本号 `+1`， 末尾增加 `-SNAPSHOT` 快照标识， push `[版本分支]` 到 Github
 4. 从 `[版本分支]` 检出 `[特性分支]`: `git checkout -b feature-${xxx}`
 5. 在 `[特性分支]` 修改代码（可以随时提交到 Github）
 6. 每完成一个需求修改后，在 Github 合并 `[特性分支]` 到 `[版本分支]`，此时会触发流水线自动 deploy `SNAPSHOT` 版本到 Maven 中央仓库
@@ -14,7 +14,7 @@
 8. 宣布封版，在 Github 删除所有 `[特性分支]`
 9. 在本地切换到 `[版本分支]`: `git checkout v${x.y.z}`
 10. 拉取 `[版本分支]` 最新代码: `git pull`
-11. 修改 `pom.xml` 中的 `<version>`: 移除末尾的 `-SNAPSHOT` 快照标识
+11. 批量修改父子所有 `pom.xml` 中的 `<version>`: 移除末尾的 `-SNAPSHOT` 快照标识
 12. 提交 `[版本分支]` 到 Github
 13. 在 Github 对 `[版本分支]` 发起 `Releases` 动作（会强制新建 `Tag`，名称和 `[版本分支]` 一致），此时会触发流水线自动 deploy `Release` 版本到 Maven 中央仓库
 14. 在 Github 合并 `[版本分支]` 到 master，此时会触发流水线自动生成 javadoc
@@ -33,7 +33,7 @@ sequenceDiagram
     participant Github Pages
     Github->>Local: 拉取 master 最新代码<br/>git pull
     Local->>Local: 检出 [版本分支]<br/>git checkout -b v${x.y.z}
-    Local->>Local: 修改 pom.xml 的版本
+    Local->>Local: 批量修改父子所有 pom.xml 的版本
     Note left of Local: 版本号 +1<br/>末尾增加 -SNAPSHOT
     Local->>Github: 提交 [版本分支]<br/>git push
     Local->>Local: 检出 [特性分支]<br/>git checkout -b feature-${xxx}
@@ -48,7 +48,7 @@ sequenceDiagram
     Github->>Github: 删除所有 [特性分支]
     Local->>Local: 切换到 [版本分支]<br/>git checkout v${x.y.z}
     Local->>Local: 拉取 [版本分支] 最新代码<br/>git pull
-    Local->>Local: 修改 pom.xml 的版本
+    Local->>Local: 批量修改父子所有 pom.xml 的版本
     Note left of Local: 移除末尾的 -SNAPSHOT
     Local->>Github: 提交 [版本分支]<br/>git push
     Github->>Github: 对 [版本分支] 发起 Releases
