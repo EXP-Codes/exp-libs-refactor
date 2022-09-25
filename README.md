@@ -1,6 +1,7 @@
 # exp-libs-refactor
 
 > 经验构件库（重构版）
+> 原项目已废弃：https://github.com/lyy289065406/exp-libs
 
 ------
 
@@ -11,12 +12,20 @@
 
 ## 简介
 
-正在作业中，原项目基本已废弃：https://github.com/lyy289065406/exp-libs
+此构件库为本人多年编程总结提炼而成，把常用的功能模块作为原子 API 进行封装。
+
+另外也借用了不少出色的第三方构件，在其之上进行二次封装。
+
+过程中尽量确保了低耦合、高性能、强稳健、高复用、更易用等，使之能够满足日常开发需要、提高开发效率。
+
+> [Javadoc](https://lyy289065406.github.io/exp-libs-refactor/)
 
 
 ## 使用
 
-settings 仓库追加 sonatype 中央仓库配置（本项目发布到该中央仓库）：
+### settings 仓库配置
+
+在 `~/.m2/settings.xml` 追加 sonatype 中央仓库配置（本项目发布到该中央仓库）：
 
 ```xml
 <mirror>
@@ -32,20 +41,10 @@ settings 仓库追加 sonatype 中央仓库配置（本项目发布到该中央�
 </mirror>
 ```
 
+### 工程 pom 依赖配置
 
-## 发版规约
+在你的工程 `pom.xml` 的 `<dependencies>` 下添加需要的依赖构件即可。
 
-1. 从 master 检出 `[版本分支]`: `git checkout -b v${x.y.z}`
-2. 修改 `pom.xml` 中的 `<version>`: 版本号 `+1`， 末尾增加 `-SNAPSHOT` 快照标识， push `[版本分支]` 到 Github
-3. 从 `[版本分支]` 检出 `[特性分支]`: `git checkout -b feature-${xxx}`
-4. 在 `[特性分支]` 修改代码（可以随时提交到 Github）
-5. 每完成一个需求修改后，在 Github 合并 `[特性分支]` 到 `[版本分支]`，此时会触发流水线自动 deploy `SNAPSHOT` 版本到 Maven 中央仓库
-6. 重复步骤 4 ~ 5， 直到一个版本需求完成
-7. 宣布封版，在 Github 删除所有 `[特性分支]`
-8. 在本地切换到 `[版本分支]`: `git checkout v${x.y.z}`
-9. 拉取 `[版本分支]` 最新代码
-10. 修改 `pom.xml` 中的 `<version>`: 移除末尾的 `-SNAPSHOT` 快照标识
-11. 提交 `[版本分支]` 到 Github
-12. 在 Github 对 `[版本分支]` 发起 `Releases` 动作（会要求新建 `Tag`，名称和 `[版本分支]` 名一致），此时会触发流水线自动 deploy `Release` 版本到 Maven 中央仓库
-13. 在 Github 合并 `[版本分支]` 到 master，此时会触发流水线自动生成 javadoc
-14. 重复步骤 1， 进入下一轮迭代
+> 此项目的最新依赖的 pom 坐标可以到 [Maven 中央仓库](https://mvnrepository.com/search?q=exp-blog) 检索关键字 `exp-blog`。
+
+
