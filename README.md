@@ -33,7 +33,7 @@ settings 仓库追加 sonatype 中央仓库配置（本项目发布到该中央�
 ```
 
 
-## 发版指引
+## 发版规约
 
 1. 从 master 检出 `[版本分支]`: `git checkout -b v${x.y.z}`
 2. 修改 `pom.xml` 中的 `<version>`: 版本号 `+1`， 末尾增加 `-SNAPSHOT` 快照标识， push `[版本分支]` 到 Github
