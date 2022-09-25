@@ -13,7 +13,7 @@ import java.util.Map;
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+
  */
-public class BMPattern extends _Pattern {
+class BMPattern extends _Pattern {
 
     private Map<Character, Integer> badCharacter;
 
