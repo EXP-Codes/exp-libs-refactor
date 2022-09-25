@@ -30,15 +30,16 @@ sequenceDiagram
     participant Github
     participant Github Action
     participant Sonatype
+    participant Github Pages
     Github->>Local: 拉取 master 最新代码<br/>git pull
     Local->>Local: 检出 [版本分支]<br/>git checkout -b v${x.y.z}
     Local->>Local: 修改 pom.xml 的版本
     Note left of Local: 版本号 +1<br/>末尾增加 -SNAPSHOT
-    Local->>Github: 推送 [版本分支]<br/>git push
+    Local->>Github: 提交 [版本分支]<br/>git push
     Local->>Local: 检出 [特性分支]<br/>git checkout -b feature-${xxx}
     loop 需求开发
         Local->>Local: 修改代码
-        Local->>Github: 推送修改<br/>git push
+        Local->>Github: 提交修改<br/>git push
         Github->>Github: 合并 [特性分支] 到 [版本分支]
         Github->>Github Action: 触发流水线
         Github Action->>Sonatype: 发布 SNAPSHOT 版本
@@ -49,28 +50,15 @@ sequenceDiagram
     Local->>Local: 拉取 [版本分支] 最新代码<br/>git pull
     Local->>Local: 修改 pom.xml 的版本
     Note left of Local: 移除末尾的 -SNAPSHOT
+    Local->>Github: 提交 [版本分支]<br/>git push
+    Github->>Github: 对 [版本分支] 发起 Releases
+    Note left of Github: 新建 `Tag`<br/>名称和 [版本分支] 一致
+    Github->>Github Action: 触发流水线
+    Github Action->>Sonatype: 发布 Release 版本
+    Github->>Github: 合并 [版本分支] 到 master
+    Github->>Github Action: 触发流水线
+    Github Action->>Github Pages: 发布 Javadoc
 ```
-
-
-Note left of 视觉 AI 服务: Socket Server
-loop Listener
-视觉 AI 服务->>视觉 AI 服务: 监听游戏控制终端链接请求
-end
-Note right of 游戏控制终端: Socket Client
-游戏控制终端->>视觉 AI 服务: 建立 Socket 连接
-Note right of 游戏控制终端: 👇 Alt
-游戏控制终端->>游戏: 截取游戏画面<br/>中心区域
-Note right of 游戏控制终端: by [OpenCV]
-Note left of 游戏控制终端: by [视频采集卡]
-游戏控制终端->>视觉 AI 服务: 发送区域图像
-视觉 AI 服务->>视觉 AI 服务: 分析区域图像<br/>获得人体部位坐标
-Note left of 视觉 AI 服务: by [视觉 AI]
-Note right of 视觉 AI 服务: by [Socket]
-视觉 AI 服务->>游戏控制终端: 发送人体部位坐标
-游戏控制终端->>游戏控制终端: 计算坐标偏移<br/>获得鼠标坐标
-Note right of 游戏控制终端: by [驱动级信号]
-游戏控制终端->>游戏: 发送鼠标坐标
-Note right of 游戏: 移动鼠标到目标<br/>然后射击吧 !!!
 
 </details>
 
