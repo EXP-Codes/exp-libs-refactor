@@ -60,7 +60,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <modules.version>2.1.0-SNAPSHOT</modules.version>
+        <modules.version>${project.version}</modules.version>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -230,7 +230,7 @@
                 <version>1.6.13</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <serverId>sonatype</serverId>
+                    <serverId>sonatype</serverId>   <!-- 要与 distributionManagement 定义的 id 一致 -->
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
@@ -250,11 +250,13 @@
         </repository>
     </distributionManagement>
 
+
     <!-- =========================================================================== -->
-    <!-- 不能修改，整个 profile 都是用于 Github Actions 命令行发布的 -->
+    <!-- 不能修改，整个 profile 都是用于 Github Actions 命令行发布的 （主要是 GPG 签名插件需要配置非交互模式输入密码） -->
+    <!-- 命令行使用 mvn clean deploy -P toSonatype 即可指定此配置 -->
     <profiles>
         <profile>
-            <id>deploy</id>
+            <id>toSonatype</id>
             <build>
                 <plugins>
                     <!-- 编译 maven 工程 -->
@@ -342,7 +344,7 @@
                         <version>1.6.13</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>sonatype</serverId>
+                            <serverId>sonatype</serverId>   <!-- 要与 distributionManagement 定义的 id 一致 -->
                             <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
