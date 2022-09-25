@@ -1,7 +1,6 @@
 # exp-libs-refactor
 
 > 经验构件库（重构版）
-> 原项目已废弃：https://github.com/lyy289065406/exp-libs
 
 ------
 
@@ -18,7 +17,7 @@
 
 过程中尽量确保了低耦合、高性能、强稳健、高复用、更易用等，使之能够满足日常开发需要、提高开发效率。
 
-> [Javadoc](https://lyy289065406.github.io/exp-libs-refactor/)
+> 原项目已废弃：https://github.com/lyy289065406/exp-libs
 
 
 ## 使用
@@ -41,10 +40,16 @@
 </mirror>
 ```
 
+
 ### 工程 pom 依赖配置
 
 在你的工程 `pom.xml` 的 `<dependencies>` 下添加需要的依赖构件即可。
 
-> 此项目的最新依赖的 pom 坐标可以到 [Maven 中央仓库](https://mvnrepository.com/search?q=exp-blog) 检索关键字 `exp-blog`。
+此项目的最新依赖的 pom 坐标可以到 [Maven 中央仓库](https://mvnrepository.com/search?q=exp-blog) 检索关键字 `exp-blog`。
+
+![](./imgs/02.png)
 
 
+### API 使用
+
+本项目每个 API 均有完整的注释说明， 具体 API 的使用方法可查看 [Javadoc](https://lyy289065406.github.io/exp-libs-refactor/)

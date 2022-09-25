@@ -19,14 +19,45 @@
 13. 在 Github 合并 `[版本分支]` 到 master，此时会触发流水线自动生成 javadoc
 14. 重复步骤 1， 进入下一轮迭代
 
+<details>
+<summary><b>发布流程示意图</b></summary>
+<br/>
 
-## 发布流程示意图
+```mermaid
+sequenceDiagram
+    participant Local
+    participant Github
+    participant Github Action
+    Github->>Local: git checkout -b v${x.y.z}
+```
 
 
+Note left of 视觉 AI 服务: Socket Server
+loop Listener
+视觉 AI 服务->>视觉 AI 服务: 监听游戏控制终端链接请求
+end
+Note right of 游戏控制终端: Socket Client
+游戏控制终端->>视觉 AI 服务: 建立 Socket 连接
+Note right of 游戏控制终端: 👇 Alt
+游戏控制终端->>游戏: 截取游戏画面<br/>中心区域
+Note right of 游戏控制终端: by [OpenCV]
+Note left of 游戏控制终端: by [视频采集卡]
+游戏控制终端->>视觉 AI 服务: 发送区域图像
+视觉 AI 服务->>视觉 AI 服务: 分析区域图像<br/>获得人体部位坐标
+Note left of 视觉 AI 服务: by [视觉 AI]
+Note right of 视觉 AI 服务: by [Socket]
+视觉 AI 服务->>游戏控制终端: 发送人体部位坐标
+游戏控制终端->>游戏控制终端: 计算坐标偏移<br/>获得鼠标坐标
+Note right of 游戏控制终端: by [驱动级信号]
+游戏控制终端->>游戏: 发送鼠标坐标
+Note right of 游戏: 移动鼠标到目标<br/>然后射击吧 !!!
 
-## 发布目标
+</details>
 
-在 [pom.xml](./pom.xml) 中 `<distributionManagement>` 指定发布的目标位置是 [sonatype nexus](https://s01.oss.sonatype.org/)。
+
+## 发布位置
+
+在 [pom.xml](./pom.xml) 中 `<distributionManagement>` 指定版本的发布目标位置是 [sonatype nexus](https://s01.oss.sonatype.org/)。
 
 检索关键字 `exp-blog` 可检索到本工程的[所有依赖构件](https://s01.oss.sonatype.org/#nexus-search;quick~exp-blog)：
 
