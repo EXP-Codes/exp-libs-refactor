@@ -217,13 +217,6 @@
                         <goals>
                             <goal>sign</goal>
                         </goals>
-                        <configuration>
-                            <!-- 必须配置，用于 gpg 非交互式密码输入 -->
-                            <gpgArguments>
-                                <arg>--pinentry-mode</arg>
-                                <arg>loopback</arg>
-                            </gpgArguments>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -257,12 +250,25 @@
         </repository>
     </distributionManagement>
 
+    <!-- =========================================================================== -->
+    <!-- 不能修改，整个 profile 都是用于 Github Actions 命令行发布的 -->
     <profiles>
-        <!-- 整个 profile 都是用于 Github Actions 发布的 -->
         <profile>
             <id>deploy</id>
             <build>
                 <plugins>
+                    <!-- 编译 maven 工程 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.10.0</version>
+                        <configuration>
+                            <source>${maven.compiler.source}</source>
+                            <target>${maven.compiler.target}</target>
+                            <encoding>${project.build.sourceEncoding}</encoding>
+                        </configuration>
+                    </plugin>
+
                     <!-- 生成 javadoc -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
