@@ -33,7 +33,7 @@ graph LR
     featureA -- merge:SNAPSHOT --> version
     featureN -- merge:SNAPSHOT --> version
     version -- merge:Javadoc --> master
-    version -- releases --> tag((tag<br/>X.Y.Z))
+    version -- releases:archive --> tag((tag<br/>X.Y.Z))
 ```
 
 </details>
