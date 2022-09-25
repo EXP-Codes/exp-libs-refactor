@@ -32,7 +32,8 @@ graph LR
     version -- checkout --> featureN(feature-...<br/>特性分支 N)
     featureA -- merge:SNAPSHOT --> version
     featureN -- merge:SNAPSHOT --> version
-    version -- merge:RELEASE --> master
+    version -- merge:Javadoc --> master
+    version -- releases --> tag((tag<br/>X.Y.Z))
 ```
 
 </details>
