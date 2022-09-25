@@ -33,7 +33,7 @@ graph LR
     version -- checkout --> featureN(feature-...<br/>特性分支 N)
     featureA -- merge --> version
     featureB -- merge --> version
-    featureC -- merge --> version
+    featureN -- merge --> version
     version -- merge --> master
 ```
 
