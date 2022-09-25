@@ -20,6 +20,25 @@
 14. 在 Github 合并 `[版本分支]` 到 master，此时会触发流水线自动生成 javadoc
 15. 重复步骤 1， 进入下一轮迭代
 
+
+<details>
+<summary><b>分支示意图</b></summary>
+<br/>
+
+```mermaid
+graph LR
+    master -- checkout --> version(vX.Y.Z<br/>版本分支)
+    version -- checkout --> featureA(feature-AAA<br/>特性分支 A)
+    version -- checkout --> featureB(feature-BBB<br/>特性分支 B)
+    version -- checkout --> featureC(feature-CCC<br/>特性分支 C)
+    featureA -- merge --> version
+    featureB -- merge --> version
+    featureC -- merge --> version
+    version -- merge --> master
+```
+
+</details>
+
 <details>
 <summary><b>发版流程示意图</b></summary>
 <br/>
