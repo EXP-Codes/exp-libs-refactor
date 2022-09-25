@@ -11,8 +11,9 @@ on:
   pull_request:
     branches: [v*]
 
-  push:
-    branches: [feature-*]
+  # 推送特性分支时触发
+#  push:
+#    branches: [feature-*]
 
 jobs:
   deploy:
@@ -26,20 +27,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-          server-id: sonatype         # 要与 distributionManagement 定义的 id 一致
+          server-id: sonatype                 # 要与 distributionManagement 定义的 id 一致
           server-username: MAVEN_USERNAME
           server-password: MAVEN_CENTRAL_TOKEN
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
 
-#      - name: Configure GPG Key
-#        run: |
-#          echo -n "${GPG_PRIVATE_KEY}" | base64 --decode | gpg --import
-#        env:
-#          GPG_SIGNING_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-
       - name: Publish to Sonatype Maven Central
-        run: mvn clean deploy -P deploy
+        run: mvn clean deploy -P toSonatype   # 指定使用 pom.xml 的 <profile>.<id>deploy</id> 配置进行发布
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
