@@ -27,7 +27,7 @@ do
           rm -rf $snkPath
         fi
         mkdir -p $snkPath
-        tar -zxvf $srcPath -C $snkPath
+        tar -xvf $srcPath -C $snkPath
       fi
     fi
 done
