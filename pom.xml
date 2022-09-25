@@ -60,7 +60,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <modules.version>2.1.0-SNAPSHOT</modules.version>
+        <modules.version>${project.version}</modules.version>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
