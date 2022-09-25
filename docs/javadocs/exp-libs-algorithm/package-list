@@ -5,3 +5,4 @@ exp.libs.algorithm.gmtry
 exp.libs.algorithm.graph
 exp.libs.algorithm.math
 exp.libs.algorithm.search
+exp.libs.algorithm.substr

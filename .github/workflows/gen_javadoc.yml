@@ -3,7 +3,7 @@ on:
   # 支持手动触发构建
   workflow_dispatch:
 
-  # 把特性分支合并到 master 时触发
+  # 把版本分支合并到 master 时触发
   pull_request:
     branches: [ master ]
 
