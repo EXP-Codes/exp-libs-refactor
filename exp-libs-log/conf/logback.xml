@@ -5,7 +5,7 @@
     <property name="BACKUP" value="${LOG_HOME}/BACKUP/%d{yyyy-MM-dd}" /><!-- 日志备份目录 -->
 
     <!-- 日志输出格式, %c{0} 表示打印 logger 名，若 logger 名是一个类路径，则打印最后一个.右边的部分 -->
-    <property name="PATTERN_DEF" value="[%d{yyyy-MM-dd HH:mm:ss SSS}] [%-5p] [%t] [%c{0}:%L] - %m%n" />
+    <property name="PATTERN_DEF" value="[%d{yyyy-MM-dd HH:mm:ss SSS}] [%-5p] [%t] [%c{1}.%M:%L] - %m%n" />
 
     <!-- 控制台日志器 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
