@@ -16,16 +16,26 @@ import org.junit.jupiter.api.Test;
 class ConsoleTest {
 
     @Test
-    void log() {
-        Console.log("默认（灰色）");
-        Console.log("黑色", LogColor.BLACK);
-        Console.log("红色", LogColor.RED);
-        Console.log("绿色", LogColor.GREEN);
-        Console.log("黄色", LogColor.YELLOW);
-        Console.log("蓝色", LogColor.BLUE);
-        Console.log("粉色", LogColor.MAGENTA);
-        Console.log("青色", LogColor.CYAN);
-        Console.log("白色", LogColor.WHITE);
+    void out() {
+        Console.out("out 默认（青色）");
+        Console.out(LogColor.BLUE, "out {} {}", "蓝色", "无异常");
+
+        try {
+            int a = 1 / 0;
+        } catch (Exception e) {
+            Console.out(LogColor.WHITE, "out {} {}", "白色", "有异常", e);
+        }
     }
 
+    @Test
+    void err() {
+        Console.err("err 默认（红色）");
+        Console.err(LogColor.RED, "err {} {}", "红色", "无异常");
+
+        try {
+            int a = 1 / 0;
+        } catch (Exception e) {
+            Console.err(LogColor.MAGENTA, "err {} {}", "粉色", "有异常", e);
+        }
+    }
 }

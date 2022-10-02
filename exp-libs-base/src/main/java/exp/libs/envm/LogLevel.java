@@ -14,16 +14,16 @@ import exp.libs.utils.str.StrUtils;
  */
 public enum LogLevel {
 
-    /* 默认（INFO） */
-    DEFAULT("INFO", 1),
+    /* 默认 */
+    DEFAULT("", 0),
 
-    DEBUG("DEBUG", 0),
+    DEBUG("[DEBUG] ", 1),
 
-    INFO("INFO", 1),
+    INFO("[INFO] ", 2),
 
-    WARN("WARN", 2),
+    WARN("[WARN] ", 3),
 
-    ERROR("ERROR", 3),
+    ERROR("[ERROR] ", 4),
 
     ;
 
