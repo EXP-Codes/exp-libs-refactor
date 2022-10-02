@@ -1,5 +1,6 @@
 package exp.libs.log;
 
+import ch.qos.logback.core.util.StatusPrinter;
 import exp.libs.utils.str.StrUtils;
 import org.slf4j.LoggerFactory;
 
@@ -18,17 +19,11 @@ import java.io.FileInputStream;
  */
 public class LogUtils {
 
-	// FIXME 
-	//  1. 彩色日志
-	//  2. loadLogBackConfig 有问题，在 1.8 无效，需调整
-
-
-
 	/** logback 默认配置文件路径 */
-	private final static String LOGBACK_PATH = "./conf/logback.xml";
+	public final static String LOGBACK_PATH = "./conf/logback.xml";
 
 	/** log4j2 默认配置文件路径 */
-	private final static String LOG4J2_PATH = "./conf/log4j2.xml";
+	public final static String LOG4J2_PATH = "./conf/log4j2.xml";
 	
 	/** 私有化构造函数 */
 	protected LogUtils() {}
@@ -38,29 +33,51 @@ public class LogUtils {
 	 * (默认路径为 ./conf/logback.xml)
 	 */
 	public static void loadLogBackConfig() {
-		loadLogBackConfig(LOGBACK_PATH);
+		loadLogBackConfig(LOGBACK_PATH, false);
 	}
 
 	/**
 	 * 加载 logback 日志配置文件
-	 * （若不加载，默认配置文件路径为 src/main/resources/logback.xml）
 	 * @param logbackConfPath 日志配置文件路径
 	 */
 	public static void loadLogBackConfig(String logbackConfPath) {
+		loadLogBackConfig(LOGBACK_PATH, false);
+	}
+
+	/**
+	 * <pre>
+	 * 加载 logback 日志配置文件
+	 * （若不调用此方法，默认配置文件路径为 jar 内的 src/main/resources/logback.xml）
+	 * ------------------------------------
+	 * 此方法在效果上等同于：
+	 * static {
+	 *     System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, ${CustomLogbackPath}");
+	 * }
+	 * 但是静态块有个问题，就是无法传参，所以还是此方法更好
+	 * </pre>
+	 * @param logbackConfPath 日志配置文件路径
+	 * @param printLoadInfo 是否打印加载 logback 配置时的异常信息（用于调试）
+	 */
+	public static void loadLogBackConfig(String logbackConfPath, boolean printLoadInfo) {
 		if(StrUtils.isEmpty(logbackConfPath)) {
 			logbackConfPath = LOGBACK_PATH;
 		}
 
 		// 包名写到方法内部时，没有调用此方法都不会报错，确保可以按需引入
 		try {
+			File file = new File(logbackConfPath);
 			ch.qos.logback.classic.LoggerContext loggerContext =
 					(ch.qos.logback.classic.LoggerContext) LoggerFactory.getILoggerFactory();
-			ch.qos.logback.access.joran.JoranConfigurator joranConfigurator =
-					new ch.qos.logback.access.joran.JoranConfigurator();
+			ch.qos.logback.classic.joran.JoranConfigurator joranConfigurator =
+					new ch.qos.logback.classic.joran.JoranConfigurator();
 			joranConfigurator.setContext(loggerContext);
 			loggerContext.reset();
+			joranConfigurator.doConfigure(file);
 
-			joranConfigurator.doConfigure(logbackConfPath);
+			// 打印 Logback 初始化时的异常信息
+			if (printLoadInfo) {
+				StatusPrinter.printInCaseOfErrorsOrWarnings(loggerContext);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("Fail to load logBack configure file: " + logbackConfPath);
