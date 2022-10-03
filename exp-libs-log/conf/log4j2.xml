@@ -42,7 +42,7 @@
         使用 DefaultRolloverStrategy。从2.5开始，可以在 DefaultRolloverStrategy 中配置一个自定义的删除动作。从2.8开始，如果没有指定
         文件名，则会使用 DirectWriteRolloverStrategy 来代替 DefaultRolloverStrategy -->
         <!-- 这个RollingFile Appender会打印出所有的DEBUG及以下级别（DEBUG、INFO、ERROR、FATAL、OFF）的信息 -->
-        <RollingFile name="DebugLogRollingFile" fileName="${LOG_HOME}/application.log"
+        <RollingFile name="AppLogRollingFile" fileName="${LOG_HOME}/application.log"
                      filePattern="${BACKUP}/application_%d{yyyy-MM-dd-HH}-%i.log.gz">
             <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="ACCEPT"/>
             <PatternLayout pattern="${log_pattern}" charset="UTF-8"/>
@@ -73,44 +73,44 @@
             <DefaultRolloverStrategy fileIndex="nomax">
                 <!-- Log4j 2.5 引入了删除动作（Delete元素）。在滚动删除旧的日志文件时，相比使用 DefaultRolloverStrategy 的 max 属
                 性，该功能可以让用户拥有更多的删除控制。删除动作可以让用户配置若干个条件来删除相对于基准目录的文件。该功能可以删除非日
-                志文件，使用时一定要小心。可以通过testMode属性来测试配置是否会错删文件。basePath属性值用于指定删除文件的基准目录，必
-                须显式指定。maxDepth属性指定扫描目录的最大层级，0表示仅能访问基准目录（安全限制不能访问的情况除外），
-                Integer.MAX_VALUE值表示可以访问所有层级。默认值为1，表示仅扫描基准目录下的文件。testMode属性值如果设置为true，文件
-                不会实际删除，而是在status logger打印一条INFO级别的消息，可以使用该功能来测试是否会错删目标文件，默认为false。-->
+                志文件，使用时一定要小心。可以通过 testMode 属性来测试配置是否会错删文件。basePath 属性值用于指定删除文件的基准目录，必
+                须显式指定。maxDepth 属性指定扫描目录的最大层级，0 表示仅能访问基准目录（安全限制不能访问的情况除外），
+                Integer.MAX_VALUE 值表示可以访问所有层级。默认值为 1，表示仅扫描基准目录下的文件。testMode 属性值如果设置为 true，文件
+                不会实际删除，而是在 status logger 打印一条INFO级别的消息，可以使用该功能来测试是否会错删目标文件，默认为 false。-->
 
-                <!-- 这里的Delete元素配置了每次滚动都会删除基准目录下匹配“*/application_*.log.gz”日志文件，只要9分钟以前的日志文
-                件总大小超过2MB，或9分钟以前的日志文件文件总数超过2个就按时间顺序删除较早的日志文件。该元素可以防止日志文件所在分区的
+                <!-- 这里的 Delete 元素配置了每次滚动都会删除基准目录下匹配 “*/application_*.log.gz” 日志文件，只要 9 分钟以前的日志文
+                件总大小超过 2MB，或 9 分钟以前的日志文件文件总数超过 2 个就按时间顺序删除较早的日志文件。该元素可以防止日志文件所在分区的
                 磁盘空间被占满。特别需要注意的是，只有在发生日志滚动时才会尝试进行删除，否则即使满足了删除条件，但如果没有新的滚动日志
                 生成的话也不会发生删除操作。 -->
                 <Delete basePath="${LOG_HOME}" maxDepth="2">
-                    <!-- Delete元素里可以指定若干个PathCondition类型的元素。如果指定了不止一个条件，则这些条件都需要在删除之前接受
+                    <!-- Delete 元素里可以指定若干个 PathCondition 类型的元素。如果指定了不止一个条件，则这些条件都需要在删除之前接受
                     某个路径。这些条件可以嵌套，只有外部条件接受某个路径之后，其内部条件才会决定是否接受该路径。如果这些条件没有嵌套，
-                    则它们的执行顺序是任意的。这些条件也可以通过使用IfAll, IfAny和IfNot等组合条件进行AND、OR和NOT等逻辑运算。用户
-                    也可以创建自定义条件或使用内置条件：
-                    - IfFileName：接受匹配正则表达式或glob的文件路径；
+                    则它们的执行顺序是任意的。这些条件也可以通过使用 IfAll, IfAny 和 IfNot 等组合条件进行 AND、OR 和 NOT 等逻辑运算。
+                    用户也可以创建自定义条件或使用内置条件：
+                    - IfFileName：接受匹配正则表达式或 glob 的文件路径；
                     - IfLastModified：接受比指定时段早或一样早的文件；
                     - IfAccumulatedFileCount：在遍历文件树时文件总数超过文件数上限后接受路径；
                     - IfAccumulatedFileSize：在遍历文件树时文件总大小超过上限后接受路径；
-                    - IfAll：如果所有内嵌条件都接受了某个路径才会接受该路径，相当于AND逻辑，其内嵌条件的执行顺序是任意的；
-                    - IfAny：如果任意一个内嵌条件接受了某个目录就接受该目录，相当于OR逻辑，其内嵌条件的执行顺序是任意的；
-                    - IfNot：如果内嵌条件不接受某个路径就接收该路径，相当于NOT逻辑。-->
+                    - IfAll：如果所有内嵌条件都接受了某个路径才会接受该路径，相当于 AND 逻辑，其内嵌条件的执行顺序是任意的；
+                    - IfAny：如果任意一个内嵌条件接受了某个目录就接受该目录，相当于 OR 逻辑，其内嵌条件的执行顺序是任意的；
+                    - IfNot：如果内嵌条件不接受某个路径就接收该路径，相当于 NOT 逻辑。-->
 
-                    <!-- IfFileName可以通过glob（使用受限的模式语言,比正则更简单）或regex属性（正则）来匹配相对路径（相对于Delete
-                    的basePath属性指定的基准目录）-->
+                    <!-- IfFileName 可以通过 glob（使用受限的模式语言,比正则更简单）或 regex 属性（正则）来匹配相对路径（相对于 Delete
+                    的 basePath 属性指定的基准目录）-->
                     <!-- 当外部的条件满足时才会计算内部的条件，内部的同级条件的计算顺序是任意的。 -->
                     <IfFileName glob="*/application_*.log.gz">
-                        <!-- IfLastModified可以通过age属性值来指定接受最后修改时间为指定时间或早于指定时间的路径，该属性的值可参考
-                        org.apache.logging.log4j.core.appender.rolling.action.Duration.parse(CharSequence text)方法的文档 -->
-                        <!-- 这里的IfLastModified指定删除达到或超过60天内的文件 -->
-                        <IfLastModified age="9m">
-                            <!-- 这里的IfAny内嵌了两个PathCondition，表示满足任意一个条件即可 -->
+                        <!-- IfLastModified 可以通过 age 属性值来指定接受最后修改时间为指定时间或早于指定时间的路径，该属性的值可参考
+                        org.apache.logging.log4j.core.appender.rolling.action.Duration.parse(CharSequence text) 方法的文档 -->
+                        <!-- 这里的 IfLastModified 指定删除达到或超过 30 天内的文件 -->
+                        <IfLastModified age="30d">
+                            <!-- 这里的 IfAny 内嵌了两个 PathCondition，表示满足任意一个条件即可 -->
                             <IfAny>
-                                <!-- IfAccumulatedFileSize可通过exceeds属性值指定一个文件总大小上限值。如果文件数超过了该上限值
+                                <!-- IfAccumulatedFileSize 可通过 exceeds 属性值指定一个文件总大小上限值。如果文件数超过了该上限值
                                 则删除文件 -->
-                                <IfAccumulatedFileSize exceeds="2MB"/>
-                                <!-- IfAccumulatedFileCount可通过exceeds属性值指定一个文件总数上限值。如果文件数超过了该上限值
+                                <IfAccumulatedFileSize exceeds="64MB"/>
+                                <!-- IfAccumulatedFileCount 可通过 exceeds 属性值指定一个文件总数上限值。如果文件数超过了该上限值
                                 则删除文件 -->
-                                <IfAccumulatedFileCount exceeds="2"/>
+                                <IfAccumulatedFileCount exceeds="10"/>
                             </IfAny>
                         </IfLastModified>
                     </IfFileName>
@@ -118,7 +118,7 @@
             </DefaultRolloverStrategy>
         </RollingFile>
 
-        <RollingFile name="ErrorLogRollingFile" fileName="${LOG_HOME}/exception.log"
+        <RollingFile name="ErrLogRollingFile" fileName="${LOG_HOME}/exception.log"
                      filePattern="${BACKUP}/exception_%d{yyyy-MM-dd-HH}-%i.log.gz">
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout pattern="${log_pattern}"/>
@@ -129,13 +129,13 @@
             <DefaultRolloverStrategy fileIndex="nomax">
                 <Delete basePath="${LOG_HOME}" maxDepth="2">
                     <IfFileName glob="*/exception_*.log.gz">
-                        <!-- 这里表示匹配“*/application_*.log.gz”模式的日志文件的删除策略如下：
-                        - 只要日志文件总数量超过5个就删除按时间顺序最早的日志文件
-                        - 只要日志文件总大小超过10MB就会删除按时间顺序最早的日志文件
-                        - 只要日志文件最近修改时间为9分钟前或更早就会删除按时间顺序最早的日志文件 -->
+                        <!-- 这里表示匹配“*/exception_*.log.gz”模式的日志文件的删除策略如下：
+                        - 只要日志文件总大小超过 64MB 就会删除按时间顺序最早的日志文件
+                        - 只要日志文件总数量超过 10 个就删除按时间顺序最早的日志文件
+                        - 只要日志文件最近修改时间为 30 天前或更早就会删除按时间顺序最早的日志文件 -->
                         <IfAny>
-                            <IfAccumulatedFileSize exceeds="3GB"/>
-                            <IfAccumulatedFileCount exceeds="3000"/>
+                            <IfAccumulatedFileSize exceeds="64MB"/>
+                            <IfAccumulatedFileCount exceeds="10"/>
                             <IfLastModified age="30d"/>
                         </IfAny>
                     </IfFileName>
@@ -155,8 +155,8 @@
                 <Delete basePath="${LOG_HOME}" maxDepth="2" testMode="true">
                     <IfFileName glob="*/druid_*.log.gz">
                         <IfAny>
-                            <IfAccumulatedFileSize exceeds="3GB"/>
-                            <IfAccumulatedFileCount exceeds="3000"/>
+                            <IfAccumulatedFileSize exceeds="64MB"/>
+                            <IfAccumulatedFileCount exceeds="10"/>
                             <IfLastModified age="30d"/>
                         </IfAny>
                     </IfFileName>
@@ -165,37 +165,35 @@
         </RollingFile>
     </Appenders>
 
-    <!--定义logger，只有定义了logger并引入的appender，appender才会生效-->
+    <!--定义 logger，只有定义了 logger 并关联了 appender，appender 才会生效-->
     <Loggers>
-        <!-- 当Logger在配置文件中声明时，就创建了一个LoggerConfig对象，两者一一对应，LoggerConfig包含一些Filter、这些
-        Filters用于过滤传递给任意Appender的LogEvent，它还包含一些Appender的引用。Logger本身执行无指向的动作，它仅含有一
-        个与LoggerConfig关联的名称（通过name属性指定），root Logger具有固定的默认名称，其他Logger需要指定各自的name属性
-        值。LoggerConfig会被分配一个日志级别，通过level属性来指定。内建的日志级别按优先级从高到底排序有：OFF > FATAL >
-        ERROR > WARN > INFO > DEBUG > TRACE > ALL，Log4j 2 也支持自定义的日志级别。
+        <!-- 当 Logger 在配置文件中声明时，就创建了一个 LoggerConfig 对象，两者一一对应，LoggerConfig 包含一些 Filter、这些
+        Filters 用于过滤传递给任意 Appender 的 LogEvent，它还包含一些 Appender 的引用。Logger本身执行无指向的动作，它仅含有一
+        个与 LoggerConfig 关联的名称（通过 name 属性指定），root Logger 具有固定的默认名称，其他 Logger 需要指定各自的 name 属性
+        值。LoggerConfig 会被分配一个日志级别，通过 level 属性来指定。内建的日志级别按优先级从高到底排序有：
+        OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL，Log4j 2 也支持自定义的日志级别。
         -->
         <Root level="ALL">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="InfoLogRollingFile"/>
-            <AppenderRef ref="WarnLogRollingFile"/>
-            <AppenderRef ref="DebugLogRollingFile"/>
-            <AppenderRef ref="ErrorLogRollingFile"/>
+            <AppenderRef ref="AppLogRollingFile"/>
+            <AppenderRef ref="ErrLogRollingFile"/>
         </Root>
 
-        <!-- 每个LoggerConfig的日志级别如果没有显式配置，则会继承其父级LoggerConfig的日志级别，而root LoggerConfig如果没
-        有配置日志级别，则会为其分配一个默认的ERROR级别 -->
-        <!-- 某个Logger所允许的每条日志打印请求都会传递给其LoggerConfig中的所有Appender，也会传递给该LoggerConfig的parent
-        LoggerConfig中的Appender，这种现象称为相加性（Additivity）。也就是说，Appender会从LoggerConfig的继承中继承相加性。这种特
-        性可以用来汇整某几个logger的输出，可以在声明Logger的配置文件中设置additivity="false"来禁用这种叠加继承 -->
-        <!--记录druid-sql的记录-->
+        <!-- 每个 LoggerConfig 的日志级别如果没有显式配置，则会继承其父级 LoggerConfig 的日志级别，而 root LoggerConfig 如果没
+        有配置日志级别，则会为其分配一个默认的 ERROR 级别 -->
+        <!-- 某个 Logger 所允许的每条日志打印请求都会传递给其 LoggerConfig 中的所有 Appender，也会传递给该 LoggerConfig 的 parent
+        LoggerConfig 中的 Appender，这种现象称为相加性（Additivity）。也就是说，Appender 会从 LoggerConfig 的继承中继承相加性。这种特
+        性可以用来汇整某几个 logger 的输出，可以在声明 Logger 的配置文件中设置 additivity="false" 来禁用这种叠加继承 -->
+        <!--记录 druid-sql 的记录-->
         <Logger name="druid.sql.Statement" level="debug" additivity="false">
             <appender-ref ref="DruidSqlRollingFile"/>
         </Logger>
 
-        <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+        <!-- 过滤掉 spring 和 mybatis 的一些无用的 DEBUG 信息 -->
         <Logger name="org.springframework" level="INFO"/>
         <Logger name="org.mybatis" level="INFO"/>
 
-        <!--log4j2 自带过滤日志-->
+        <!-- log4j2 自带过滤日志 -->
         <Logger name="org.apache.catalina.startup.DigesterFactory" level="error"/>
         <Logger name="org.apache.catalina.util.LifecycleBase" level="error"/>
         <Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn"/>
