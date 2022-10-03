@@ -20,9 +20,9 @@
         - %T : 线程号
         - %L : 日志输出所在行数
         - %M : 日志输出所在方法名 -->
-        <Property name="log_pattern">[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5p] [%T] [%c{1}.%M:%L] %msg%xEx%n</Property>
+        <Property name="PATTERN_DEF">[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5p] [%T] [%c{1}.%M:%L] %msg%xEx%n</Property>
         <!-- 单个日志文件最大大小，单位可以是KB, MB or GB -->
-        <Property name="max_single_file_size">64MB</Property>
+        <Property name="MAX_FILE_SIZE">64MB</Property>
     </Properties>
 
     <!-- 使用 Appenders 元素可以将日志事件数据写到各种目标位置（目前可以为控制台、文件、多种数据库API、远程套接字服务器、Apache Flume、
@@ -34,7 +34,7 @@
             <!-- 只接受程序中DEBUG级别的日志进行处理 -->
             <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
             <!-- 在大多数情况下，Appender 将格式化 LogEvent 的责任委托给 Layout -->
-            <PatternLayout pattern="${log_pattern}"/>
+            <PatternLayout pattern="${PATTERN_DEF}"/>
         </Console>
 
         <!-- RollingFile Appender 会将日志输出到 fileName 属性指定的文件中，且需要指定 TriggeringPolicy 和 RolloverStrategy。其中
@@ -45,7 +45,7 @@
         <RollingFile name="AppLogRollingFile" fileName="${LOG_HOME}/application.log"
                      filePattern="${BACKUP}/application_%d{yyyy-MM-dd-HH}-%i.log.gz">
             <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="ACCEPT"/>
-            <PatternLayout pattern="${log_pattern}" charset="UTF-8"/>
+            <PatternLayout pattern="${PATTERN_DEF}" charset="UTF-8"/>
             <!-- Policies 表示一个 CompositeTriggeringPolicy，可以组合多个 TriggeringPolicy，只要内部的任意一个 TriggeringPolicy 满足触发条件，都会滚动日志 -->
             <Policies>
                 <!-- TimeBasedTriggeringPolicy 用于按时间滚动日志。只要 filePattern 属性值中的日期/时间模式（pattern）不再应用于当
@@ -58,7 +58,7 @@
                 <TimeBasedTriggeringPolicy interval="1" modulate="false"/>
                 <!-- SizeBasedTriggeringPolicy 用于按文件大小滚动日志。每当日志文件超过 size 指定的大小（一般不超过几十 MB，否则使用软
                 件打开导出的日志时很不方便），则这 size 大小的日志会自动存入按 filePattern 属性指定建立的文件夹下面并进行压缩存档 -->
-                <SizeBasedTriggeringPolicy size="${max_single_file_size}"/>
+                <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>
             </Policies>
             <!-- DefaultRolloverStrategy 可以同时接受 RollingFileAppender 中 filePattern 属性值中日期/时间和整数计数器（%i）的
             pattern，当日期/时间满足条件时，则会使用当前的日期/时间生成新的日志文件，如果 filePattern 属性值中含有一个整数计数器 %i，则
@@ -121,10 +121,10 @@
         <RollingFile name="ErrLogRollingFile" fileName="${LOG_HOME}/exception.log"
                      filePattern="${BACKUP}/exception_%d{yyyy-MM-dd-HH}-%i.log.gz">
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="${log_pattern}"/>
+            <PatternLayout pattern="${PATTERN_DEF}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="${max_single_file_size}"/>
+                <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>
             </Policies>
             <DefaultRolloverStrategy fileIndex="nomax">
                 <Delete basePath="${LOG_HOME}" maxDepth="2">
@@ -146,10 +146,10 @@
         <!-- 记录 druid 的 SQL 语句 -->
         <RollingFile name="DruidSqlRollingFile" fileName="${LOG_HOME}/druid.log"
                      filePattern="${BACKUP}/druid_%d{yyyy-MM-dd-HH}-%i.log.gz">
-            <PatternLayout pattern="${log_pattern}"/>
+            <PatternLayout pattern="${PATTERN_DEF}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="${max_single_file_size}"/>
+                <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>
             </Policies>
             <DefaultRolloverStrategy fileIndex="nomax">
                 <Delete basePath="${LOG_HOME}" maxDepth="2" testMode="true">
@@ -173,10 +173,13 @@
         值。LoggerConfig 会被分配一个日志级别，通过 level 属性来指定。内建的日志级别按优先级从高到底排序有：
         OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL，Log4j 2 也支持自定义的日志级别。
         -->
-        <Root level="ALL">
-            <AppenderRef ref="Console"/>
+        <Logger name="exp.libs" level="debug" additivity="false">
             <AppenderRef ref="AppLogRollingFile"/>
             <AppenderRef ref="ErrLogRollingFile"/>
+        </Logger>
+
+        <Root level="ALL">
+            <AppenderRef ref="Console"/>
         </Root>
 
         <!-- 每个 LoggerConfig 的日志级别如果没有显式配置，则会继承其父级 LoggerConfig 的日志级别，而 root LoggerConfig 如果没
