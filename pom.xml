@@ -386,9 +386,9 @@
 
         <!-- =========================================================================== -->
         <!-- 不能修改，这个 profile 是用于 Github Actions 命令行发布的 （主要是 GPG 签名插件需要配置非交互模式输入密码） -->
-        <!-- 命令行使用 mvn clean deploy -P toSonatype 即可指定此配置 -->
+        <!-- 命令行使用 mvn clean deploy -P autoDeploy 即可指定此配置 -->
         <profile>
-            <id>toSonatype</id>
+            <id>autoDeploy</id>
             <build>
                 <plugins>
                     <!-- 编译 maven 工程 -->
