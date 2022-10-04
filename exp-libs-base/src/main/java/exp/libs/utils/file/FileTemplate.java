@@ -18,7 +18,7 @@ import java.util.Map;
  * 注意：模板文件中的占位符为  @{占位符名称}@，而代码替换只需 set(占位符名称, 值)。
  * 
  * 使用示例:
- * 	Template tpl = new Template(FILE_PATH, Charset.UTF8);
+ * 	FileTemplate tpl = new FileTemplate(FILE_PATH, Charset.UTF8);
  *  tpl.set("username", "exp");
  *  tpl.set("year", "2017-08-21");
  *  String content = tpl.getContent();

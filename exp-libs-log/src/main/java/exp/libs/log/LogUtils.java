@@ -102,10 +102,12 @@ public class LogUtils {
 	 * 在重新指定配置后，只能对其之后创建的日志对象生效，而且在单元测试中无法生效，原因暂时不明
 	 * </pre>
 	 */
+/*
 	@Deprecated
 	public static void loadLog4JConfig() {
 		loadLog4JConfig(LOG4J2_PATH);
 	}
+*/
 
 	/**
 	 * <pre>
@@ -116,6 +118,7 @@ public class LogUtils {
 	 * </pre>
 	 * @param log4JConfPath 日志配置文件路径
 	 */
+/*
 	@Deprecated
 	public static void loadLog4JConfig(String log4JConfPath) {
 		if(StrUtils.isEmpty(log4JConfPath)) {
@@ -139,6 +142,7 @@ public class LogUtils {
 			Console.err("Fail to load log4J2 configure file: {}", log4JConfPath, e);
 		}
 	}
+*/
 
 	/**
 	 * 组装日志内容
