@@ -64,8 +64,4 @@ class LogUtilsTest {
         log.error("[ERROR] 已初始化 log4j2 日志");
     }
 
-    public static void main(String[] args) {
-
-    }
-
 }

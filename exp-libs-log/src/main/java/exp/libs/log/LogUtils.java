@@ -14,9 +14,9 @@ import java.io.FileInputStream;
  * -----------------
  * 若不调用此类加载日志配置，默认读取的配置文件路径为 jar 内的 src/main/resources/logback.xml 或 log4j2.xml
  * -----------------
- * 报错 SLF4J: Class path contains multiple SLF4J bindings. 是正常的
+ * 若报错 SLF4J: Class path contains multiple SLF4J bindings. 是正常的
  * 因为 pom.xml 同时依赖了 logback 和 log4j2 两种依赖实现
- * 使用某一种时先在 pom.xml 中 exclusions 另外一种即可
+ * 使用某一种时，先在 pom.xml 中 exclusions 另外一种即可
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs
  * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">www.exp-blog.com</a>
@@ -102,6 +102,7 @@ public class LogUtils {
 	 * 在重新指定配置后，只能对其之后创建的日志对象生效，而且在单元测试中无法生效，原因暂时不明
 	 * </pre>
 	 */
+	@Deprecated
 	public static void loadLog4JConfig() {
 		loadLog4JConfig(LOG4J2_PATH);
 	}
@@ -110,11 +111,12 @@ public class LogUtils {
 	 * <pre>
 	 * 加载 log4j2 日志配置文件
 	 * ---------------
-	 * log4j2 限制太多，不推荐使用。
-	 * 在重新指定配置后，只能对其之后创建的日志对象生效，而且在单元测试中无法生效，原因暂时不明
+	 * log4j2 限制太多，而且近期一堆 CVE 漏洞，明显被针对了，不推荐使用。
+	 * 在重新指定配置后，只能对其之后创建的日志对象生效，而且在单元测试中无法生效，原因暂时不明。
 	 * </pre>
 	 * @param log4JConfPath 日志配置文件路径
 	 */
+	@Deprecated
 	public static void loadLog4JConfig(String log4JConfPath) {
 		if(StrUtils.isEmpty(log4JConfPath)) {
 			log4JConfPath = LOG4J2_PATH;
