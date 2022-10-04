@@ -2,10 +2,6 @@ package exp.libs.log;
 
 import exp.libs.envm.LogColor;
 import exp.libs.envm.LogLevel;
-import exp.libs.utils.str.StrUtils;
-import org.slf4j.LoggerFactory;
-
-import java.io.PrintStream;
 
 /**
  * <PRE>
