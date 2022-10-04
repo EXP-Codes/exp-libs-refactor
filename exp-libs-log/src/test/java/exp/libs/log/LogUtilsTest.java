@@ -45,6 +45,7 @@ class LogUtilsTest {
         log.error("[ERROR] 已初始化 logback 日志");
     }
 
+/*
     @Test
     void loadLog4J2Config() {
         Logger log = LoggerFactory.getLogger(LogUtilsTest.class);
@@ -63,5 +64,6 @@ class LogUtilsTest {
         log.warn("[WARN] 已初始化 log4j2 日志");
         log.error("[ERROR] 已初始化 log4j2 日志");
     }
+*/
 
 }
