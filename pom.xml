@@ -165,7 +165,22 @@
                 </configuration>
             </plugin>
 
-            <!-- 生成 javadoc -->
+            <!-- 生成源码 jar 包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 生成 javadoc 包 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -175,8 +190,8 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <docencoding>${project.build.sourceEncoding}</docencoding>
 
-                    <!-- 从JDK8开始, Javadoc中添加了doclint, 目的是旨在获得符合W3C HTML 4.01标准规范的HTML文档 -->
-                    <!-- 简而言之Javadoc不允许出现html相关的元素, 若旧注释含有这些元素又不想修改, 只能关闭doclint -->
+                    <!-- 从 JDK8 开始, Javadoc中 添加了 doclint, 目的是旨在获得符合 W3C HTML 4.01 标准规范的 HTML 文档 -->
+                    <!-- 简而言之 Javadoc 不允许出现 html 相关的元素, 若旧注释含有这些元素又不想修改, 只能关闭 doclint -->
                     <additionalOptions>
                         <additionalOption>-Xdoclint:none</additionalOption>
                     </additionalOptions>
@@ -184,21 +199,6 @@
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- 生成源码 jar 包 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -228,7 +228,22 @@
                         </configuration>
                     </plugin>
 
-                    <!-- 生成 javadoc -->
+                    <!-- 生成源码 jar 包 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- 生成 javadoc 包 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
@@ -238,8 +253,8 @@
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
 
-                            <!-- 从JDK8开始, Javadoc中添加了doclint, 目的是旨在获得符合W3C HTML 4.01标准规范的HTML文档 -->
-                            <!-- 简而言之Javadoc不允许出现html相关的元素, 若旧注释含有这些元素又不想修改, 只能关闭doclint -->
+                            <!-- 从 JDK8 开始, Javadoc中 添加了 doclint, 目的是旨在获得符合 W3C HTML 4.01 标准规范的 HTML 文档 -->
+                            <!-- 简而言之 Javadoc 不允许出现 html 相关的元素, 若旧注释含有这些元素又不想修改, 只能关闭 doclint -->
                             <additionalOptions>
                                 <additionalOption>-Xdoclint:none</additionalOption>
                             </additionalOptions>
@@ -247,21 +262,6 @@
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!-- 生成源码 jar 包 -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
@@ -308,7 +308,22 @@
                         </configuration>
                     </plugin>
 
-                    <!-- 生成 javadoc -->
+                    <!-- 生成源码 jar 包 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- 生成 javadoc 包 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
@@ -318,8 +333,8 @@
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
 
-                            <!-- 从JDK8开始, Javadoc中添加了doclint, 目的是旨在获得符合W3C HTML 4.01标准规范的HTML文档 -->
-                            <!-- 简而言之Javadoc不允许出现html相关的元素, 若旧注释含有这些元素又不想修改, 只能关闭doclint -->
+                            <!-- 从 JDK8 开始, Javadoc中 添加了 doclint, 目的是旨在获得符合 W3C HTML 4.01 标准规范的 HTML 文档 -->
+                            <!-- 简而言之 Javadoc 不允许出现 html 相关的元素, 若旧注释含有这些元素又不想修改, 只能关闭 doclint -->
                             <additionalOptions>
                                 <additionalOption>-Xdoclint:none</additionalOption>
                             </additionalOptions>
@@ -327,21 +342,6 @@
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!-- 生成源码 jar 包 -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
@@ -386,9 +386,9 @@
 
         <!-- =========================================================================== -->
         <!-- 不能修改，这个 profile 是用于 Github Actions 命令行发布的 （主要是 GPG 签名插件需要配置非交互模式输入密码） -->
-        <!-- 命令行使用 mvn clean deploy -P toSonatype 即可指定此配置 -->
+        <!-- 命令行使用 mvn clean deploy -P autoDeploy 即可指定此配置 -->
         <profile>
-            <id>toSonatype</id>
+            <id>autoDeploy</id>
             <build>
                 <plugins>
                     <!-- 编译 maven 工程 -->
@@ -403,7 +403,22 @@
                         </configuration>
                     </plugin>
 
-                    <!-- 生成 javadoc -->
+                    <!-- 生成源码 jar 包 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- 生成 javadoc 包 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
@@ -413,8 +428,8 @@
                             <encoding>${project.build.sourceEncoding}</encoding>
                             <docencoding>${project.build.sourceEncoding}</docencoding>
 
-                            <!-- 从JDK8开始, Javadoc中添加了doclint, 目的是旨在获得符合W3C HTML 4.01标准规范的HTML文档 -->
-                            <!-- 简而言之Javadoc不允许出现html相关的元素, 若旧注释含有这些元素又不想修改, 只能关闭doclint -->
+                            <!-- 从 JDK8 开始, Javadoc中 添加了 doclint, 目的是旨在获得符合 W3C HTML 4.01 标准规范的 HTML 文档 -->
+                            <!-- 简而言之 Javadoc 不允许出现 html 相关的元素, 若旧注释含有这些元素又不想修改, 只能关闭 doclint -->
                             <additionalOptions>
                                 <additionalOption>-Xdoclint:none</additionalOption>
                             </additionalOptions>
@@ -422,21 +437,6 @@
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <!-- 生成源码 jar 包 -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>3.2.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
@@ -488,10 +488,14 @@
 
     <!-- deploy 的目标服务器 -->
     <distributionManagement>
+
+        <!-- sonatype 的快照仓库 -->
         <snapshotRepository>
             <id>sonatype</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
         </snapshotRepository>
+
+        <!-- sonatype 的正式仓库 -->
         <repository>
             <id>sonatype</id>
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>

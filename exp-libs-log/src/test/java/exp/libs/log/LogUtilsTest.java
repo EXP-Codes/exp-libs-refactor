@@ -7,6 +7,10 @@ import org.slf4j.LoggerFactory;
 /**
  * <PRE>
  * 日志工具测试
+ * ----------------------
+ * 报错 SLF4J: Class path contains multiple SLF4J bindings. 是正常的
+ * 因为 pom.xml 同时依赖了 logback 和 log4j2 两种依赖实现
+ * 测试某一种前先 exclusions 另外一种即可
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs
  * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">www.exp-blog.com</a>
@@ -32,6 +36,8 @@ class LogUtilsTest {
         log.warn("[WARN] 尚未初始化 logback 日志");
         log.error("[ERROR] 尚未初始化 logback 日志");
 
+        // logback 在重新指定配置后，对之前和之后创建的日志对象均能生效
+        // 而且在单元测试中亦可生效
         LogUtils.loadLogBackConfig(LOGBACK_PATH);
         log.debug("[DEBUG] 已初始化 logback 日志");
         log.info("[INFO] 已初始化 logback 日志");
@@ -41,15 +47,21 @@ class LogUtilsTest {
 
     @Test
     void loadLog4J2Config() {
+        Logger log = LoggerFactory.getLogger(LogUtilsTest.class);
         log.debug("[DEBUG] 尚未初始化 log4j2 日志");
         log.info("[INFO] 尚未初始化 log4j2 日志");
         log.warn("[WARN] 尚未初始化 log4j2 日志");
         log.error("[ERROR] 尚未初始化 log4j2 日志");
 
+        // log4j2 在重新指定配置后，只能对其之后创建的日志对象生效
+        // 而且在单元测试中无法生效，原因暂时不明
         LogUtils.loadLog4JConfig(LOG4J2_PATH);
+
+        log = LoggerFactory.getLogger(LogUtilsTest.class);
         log.debug("[DEBUG] 已初始化 log4j2 日志");
         log.info("[INFO] 已初始化 log4j2 日志");
         log.warn("[WARN] 已初始化 log4j2 日志");
         log.error("[ERROR] 已初始化 log4j2 日志");
     }
+
 }
