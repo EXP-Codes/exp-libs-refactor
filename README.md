@@ -29,12 +29,21 @@
 ```xml
 <mirror>
     <id>mvnrepository</id>
+    <name>Maven Central Repository</name>
     <mirrorOf>mvnrepository</mirrorOf>
     <url>http://mvnrepository.com/</url>
 </mirror>
 
 <mirror>
+    <id>repomaven</id>
+    <name>Maven Central Repository</name>
+    <mirrorOf>mvnrepository</mirrorOf>
+    <url>http://repo1.maven.org/maven2/</url>
+</mirror>
+
+<mirror>
     <id>sonatype</id>
+    <name>Sonatype Nexus</name>
     <mirrorOf>sonatype</mirrorOf>
     <url>https://s01.oss.sonatype.org/</url>
 </mirror>

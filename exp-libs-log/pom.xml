@@ -44,24 +44,24 @@
         </dependency>
 
         <!-- log4j2 构件，若不需要可以 exclusion -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j2.version}</version>
-            <scope>compile</scope>  <!-- 出于安全问题和使用便利性考虑，默认不再打包 log4j2 -->
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j2.version}</version>
-            <scope>compile</scope>  <!-- 出于安全问题和使用便利性考虑，默认不再打包 log4j2 -->
-        </dependency>
-        <dependency>    <!-- 与 slf4j 搭配必须，实现了 Slf4j 的 API -->
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j2.version}</version>
-            <scope>compile</scope>  <!-- 出于安全问题和使用便利性考虑，默认不再打包 log4j2 -->
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-core</artifactId>-->
+<!--            <version>${log4j2.version}</version>-->
+<!--            <scope>compile</scope>  &lt;!&ndash; 出于安全问题和使用便利性考虑，默认不再打包 log4j2 &ndash;&gt;-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-api</artifactId>-->
+<!--            <version>${log4j2.version}</version>-->
+<!--            <scope>compile</scope>  &lt;!&ndash; 出于安全问题和使用便利性考虑，默认不再打包 log4j2 &ndash;&gt;-->
+<!--        </dependency>-->
+<!--        <dependency>    &lt;!&ndash; 与 slf4j 搭配必须，实现了 Slf4j 的 API &ndash;&gt;-->
+<!--            <groupId>org.apache.logging.log4j</groupId>-->
+<!--            <artifactId>log4j-slf4j-impl</artifactId>-->
+<!--            <version>${log4j2.version}</version>-->
+<!--            <scope>compile</scope>  &lt;!&ndash; 出于安全问题和使用便利性考虑，默认不再打包 log4j2 &ndash;&gt;-->
+<!--        </dependency>-->
     </dependencies>
 
 </project>
