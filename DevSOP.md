@@ -20,6 +20,24 @@
 14. 在 Github 合并 `[版本分支]` 到 master，此时会触发流水线自动生成 javadoc
 15. 重复步骤 1， 进入下一轮迭代
 
+
+<details>
+<summary><b>分支示意图</b></summary>
+<br/>
+
+```mermaid
+graph LR
+    master((master)) -- checkout --> version[vX.Y.Z<br/>版本分支]
+    version -- checkout --> featureA(feature-AAA<br/>特性分支 A)
+    version -- checkout --> featureN(feature-...<br/>特性分支 N)
+    featureA -- merge:SNAPSHOT --> version
+    featureN -- merge:SNAPSHOT --> version
+    version -- merge:javadoc --> master
+    version -- archive:RELEASE --> tag((tag<br/>X.Y.Z))
+```
+
+</details>
+
 <details>
 <summary><b>发版流程示意图</b></summary>
 <br/>
@@ -37,7 +55,7 @@ sequenceDiagram
     Note left of Local: 版本号 +1<br/>末尾增加 -SNAPSHOT
     Local->>Github: 提交 [版本分支]<br/>git push
     Local->>Local: 检出 [特性分支]<br/>git checkout -b feature-${xxx}
-    loop 需求开发
+    loop 当前版本需求开发
         Local->>Local: 修改代码
         Local->>Github: 提交修改<br/>git push
         Github->>Github: 合并 [特性分支] 到 [版本分支]
@@ -52,7 +70,7 @@ sequenceDiagram
     Note left of Local: 移除末尾的 -SNAPSHOT
     Local->>Github: 提交 [版本分支]<br/>git push
     Github->>Github: 对 [版本分支] 发起 Releases
-    Note left of Github: 强制新建 `Tag`<br/>名称和 [版本分支] 一致
+    Note left of Github: 强制新建 Tag<br/>名称和 [版本分支] 一致
     Github->>Github Action: 触发流水线
     Github Action->>Sonatype: 发布 Release 版本
     Github->>Github: 合并 [版本分支] 到 master

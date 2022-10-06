@@ -1,8 +1,7 @@
 **/.idea/*
 **/target/*
-**/logs/*
-**/log/*
-*.log
+./logs/*
+./log/*
 *.iml
 
 # Compiled class file
@@ -10,6 +9,7 @@
 
 # Log file
 *.log
+*.log.gz
 
 # BlueJ files
 *.ctxt

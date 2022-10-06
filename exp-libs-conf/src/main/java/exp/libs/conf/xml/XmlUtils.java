@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 /**
  * <PRE>
- * xml处理工具
+ * xml 内容处理工具（与 dom4j 搭配使用）
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs
  * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>

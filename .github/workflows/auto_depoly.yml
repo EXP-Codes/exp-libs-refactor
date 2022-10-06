@@ -20,9 +20,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 拉取仓库
       - name: Check out repo
         uses: actions/checkout@v2
 
+      # 设置 Java 环境
       - name: Set up Java env
         uses: actions/setup-java@v1
         with:
@@ -33,10 +35,10 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
 
+      # 发布 Jar 到 Maven 中央仓库
       - name: Publish to Sonatype Maven Central
-        run: mvn clean deploy -P toSonatype   # 指定使用 pom.xml 的 <profile>.<id>deploy</id> 配置进行发布
+        run: mvn clean deploy -P autoDeploy   # 指定使用 pom.xml 的 <profile>.<id>autoDeploy</id> 配置进行发布
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.SONATYPE_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE_KEY }}
-

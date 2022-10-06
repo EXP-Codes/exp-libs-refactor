@@ -5,7 +5,7 @@
     <parent>
         <artifactId>exp-libs-refactor</artifactId>
         <groupId>com.exp-blog</groupId>
-        <version>2.1.0</version>
+        <version>2.2.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -36,9 +36,13 @@
             <groupId>com.exp-blog</groupId>
             <artifactId>javaini</artifactId>
             <version>1.1.0</version>
-<!--            如果无法从 maven 中央仓库下载，可以把注释取消直接用本地的 -->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/libs/javaini-1.1.0.jar</systemPath>-->
+        </dependency>
+
+        <!-- yml 解析构件 -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.33</version>
         </dependency>
     </dependencies>
 
