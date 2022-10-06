@@ -27,19 +27,26 @@
 在 `~/.m2/settings.xml` 追加 sonatype 中央仓库配置（本项目发布到该中央仓库）：
 
 ```xml
-  <mirror>
+<mirror>
     <id>mvnrepository</id>
     <name>Maven Central Repository</name>
     <mirrorOf>mvnrepository</mirrorOf>
-    <url>http://repo1.maven.org/maven2/</url>
-  </mirror>
+    <url>http://mvnrepository.com/</url>
+</mirror>
 
-  <mirror>
-    <id>sonatype</id>
+<mirror>
+    <id>repomaven</id>
     <name>Maven Central Repository</name>
+    <mirrorOf>mvnrepository</mirrorOf>
+    <url>http://repo1.maven.org/maven2/</url>
+</mirror>
+
+<mirror>
+    <id>sonatype</id>
+    <name>Sonatype Nexus</name>
     <mirrorOf>sonatype</mirrorOf>
     <url>https://s01.oss.sonatype.org/</url>
-  </mirror>
+</mirror>
 ```
 
 
