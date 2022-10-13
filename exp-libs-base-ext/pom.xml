@@ -33,9 +33,6 @@
             <groupId>com.exp-blog</groupId>
             <artifactId>jvm-agent</artifactId>
             <version>1.0.0</version>
-<!--            如果无法从 maven 中央仓库下载，可以把注释取消直接用本地的 -->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/libs/jvm-agent-1.0.0.jar</systemPath>-->
         </dependency>
 
         <!-- JSON 构件 -->
@@ -51,7 +48,7 @@
             <version>1.9.13</version>
         </dependency>
 
-        <!-- ehcache缓存器 -->
+        <!-- ehcache 缓存器 -->
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>

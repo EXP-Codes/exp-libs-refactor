@@ -1,15 +1,18 @@
 package exp.libs.ext.format;
 
+import exp.libs.envm.DateFormat;
 import exp.libs.utils.num.NumUtils;
 import exp.libs.utils.other.BoolUtils;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
@@ -29,7 +32,102 @@ public class JsonUtils {
 	
 	/** 私有化构造函数 */
 	protected JsonUtils() {}
-	
+
+	/**
+	 * <PRE>
+	 * 把一个对象转换成json字符串.
+	 *
+	 * 	此方法仅适用于简单对象的转换, 如 String、Integer、 Map<?, ?>等， 且Map对象不允许嵌套.
+	 * <PRE>
+	 * @param obj 简单对象
+	 * @return 若转换失败返回""
+	 */
+	@SuppressWarnings("deprecation")
+	public static String toJson(Object obj) {
+		String json = "";
+		if (obj == null) {
+			return json;
+		}
+
+		StringWriter writer = new StringWriter();
+		SimpleDateFormat sdf = new SimpleDateFormat(DateFormat.YMDHMSS);
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.getSerializationConfig().setDateFormat(sdf);
+
+		try {
+			mapper.writeValue(writer, obj);
+		} catch (Exception e) {
+			log.error("转换JSON失败: {}", obj, e);
+		}
+		json = writer.toString();
+
+		try {
+			writer.close();
+		} catch (IOException e) {
+			log.error("转换JSON异常: 关闭输入流失败.", e);
+		}
+		return json;
+	}
+
+	/**
+	 * <PRE>
+	 * 把一个对象转换成json字符串.
+	 * 若对象中存在日期属性, 则使用指定日期格式转换.
+	 *
+	 * 	此方法仅适用于简单对象的转换, 如 String、Integer、 Map<?, ?>等， 且Map对象不允许嵌套.
+	 * <PRE>
+	 * @param obj 简单对象
+	 * @param dateFormat 日期格式
+	 * @return 若转换失败返回""
+	 */
+	@SuppressWarnings("deprecation")
+	public static String toJson(Object obj, String dateFormat) {
+		String json = "";
+		if (obj == null) {
+			return json;
+		}
+
+		StringWriter writer = new StringWriter();
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.getSerializationConfig().setDateFormat(sdf);
+
+		try {
+			mapper.writeValue(writer, obj);
+		} catch (Exception e) {
+			log.error("转换JSON失败: {}", obj, e);
+		}
+		json = writer.toString();
+
+		try {
+			writer.close();
+		} catch (IOException e) {
+			log.error("转换JSON异常: 关闭输入流失败.", e);
+		}
+		return json;
+	}
+
+	/**
+	 * <PRE>
+	 * 把json字符串转换成Map对象.
+	 *
+	 * 	此方法仅适用于纯KV键值对的json字符串, 多重嵌套的json字符串可能会转换失败.
+	 * <PRE>
+	 * @param json 纯KV键值对的json字符串
+	 * @return 若转换失败返回null
+	 */
+	public static Map<?, ?> unJson(String json) {
+		Map<?, ?> map = null;
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			map = mapper.readValue(json, LinkedHashMap.class);
+
+		} catch (Exception e) {
+			log.error("转换JSON失败: {}", json, e);
+		}
+		return map;
+	}
+
 	/**
 	 * 是否为合法的json格式字符串
 	 * @param json json格式字符串
