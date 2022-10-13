@@ -95,9 +95,6 @@ final public class VersionMgr {
 		boolean manage = true;
 		if(args != null && args.length >= 1) {
 			manage = "-m".equals(args[0]);
-			if(OSUtils.isUnix()) {
-				manage = false;
-			}
 		}
 		return (manage ? manage() : print());
 	}

@@ -92,7 +92,7 @@ public final class OSUtils {
 	 * @return true:unix; false:其他
 	 */
 	public static boolean isUnix() {
-		return !isWin(); // mac 也算是 unix
+		return !isWin(); // mac 也是 unix
 	}
 	
 	/**
