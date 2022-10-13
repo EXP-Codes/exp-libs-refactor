@@ -6,7 +6,7 @@ import exp.libs.db.sql.bean.DataSourceBean;
 import exp.libs.envm.Charset;
 import exp.libs.envm.DBType;
 import exp.libs.envm.Delimiter;
-import exp.libs.ext.format.ESCUtils;
+import exp.libs.utils.other.EscapeUtils;
 import exp.libs.utils.file.FileUtils;
 import exp.libs.utils.file.JarUtils;
 import exp.libs.utils.os.OSUtils;
@@ -251,7 +251,7 @@ class _VerDBMgr {
 		curVerInfo.add(Arrays.asList(new String[] { RELEASE, datetime }));
 		curVerInfo.add(Arrays.asList(new String[] { "", "" }));
 		curVerInfo.add(Arrays.asList(new String[] { AUTHOR, author }));
-		return ESCUtils.toTXT(curVerInfo, false);
+		return EscapeUtils.toTXT(curVerInfo, false);
 	}
 	
 	/**

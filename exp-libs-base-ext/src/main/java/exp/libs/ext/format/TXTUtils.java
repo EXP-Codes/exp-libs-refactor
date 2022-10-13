@@ -15,12 +15,12 @@ import java.io.FileOutputStream;
 
 /**
  * <PRE>
- * TXT转码工具.
+ * TXT 转码工具.
  * ------------------------
  *  可把任意文件与txt文件进行互转:
- *   读取文件的字节流，并转换成16进制字符串存储到txt文件.
- *  
+ *   读取文件的字节流，并转换成 16 进制字符串存储到 txt 文件.
  * </PRE>
+ *
  * <br/><B>PROJECT : </B> exp-libs
  * <br/><B>SUPPORT : </B> <a href="https://exp-blog.com" target="_blank">https://exp-blog.com</a>
  * @version   2022-03-06
