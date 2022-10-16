@@ -17,29 +17,28 @@ import java.util.*;
  */
 public class QuickTimer {
 
+    /** 所有 CheckPoint 的 map */
     private Map<String, CheckPoint> checkPointMap;
 
+    /** 所有 CheckPoint 的 list */
     private List<CheckPoint> checkPointList;
 
-    private CheckPoint lastCheckpoint;
+    /** 最后一个 CheckPoint */
+    private CheckPoint lastCheckPoint;
 
+    /** 标记当前是否计时中 */
     private boolean isTiming;
 
     public QuickTimer() {
         this.checkPointMap = new HashMap<>();
         this.checkPointList = new LinkedList<>();
 
-        this.lastCheckpoint = null;
+        this.lastCheckPoint = null;
         this.isTiming = false;
     }
 
-    private void add(CheckPoint checkPoint) {
-        this.checkPointMap.put(checkPoint.getName(), checkPoint);
-        this.checkPointList.add(checkPoint);
-    }
-
     /**
-     * 启动计时器
+     * 启动一个新的 CheckPoint
      * @return 启动的时间点（毫秒）
      */
     public long start() {
@@ -47,97 +46,141 @@ public class QuickTimer {
     }
 
     /**
-     * 启动计时器
-     * @param name 计时器名称
+     * 启动一个新的 CheckPoint
+     * @param name CheckPoint 名称
      * @return 启动的时间点（毫秒）
      */
     public long start(String name) {
         return start(name, System.currentTimeMillis());
     }
 
+    /**
+     * 启动一个新的 CheckPoint
+     * @param name CheckPoint 名称
+     * @param time 启动的时间点（毫秒）
+     * @return 启动的时间点（毫秒）
+     */
     private long start(String name, long time) {
         if (isTiming) {
-            return lastCheckpoint.getBgnTime();
+            return lastCheckPoint.getBgnTime();
         }
 
         isTiming = true;
         CheckPoint cp = new CheckPoint(name);
         cp.setBgnTime(time);
         add(cp);
-        lastCheckpoint = cp;
+        lastCheckPoint = cp;
         return time;
     }
 
     /**
-     * 停止计时器
+     * 停止当前的 CheckPoint
      * @return 停止的时间点（毫秒）
      */
     public long stop() {
         return stop(System.currentTimeMillis());
     }
 
+    /**
+     * 停止当前的 CheckPoint
+     * @param time 停止的时间点（毫秒）
+     * @return 停止的时间点（毫秒）
+     */
     private long stop(long time) {
-        if (!isTiming) {
-            return lastCheckpoint.getEndTime();
-
-        } else if (lastCheckpoint == null) {
+        if (lastCheckPoint == null) {
             return -1;
+
+        } else if (!isTiming) {
+            return lastCheckPoint.getEndTime();
         }
 
         isTiming = false;
-        lastCheckpoint.setEndTime(time);
+        lastCheckPoint.setEndTime(time);
         return time;
     }
 
     /**
-     * 计算最后一次计时经过的毫秒数
-     * @return 获取当前计时经过的毫秒数
-     */
-    public long lastDiffMillis() {
-        return isTiming ? -1 : (
-                lastCheckpoint == null ? -1 : lastCheckpoint.getDiffTime()
-        );
-    }
-
-    /**
-     * 计算总共计时经过的毫秒数
-     * @return 第一次和最后一次检查点之间经过的毫秒数
-     */
-    public long allDiffMillis() {
-        if (checkPointList.size() <= 0) {
-            return 0;
-        }
-        CheckPoint head = checkPointList.get(0);
-        CheckPoint tail = lastCheckpoint;
-        return (isTiming ? lastCheckpoint.getBgnTime() : lastCheckpoint.getEndTime()) - head.getBgnTime();
-    }
-
-    /**
-     * 连续执行检查点
-     * @return
+     * <pre>
+     * 连续启动 CheckPoint
+     * （先 stop 当前 CheckPoint, 再 start 一个新的 CheckPoint）
+     * <pre>
+     * @return 停止/启动的时间点（毫秒）
      */
     public long checkpoint() {
+        return checkpoint(null);
+    }
+
+    /**
+     <pre>
+     * 连续启动 CheckPoint
+     * （先 stop 当前 CheckPoint, 再 start 一个新的 CheckPoint）
+     * <pre>
+     * @param name 新 CheckPoint 的名称
+     * @return 停止/启动的时间点（毫秒）
+     */
+    public long checkpoint(String name) {
         long time = System.currentTimeMillis();
         if (isTiming) {
             stop(time);
         }
-        start(null, time);
+        start(name, time);
         return time;
     }
 
     /**
-     * 获取历史所有检查点
-     * @return 返回检查点列表
+     * 计算最后一次 CheckPoint 经过的时间（毫秒）
+     * @return 获取当前计时经过的毫秒数
      */
-    public List<CheckPoint> getHistoryCheckPoints() {
+    public long lastElapsedTime() {
+        return isTiming ? -1 : (
+                lastCheckPoint == null ? -1 : lastCheckPoint.getDiffTime()
+        );
+    }
+
+    /**
+     * 计算所有 CheckPoint 经过的时间（毫秒）
+     * @return 第一次和最后一次 CheckPoint 之间经过的毫秒数
+     */
+    public long totalElapsedTime() {
+        if (checkPointList.size() <= 0) {
+            return 0;
+        }
+        CheckPoint head = checkPointList.get(0);
+        CheckPoint tail = lastCheckPoint;
+        return (isTiming ? tail.getBgnTime() : tail.getEndTime()) - head.getBgnTime();
+    }
+
+    /**
+     * 存储 CheckPoint
+     * @param checkPoint 新的 CheckPoint
+     */
+    private void add(CheckPoint checkPoint) {
+        this.checkPointMap.put(checkPoint.getName(), checkPoint);
+        this.checkPointList.add(checkPoint);
+    }
+
+    /**
+     * 获取某个 CheckPoint
+     * @param name CheckPoint 名称
+     * @return CheckPoint，若不存在返回 null
+     */
+    public CheckPoint getCheckPoint(String name) {
+        return checkPointMap.get(name);
+    }
+
+    /**
+     * 获取所有 CheckPoint
+     * @return 返回 CheckPoint 列表
+     */
+    public List<CheckPoint> getAllCheckPoints() {
         return checkPointList;
     }
 
     /**
-     * 打印历史所有检查点
-     * @return 返回检查点列表（用于打印的表格）
+     * 以文本表格形式返回历史所有 CheckPoint
+     * @return 返回表格格式 CheckPoint 列表
      */
-    public String printHistoryCheckPoints() {
+    public String printAllCheckPoints() {
         List<List<String>> tables = new LinkedList<>();
 
         String[] head = new String[] { "id", "name", "start_time", "end_time", "diff_time" };
@@ -157,9 +200,9 @@ public class QuickTimer {
     }
 
     /**
-     * 清除历史所有检查点
+     * 清除所有 CheckPoint
      */
-    public void clearCheckPoints() {
+    public void clearAllCheckPoints() {
         this.checkPointMap.clear();
         this.checkPointList.clear();
     }
