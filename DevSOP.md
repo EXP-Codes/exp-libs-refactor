@@ -16,7 +16,7 @@
 10. 拉取 `[版本分支]` 最新代码: `git pull`
 11. 批量修改父子所有 `pom.xml` 中的 `<version>`: 移除末尾的 `-SNAPSHOT` 快照标识
 12. 提交 `[版本分支]` 到 Github，此时会触发流水线自动生成 Javadoc
-13. 等待 Javadoc 发布完成（Github Actions 会推送变更到仓库）
+13. 等待 Javadoc 发布完成（Github Actions 会推送变更到 `[版本分支]`）
 14. 在 Github 合并 `[版本分支]` 到 master
 15. 在 Github 对 `[版本分支]` 发起 `Releases` 动作（会强制新建 `Tag`，名称和 `[版本分支]` 一致），此时会触发流水线自动 deploy `Release` 版本到 Maven 中央仓库
 16. 重复步骤 1， 进入下一轮迭代
