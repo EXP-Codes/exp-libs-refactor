@@ -127,6 +127,14 @@ public class PathUtils {
         }
         return path;
     }
+
+    /**
+     * 取得项目名称
+     * @return 项目名称
+     */
+    public static String getProjectName() {
+        return new File(getProjectPath()).getName();
+    }
     
     /**
      * 获取 项目的根路径，如： X:\foo\project

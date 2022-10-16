@@ -1,6 +1,6 @@
 package exp.libs.sock.socket.bean;
 
-import exp.libs.ext.format.ESCUtils;
+import exp.libs.utils.other.EscapeUtils;
 import exp.libs.utils.num.NumUtils;
 import exp.libs.utils.str.CharsetUtils;
 import exp.libs.utils.str.StrUtils;
@@ -335,7 +335,7 @@ public class SocketBean {
 
 	public void setDelimiter(String delimiter) {
 		if(StrUtils.isNotEmpty(delimiter)) {
-			delimiter = ESCUtils.toJavaESC(delimiter);
+			delimiter = EscapeUtils.toJavaEscape(delimiter);
 			this.delimiter = delimiter;
 			this.readDelimiter = delimiter;
 			this.writeDelimiter = delimiter;
@@ -348,7 +348,7 @@ public class SocketBean {
 
 	public void setReadDelimiter(String readDelimiter) {
 		if(StrUtils.isNotEmpty(readDelimiter)) {
-			readDelimiter = ESCUtils.toJavaESC(readDelimiter);
+			readDelimiter = EscapeUtils.toJavaEscape(readDelimiter);
 			this.readDelimiter = readDelimiter;
 			
 			if(this.readDelimiter.equals(this.writeDelimiter)) {
@@ -363,7 +363,7 @@ public class SocketBean {
 
 	public void setWriteDelimiter(String writeDelimiter) {
 		if(StrUtils.isNotEmpty(writeDelimiter)) {
-			writeDelimiter = ESCUtils.toJavaESC(writeDelimiter);
+			writeDelimiter = EscapeUtils.toJavaEscape(writeDelimiter);
 			this.writeDelimiter = writeDelimiter;
 			
 			if(this.readDelimiter.equals(this.writeDelimiter)) {
@@ -424,6 +424,7 @@ public class SocketBean {
 		return sb.toString();
 	}
 
+	@Override
 	public SocketBean clone() {
 		
 		// 部分get/set方法含有校验逻辑，若通过setXX(getXX)可能会因为重复校验导致数据异常

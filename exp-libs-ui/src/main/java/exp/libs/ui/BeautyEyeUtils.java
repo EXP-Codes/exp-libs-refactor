@@ -83,7 +83,12 @@ public final class BeautyEyeUtils {
 	 * 		osLookAndFeelDecorated: 本地系统默认风格边框
 	 */
 	public static void init(FrameBorderStyle frameBorderStyle) {
-		
+
+		// 禁用 DirectDraw, 防止激活/切换输入法时白屏
+		// 切换输入法导致白屏问题是由于官方的透明 API 的 bug 引起，与 BeautyEye 本身无关
+		// 这里的 true 表示使用 ToolBar.background 颜色实现纯色填充背景，BeautyEye 中此属性默认是 false
+		System.setProperty("sun.java2d.noddraw", "true");
+
 		// 选择边框风格类型 
 		BeautyEyeLNFHelper.frameBorderStyle = (frameBorderStyle == null ? 
 				FrameBorderStyle.translucencyAppleLike : frameBorderStyle);

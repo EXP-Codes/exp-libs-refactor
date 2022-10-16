@@ -1,5 +1,6 @@
 package exp.libs.ext.format;
 
+import exp.libs.utils.other.EscapeUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ESCUtilsTest {
+class EscapeUtilsTest {
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -117,38 +118,38 @@ class ESCUtilsTest {
 
     @Test
     public void testToTXT() {
-        System.out.println(ESCUtils.toTXT(null, true));
+        System.out.println(EscapeUtils.toTXT(null, true));
 
         List<List<Object>> table = new ArrayList<List<Object>>();
         List<Object> head = new ArrayList<Object>();
         List<Object> row1 = new ArrayList<Object>();
         List<Object> row2 = new ArrayList<Object>();
-        System.out.println(ESCUtils.toTXT(table, true));
+        System.out.println(EscapeUtils.toTXT(table, true));
 
         table.add(head);
         table.add(row1);
         table.add(row2);
-        System.out.println(ESCUtils.toTXT(table, true));
+        System.out.println(EscapeUtils.toTXT(table, true));
 
         head.add("id");
         head.add("name");
         head.add("address");
         head.add("time");
-        System.out.println(ESCUtils.toTXT(table, true));
+        System.out.println(EscapeUtils.toTXT(table, true));
 
         row1.add(2);
         row1.add("exp");
-        row1.add("广东省");
+        row1.add("北京市");
         row1.add(new Date());
         row1.add("test");
-        System.out.println(ESCUtils.toTXT(table, false));
+        System.out.println(EscapeUtils.toTXT(table, false));
 
         row2.add(1);
         row2.add("sky");
         row2.add("测试");
         row2.add(new Date(0));
 
-        System.out.println(ESCUtils.toTXT(table, true));
+        System.out.println(EscapeUtils.toTXT(table, true));
     }
 
 }
