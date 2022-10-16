@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
 
   # 把版本分支合并到 master 时触发
-  pull_request:
-    branches: [ master ]
-
-  # 推送 master 分支时触发
-#  push:
+#  pull_request:
 #    branches: [ master ]
+
+  # 推送版本分支时触发
+  push:
+    branches: [v*]
 
 jobs:
   javadoc:
@@ -33,4 +33,4 @@ jobs:
           git config --global user.name "Github-Bot"
           git add -A
           git commit -m "Updated by Github Bot" || exit 0
-          git push origin HEAD:master
+          git push
