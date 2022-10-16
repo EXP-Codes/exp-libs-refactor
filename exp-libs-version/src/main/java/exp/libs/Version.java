@@ -5,7 +5,7 @@ import exp.libs.version.VersionMgr;
 
 /**
  * <PRE>
- * 版本类.
+ * 版本类（ Demo: 使用时可复制此类到实际项目中 ）.
  *  版本信息记录在 ./src/main/resources/.verinfo 中, 请勿删除该文件.
  * </PRE>
  * <br/><B>PROJECT : </B> exp-libs

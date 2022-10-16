@@ -1,17 +1,11 @@
-package exp.libs.ext.format;
+package exp.libs.utils.other;
 
-import exp.libs.envm.DateFormat;
 import exp.libs.utils.num.NumUtils;
-import exp.libs.utils.other.ObjUtils;
 import exp.libs.utils.str.StrUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -24,13 +18,13 @@ import java.util.*;
  * @author    EXP: exp.lqb@foxmail.com
  * @since     JDK 1.8+
  */
-public class ESCUtils {
+public class EscapeUtils {
 
 	/** 日志器 */
-	private final static Logger log = LoggerFactory.getLogger(ESCUtils.class);
+	private final static Logger log = LoggerFactory.getLogger(EscapeUtils.class);
 	
 	/** 私有化构造函数. */
-	protected ESCUtils() {}
+	protected EscapeUtils() {}
 
 	/**
 	 * <PRE>
@@ -48,7 +42,7 @@ public class ESCUtils {
 	 * @param str 原字符串 
 	 * @return 转义后的字符串
 	 */
-	public static String toXmlESC(final String str) {
+	public static String toXmlEscape(final String str) {
 		String xml = "";
 		if(str != null) {
 			xml = str;
@@ -80,7 +74,7 @@ public class ESCUtils {
 	 * @param xmlStr 含有xml转义字符的字符串
 	 * @return 普通字符串
 	 */
-	public static String unXmlESC(final String xmlStr) {
+	public static String unXmlEscape(final String xmlStr) {
 		String str = "";
 		if(xmlStr != null) {
 			str = xmlStr;
@@ -102,7 +96,7 @@ public class ESCUtils {
 	 * @param str 原字符串 
 	 * @return 转义后的字符串
 	 */
-	public static String toHtmlESC(final String str) {
+	public static String toHtmlEscape(final String str) {
 		String html = "";
 		if(str != null) {
 			html = StringEscapeUtils.escapeHtml4(str);
@@ -119,7 +113,7 @@ public class ESCUtils {
 	 * @param htmlStr 含有html转义字符的字符串
 	 * @return 普通字符串
 	 */
-	public static String unHtmlESC(final String htmlStr) {
+	public static String unHtmlEscape(final String htmlStr) {
 		String str = "";
 		if(htmlStr != null) {
 			str = StringEscapeUtils.unescapeHtml4(htmlStr);
@@ -144,7 +138,7 @@ public class ESCUtils {
 	 * @param str 原字符串
 	 * @return 含java转义字符的字符串
 	 */
-	public static String toJavaESC(final String str) {
+	public static String toJavaEscape(final String str) {
 		String javaStr = "";
 		if(str != null) {
 			javaStr = str;
@@ -183,7 +177,7 @@ public class ESCUtils {
 	 * @param regex 正则表达式
 	 * @return 转义后的正则表达式
 	 */
-	public static String toRegexESC(final String regex) {
+	public static String toRegexEscape(final String regex) {
 		String str = "";
 		if(regex != null) {
 			str = regex;
@@ -220,7 +214,7 @@ public class ESCUtils {
 	 * @param json java字符
 	 * @return json转义字符
 	 */
-	public static String toJsonESC(final String json) {
+	public static String toJsonEscape(final String json) {
 		String str = "";
 		if(json != null) {
 			str = json;
@@ -235,101 +229,6 @@ public class ESCUtils {
 			str = str.replace("\f", "");
 		}
 		return str;
-	}
-	
-	/**
-	 * <PRE>
-	 * 把一个对象转换成json字符串.
-	 * 
-	 * 	此方法仅适用于简单对象的转换, 如 String、Integer、 Map<?, ?>等， 且Map对象不允许嵌套.
-	 * <PRE>
-	 * @param obj 简单对象
-	 * @return 若转换失败返回""
-	 */
-	@SuppressWarnings("deprecation")
-	public static String toJson(Object obj) {
-		String json = "";
-		if (obj == null) {
-			return json;
-		}
-			
-		StringWriter writer = new StringWriter();
-		SimpleDateFormat sdf = new SimpleDateFormat(DateFormat.YMDHMSS);
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.getSerializationConfig().setDateFormat(sdf);
-		
-		try {
-			mapper.writeValue(writer, obj);
-		} catch (Exception e) {
-			log.error("转换JSON失败: {}", obj, e);
-		}
-		json = writer.toString();
-		
-		try {
-			writer.close();
-		} catch (IOException e) {
-			log.error("转换JSON异常: 关闭输入流失败.", e);
-		}
-		return json;
-	}
-	
-	/**
-	 * <PRE>
-	 * 把一个对象转换成json字符串.
-	 * 若对象中存在日期属性, 则使用指定日期格式转换.
-	 * 
-	 * 	此方法仅适用于简单对象的转换, 如 String、Integer、 Map<?, ?>等， 且Map对象不允许嵌套.
-	 * <PRE>
-	 * @param obj 简单对象
-	 * @param dateFormat 日期格式
-	 * @return 若转换失败返回""
-	 */
-	@SuppressWarnings("deprecation")
-	public static String toJson(Object obj, String dateFormat) {
-		String json = "";
-		if (obj == null) {
-			return json;
-		}
-			
-		StringWriter writer = new StringWriter();
-		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.getSerializationConfig().setDateFormat(sdf);
-		
-		try {
-			mapper.writeValue(writer, obj);
-		} catch (Exception e) {
-			log.error("转换JSON失败: {}", obj, e);
-		}
-		json = writer.toString();
-		
-		try {
-			writer.close();
-		} catch (IOException e) {
-			log.error("转换JSON异常: 关闭输入流失败.", e);
-		}
-		return json;
-	}
-
-	/**
-	 * <PRE>
-	 * 把json字符串转换成Map对象.
-	 * 
-	 * 	此方法仅适用于纯KV键值对的json字符串, 多重嵌套的json字符串可能会转换失败.
-	 * <PRE>
-	 * @param json 纯KV键值对的json字符串
-	 * @return 若转换失败返回null
-	 */
-	public static Map<?, ?> unJson(String json) {
-		Map<?, ?> map = null;
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			map = mapper.readValue(json, LinkedHashMap.class);
-			
-		} catch (Exception e) {
-			log.error("转换JSON失败: {}", json, e);
-		}
-		return map;
 	}
 	
 	/**
@@ -567,13 +466,13 @@ public class ESCUtils {
 	
 	/**
 	 * <PRE>
-	 * 把二维数组转换成TXT表单字符串.
-	 * 	生成的TXT表单是行列对齐的,若不对齐则是字体等宽问题, 宋体为非等宽字体， 幼圆则为等宽字体.
+	 * 把二维数组转换成 TXT 表单字符串.
+	 * 	生成的 TXT 表单是行列对齐的, 若不对齐则是字体等宽问题, 宋体为非等宽字体，幼圆则为等宽字体.
 	 * <PRE>
 	 * 
 	 * @param table 二维数组
-	 * @param header 是否存在表头(若为true则取第一行为表头)
-	 * @return TXT表单字符串
+	 * @param header 是否存在表头(若为 true 则取第一行为表头)
+	 * @return TXT 表单字符串
 	 */
 	public static <T> String toTXT(List<List<T>> table, boolean header) {
 		if(table == null || table.size() <= 0) {

@@ -6,7 +6,7 @@ import exp.libs.db.sql.bean.DataSourceBean;
 import exp.libs.envm.Charset;
 import exp.libs.envm.DBType;
 import exp.libs.envm.Delimiter;
-import exp.libs.ext.format.ESCUtils;
+import exp.libs.utils.other.EscapeUtils;
 import exp.libs.utils.file.FileUtils;
 import exp.libs.utils.file.JarUtils;
 import exp.libs.utils.os.OSUtils;
@@ -41,25 +41,31 @@ class _VerDBMgr {
 	
 	protected final static String AUTHOR = "最后责任人";
 
+	/** 此子模块的项目名称 */
+	private final static String MODULE_NAME = "exp-libs-version";
+
 	/** 版本信息库的脚本 */
 	private final static String VER_DB_SCRIPT = "/exp/libs/version/VERSION-INFO-DB.sql";
-	
+
+	/** 版本库存储目录 */
+	private final static String DB_DIR = "data";
+
 	/** 版本库库名 */
 	private final static String DB_NAME = ".verinfo";
 	
 	/** 资源目录 */
-	private final static String RES_DIR = "./src/main/resources";
+	private final static String RES_DIR = "src/main/resources";
 	
 	/**
 	 * 存储版本信息的文件数据库位置.
-	 * 	[src/main/resources] 为Maven项目默认的资源目录位置（即使非Maven项目也可用此位置）
+	 * 	[src/main/resources] 为 Maven 项目默认的资源目录位置（即使非 Maven 项目也可用此位置）
 	 */
-	private final static String VER_DB = RES_DIR.concat("/").concat(DB_NAME);
+	private final static String VER_DB = StrUtils.concat(RES_DIR, "/", DB_NAME);
 	
 	/** 临时版本库位置（仅用于查看版本信息） */
-	private final static String TMP_VER_DB = OSUtils.isRunByTomcat() ? 
-			PathUtils.getProjectCompilePath().concat(DB_NAME) : 
-			"./conf/".concat(DB_NAME);
+	private final static String TMP_VER_DB = OSUtils.isRunByTomcat() ?
+			StrUtils.concat(PathUtils.getProjectCompilePath(), DB_NAME) :
+			StrUtils.concat("./", DB_DIR, "/", DB_NAME);
 	
 	/** 版本信息文件的数据源 */
 	private DataSourceBean ds;
@@ -92,7 +98,7 @@ class _VerDBMgr {
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * 初始化版本库数据源
 	 */
@@ -100,21 +106,28 @@ class _VerDBMgr {
 		this.ds = new DataSourceBean();
 		ds.setDriver(DBType.SQLITE.DRIVER);
 		ds.setCharset(Charset.UTF8);
-		ds.setName(VER_DB);
-		
-		// 对于非开发环境, Sqlite无法直接读取jar包内的版本库, 需要先将其拷贝到硬盘
+
+		// 兼容父子工程的开发环境路径（根路径为父工程，需要进行特殊处理）
+		final String DEV_ENV_VER_DB = StrUtils.concat(MODULE_NAME, "/", VER_DB);
+		if (FileUtils.exists(DEV_ENV_VER_DB)) {
+			ds.setName(DEV_ENV_VER_DB);
+		} else {
+			ds.setName(VER_DB);
+		}
+
+		// 对于非开发环境, Sqlite 无法直接读取 jar 包内的版本库, 需要先将其拷贝到硬盘
 		if(!SqliteUtils.testConn(ds)) {
-			
-			// 对于J2SE项目, 若若同位置存在版本文件, 先删除再复制, 避免复制失败使得显示的版本依然为旧版
+
+			// 对于 J2SE 项目, 若同位置存在版本文件, 先删除再复制, 避免复制失败使得显示的版本依然为旧版
 			if(!OSUtils.isRunByTomcat()) {
-				FileUtils.delete(TMP_VER_DB);	
+				FileUtils.delete(TMP_VER_DB);
 				JarUtils.copyFile(VER_DB.replace(RES_DIR, ""), TMP_VER_DB);
-				
-			// 当程序运行在Tomcat时, Tomcat会自动把版本库拷贝到classes目录下, 一般无需再拷贝(但以防万一, 若不存在版本文件还是拷贝一下)
+
+			// 当程序运行在 Tomcat 时, Tomcat 会自动把版本库拷贝到 classes 目录下, 一般无需再拷贝(但以防万一, 若不存在版本文件还是拷贝一下)
 			} else if(!FileUtils.exists(TMP_VER_DB)){
 				JarUtils.copyFile(VER_DB.replace(RES_DIR, ""), TMP_VER_DB);
 			}
-			
+
 			FileUtils.hide(TMP_VER_DB);
 			ds.setName(TMP_VER_DB);
 		}
@@ -248,7 +261,7 @@ class _VerDBMgr {
 		curVerInfo.add(Arrays.asList(new String[] { RELEASE, datetime }));
 		curVerInfo.add(Arrays.asList(new String[] { "", "" }));
 		curVerInfo.add(Arrays.asList(new String[] { AUTHOR, author }));
-		return ESCUtils.toTXT(curVerInfo, false);
+		return EscapeUtils.toTXT(curVerInfo, false);
 	}
 	
 	/**

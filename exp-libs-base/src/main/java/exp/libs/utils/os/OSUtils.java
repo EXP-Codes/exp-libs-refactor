@@ -46,8 +46,8 @@ public final class OSUtils {
 	/**
 	 * 程序入口命令.
 	 *  用于判断程序运行环境：
-	 *  1.通过tomcat运行的J2EE项目为固定值 org.apache.catalina.startup.Bootstrap start
-	 *  2.通过main运行的J2SE项目为main入口类的类名
+	 *  1.通过 tomcat 运行的 J2EE 项目为固定值 org.apache.catalina.startup.Bootstrap start
+	 *  2.通过 main 运行的 J2SE 项目为 main 入口类的类名
 	 */
 	private final static String SJC = System.getProperty("sun.java.command");
 	protected final static String RUN_EVN = (SJC == null ? "" : SJC);
@@ -92,7 +92,7 @@ public final class OSUtils {
 	 * @return true:unix; false:其他
 	 */
 	public static boolean isUnix() {
-		return !isWin(); // mac 也算是 unix
+		return !isWin(); // mac 也是 unix
 	}
 	
 	/**
