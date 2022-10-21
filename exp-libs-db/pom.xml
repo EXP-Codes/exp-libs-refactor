@@ -64,10 +64,6 @@
             <version>0.9.1</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>commons-logging</artifactId>
-                    <groupId>commons-logging</groupId>
-                </exclusion>
-                <exclusion>
                     <groupId>org.apache</groupId>
                     <artifactId>log4j</artifactId>
                 </exclusion>
