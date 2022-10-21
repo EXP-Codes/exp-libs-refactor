@@ -8,12 +8,12 @@ $OLD_VERSION = "<version>" + ${args}[0] + "</version>"
 $NEW_VERSION = "<version>" + ${args}[1] + "</version>"
 $POM_PATH = "./pom.xml"
 
-Write-Output "Set versions for all modules ..."
+Write-Output "Set versions for all modules : $NEW_VERSION"
 bin/_sed.ps1 $OLD_VERSION $NEW_VERSION $POM_PATH
 
 $items = Get-ChildItem . "exp-libs-*"
 Foreach($item in $items) {
-    Write-Output "Set versions for $item ..."
+    Write-Output "Set versions for $item : $NEW_VERSION"
     $pomPath = Get-ChildItem "./$item/pom.xml"
     If(Test-Path $pomPath) {
         bin/_sed.ps1 $OLD_VERSION $NEW_VERSION $pomPath
