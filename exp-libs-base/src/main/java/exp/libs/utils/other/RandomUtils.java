@@ -243,7 +243,9 @@ public class RandomUtils {
      * @param max 随机数限界最大值
      * @return 返回随机数范围 [min,max]
      */
-    public static int genInt(final int min, final int max) {
+    public static int genInt(int min, int max) {
+        min = (min <= 0 ? 0 : min);
+        max = (max <= 0 ? 0 : max);
         int num = genInt(max - min + 1);
         return num + min;
     }
