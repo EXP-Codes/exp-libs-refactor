@@ -1,6 +1,7 @@
 package exp.libs.utils.other;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,12 +19,51 @@ class RandomUtilsTest {
 
     @Test
     public void testRandomInt() {
-        fail("Not yet implemented");
+        int scope = -1;
+        int num = RandomUtils.genInt(scope);
+        Assertions.assertEquals(0, num);
+
+        scope = 0;
+        num = RandomUtils.genInt(scope);
+        Assertions.assertEquals(0, num);
+
+        scope = 1;
+        num = RandomUtils.genInt(scope);
+        Assertions.assertTrue(num <= scope);
+
+        scope = 10;
+        num = RandomUtils.genInt(scope);
+        Assertions.assertTrue(num <= scope);
     }
 
     @Test
     public void testRandomIntInt() {
-        fail("Not yet implemented");
+        int min = 0;
+        int max = 0;
+        int num = RandomUtils.genInt(min, max);
+        Assertions.assertEquals(0, num);
+
+        min = -1;
+        max = -1;
+        num = RandomUtils.genInt(min, max);
+        Assertions.assertEquals(0, num);
+
+        min = 9;
+        max = 2;
+        num = RandomUtils.genInt(min, max);
+        Assertions.assertEquals(min, num);
+
+        min = -1;
+        max = 10;
+        num = RandomUtils.genInt(min, max);
+        Assertions.assertTrue(num >= 0);
+        Assertions.assertTrue(num <= 10);
+
+        min = 5;
+        max = 10;
+        num = RandomUtils.genInt(min, max);
+        Assertions.assertTrue(num >= 5);
+        Assertions.assertTrue(num <= 10);
     }
 
     @Test

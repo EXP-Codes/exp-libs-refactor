@@ -155,8 +155,10 @@ public class LogUtils {
 		color = (color == null ? LogColor.DEFAULT : color);
 		return StrUtils.concat(
 				color.PREFIX(),
+				" ",
 				level.DESC(),
 				message,
+				" ",
 				color.SUFFIX()
 		);
 	}

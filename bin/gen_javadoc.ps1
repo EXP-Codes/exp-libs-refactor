@@ -6,7 +6,7 @@
 # ------------------------------------------------
 
 Write-Output "Generate javadoc-jar for all modules ..."
-mvn clean package -Dmaven.test.skip=true
+mvn clean package '-Dmaven.test.skip=true'
 
 $items = Get-ChildItem . "exp-libs-*"
 Foreach($item in $items) {
