@@ -33,7 +33,7 @@ class _Jedis implements _IJedis {
 
 	/** 默认字符集编码 */
 	private final static String CHARSET = Charset.UTF8;
-	
+
 	/** Redis部分接口的返回值 */
 	private final static String OK = "OK";
 
@@ -42,59 +42,59 @@ class _Jedis implements _IJedis {
 
 	/** Jedis连接池 */
 	private JedisPool pool;
-	
+
 	/** 是否自动提交(默认true, 即所有操作均为短连接) */
 	private boolean autoCommit;
-	
+
 	/** 当前持有的长连接(仅autoCommit=false时有效) */
 	private Jedis longJedis;
-	
+
 	protected _Jedis(String ip, int port) {
 		this(null, Protocol.DEFAULT_TIMEOUT, null, ip, port);
 	}
-	
+
 	protected _Jedis(int timeout, String ip, int port) {
 		this(null, timeout, null, ip, port);
 	}
-	
+
 	protected _Jedis(String password, String ip, int port) {
 		this(null, Protocol.DEFAULT_TIMEOUT, password, ip, port);
 	}
-	
+
 	protected _Jedis(int timeout, String password, String ip, int port) {
 		this(null, timeout, password, ip, port);
 	}
-	
+
 	protected _Jedis(GenericObjectPoolConfig poolConfig, String ip, int port) {
 		this(poolConfig, Protocol.DEFAULT_TIMEOUT, null, ip, port);
 	}
-	
-	protected _Jedis(GenericObjectPoolConfig poolConfig, 
-			int timeout, String ip, int port) {
+
+	protected _Jedis(GenericObjectPoolConfig poolConfig,
+					 int timeout, String ip, int port) {
 		this(poolConfig, timeout, null, ip, port);
 	}
-	
-	protected _Jedis(GenericObjectPoolConfig poolConfig, 
-			String password, String ip, int port) {
+
+	protected _Jedis(GenericObjectPoolConfig poolConfig,
+					 String password, String ip, int port) {
 		this(poolConfig, Protocol.DEFAULT_TIMEOUT, password, ip, port);
 	}
-	
-	protected _Jedis(GenericObjectPoolConfig poolConfig, 
-			int timeout, String password, String ip, int port) {
+
+	protected _Jedis(GenericObjectPoolConfig poolConfig,
+					 int timeout, String password, String ip, int port) {
 		if(poolConfig == null) {
 			poolConfig = new JedisPoolConfig();
 		}
-		
+
 		this.pool = StrUtils.isTrimEmpty(password) ?
-				new JedisPool(poolConfig, ip, port, timeout) : 
+				new JedisPool(poolConfig, ip, port, timeout) :
 				new JedisPool(poolConfig, ip, port, timeout, password);
 		this.autoCommit = true;
 		this.longJedis = null;
 	}
-	
+
 	/**
 	 * 对Redis键统一转码，使得Jedis的 String接口 和 byte[]接口 所产生的键值最终一致。
-	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同, 
+	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同,
 	 * 	但使用String接口与byte[]接口存储到Redis的是两个不同的哈希表)
 	 * @param redisKey redis键
 	 * @return 统一转码后的redis键
@@ -102,10 +102,10 @@ class _Jedis implements _IJedis {
 	private String _transcode(String redisKey) {
 		return CharsetUtils.transcode(redisKey, CHARSET);
 	}
-	
+
 	/**
 	 * 对Redis键统一转码，使得Jedis的 String接口 和 byte[]接口 所产生的键值最终一致。
-	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同, 
+	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同,
 	 * 	但使用String接口与byte[]接口存储到Redis的是两个不同的哈希表)
 	 * @param redisKey redis键
 	 * @return 统一转码后的redis键(字节数组)
@@ -113,10 +113,10 @@ class _Jedis implements _IJedis {
 	private byte[] _transbyte(String redisKey) {
 		return CharsetUtils.toBytes(redisKey, CHARSET);
 	}
-	
+
 	/**
 	 * 对Redis键统一转码，使得Jedis的 String接口 和 byte[]接口 所产生的键值最终一致。
-	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同, 
+	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同,
 	 * 	但使用String接口与byte[]接口存储到Redis的是两个不同的哈希表)
 	 * @param redisKey redis键(字节数组)
 	 * @return 统一转码后的redis键
@@ -124,7 +124,7 @@ class _Jedis implements _IJedis {
 	private String _transstr(byte[] redisKey) {
 		return CharsetUtils.toStr(redisKey, CHARSET);
 	}
-	
+
 	/**
 	 * 从连接池获取Redis连接
 	 * @return
@@ -133,17 +133,17 @@ class _Jedis implements _IJedis {
 		Jedis conn = null;
 		if(autoCommit) {
 			conn = pool.getResource();
-			
+
 		} else if(longJedis == null || !longJedis.isConnected()) {
 			conn = pool.getResource();
 			longJedis = conn;
-			
+
 		} else {
 			conn = longJedis;
 		}
 		return conn;
 	}
-	
+
 	/**
 	 * 把Redis连接返回连接池
 	 * @param jedis
@@ -152,7 +152,7 @@ class _Jedis implements _IJedis {
 		if(!autoCommit && jedis == longJedis) {
 			return;
 		}
-		
+
 		if(jedis != null) {
 			try {
 //				pool.returnResource(jedis);
@@ -170,7 +170,7 @@ class _Jedis implements _IJedis {
 		_close(jedis);
 		return isOk;
 	}
-	
+
 	private boolean _isVaild(Jedis jedis) {
 		boolean isOk = false;
 		if(jedis != null) {
@@ -197,7 +197,7 @@ class _Jedis implements _IJedis {
 	public void commit() {
 		setAutoCommit(true);
 	}
-	
+
 	@Override
 	public void destory() {
 		commit();
@@ -241,10 +241,15 @@ class _Jedis implements _IJedis {
 
 	@Override
 	public boolean addStrVal(String redisKey, String value) {
+		return addStrVal(redisKey, value, 0);
+	}
+
+	@Override
+	public boolean addStrVal(String redisKey, String value, int expire) {
 		boolean isOk = false;
 		if(redisKey != null && value != null) {
 			Jedis jedis = _getJedis();
-			isOk = OK.equalsIgnoreCase(jedis.set(_transcode(redisKey), value));
+			isOk = OK.equalsIgnoreCase(jedis.setex(_transcode(redisKey), expire, value));
 			_close(jedis);
 		}
 		return isOk;
@@ -274,11 +279,17 @@ class _Jedis implements _IJedis {
 
 	@Override
 	public boolean addSerialObj(String redisKey, Serializable object) {
+		return addSerialObj(redisKey, object, 0);
+	}
+
+	@Override
+	public boolean addSerialObj(String redisKey, Serializable object, int expire) {
 		boolean isOk = false;
 		if(redisKey != null && object != null) {
 			Jedis jedis = _getJedis();
-			isOk = OK.equalsIgnoreCase(jedis.set(
-					_transbyte(redisKey), 
+			isOk = OK.equalsIgnoreCase(jedis.setex(
+					_transbyte(redisKey),
+					expire,
 					ObjUtils.toSerializable(object))
 			);
 			_close(jedis);
@@ -377,7 +388,7 @@ class _Jedis implements _IJedis {
 			while(keys.hasNext()) {
 				String key = keys.next();
 				Serializable object = map.get(key);
-				isOk &= jedis.hset(byteKey, _transbyte(key), 
+				isOk &= jedis.hset(byteKey, _transbyte(key),
 						ObjUtils.toSerializable(object)) >= 0;
 			}
 			_close(jedis);
@@ -387,11 +398,11 @@ class _Jedis implements _IJedis {
 
 	@Override
 	public boolean addSerialObjToMap(String redisKey, String key,
-			Serializable object) {
+									 Serializable object) {
 		boolean isOk = false;
 		if(redisKey != null && key != null && object != null) {
 			Jedis jedis = _getJedis();
-			isOk = jedis.hset(_transbyte(redisKey), _transbyte(key), 
+			isOk = jedis.hset(_transbyte(redisKey), _transbyte(key),
 					ObjUtils.toSerializable(object)) >= 0;
 			_close(jedis);
 		}
@@ -440,7 +451,7 @@ class _Jedis implements _IJedis {
 				List<byte[]> byteVals = jedis.hmget(byteKey, _transbyte(key));
 				if(ListUtils.isEmpty(byteVals)) {
 					values.add(null);
-					
+
 				} else {
 					values.add(ObjUtils.unSerializable(byteVals.get(0)));
 				}
@@ -503,7 +514,7 @@ class _Jedis implements _IJedis {
 		long size = 0L;
 		if(redisKey != null) {
 			Jedis jedis = _getJedis();
-			size = jedis.hlen(_transcode(redisKey)); 
+			size = jedis.hlen(_transcode(redisKey));
 			_close(jedis);
 		}
 		return size;
@@ -624,7 +635,7 @@ class _Jedis implements _IJedis {
 
 	@Override
 	public long addSerialObjsToListHead(String redisKey,
-			Serializable... objects) {
+										Serializable... objects) {
 		long num = 0;
 		if(redisKey != null && objects != null) {
 			Jedis jedis = _getJedis();
@@ -642,7 +653,7 @@ class _Jedis implements _IJedis {
 
 	@Override
 	public long addSerialObjsToListTail(String redisKey,
-			Serializable... objects) {
+										Serializable... objects) {
 		long num = 0;
 		if(redisKey != null && objects != null) {
 			num = addSerialList(redisKey, Arrays.asList(objects));
@@ -660,7 +671,7 @@ class _Jedis implements _IJedis {
 		long num = 0L;
 		if(redisKey != null && object != null) {
 			Jedis jedis = _getJedis();
-			num = jedis.lrem(_transbyte(redisKey), count, 
+			num = jedis.lrem(_transbyte(redisKey), count,
 					ObjUtils.toSerializable(object));
 			_close(jedis);
 		}
@@ -705,7 +716,7 @@ class _Jedis implements _IJedis {
 		long size = 0L;
 		if(redisKey != null) {
 			Jedis jedis = _getJedis();
-			size = jedis.llen(_transcode(redisKey)); 
+			size = jedis.llen(_transcode(redisKey));
 			_close(jedis);
 		}
 		return size;
@@ -751,7 +762,7 @@ class _Jedis implements _IJedis {
 		}
 		return value;
 	}
-	
+
 	@Override
 	public Set<String> getAllStrValsInSet(String redisKey) {
 		Set<String> values = new HashSet<String>();
@@ -835,7 +846,7 @@ class _Jedis implements _IJedis {
 		}
 		return value;
 	}
-	
+
 	@Override
 	public Set<Object> getAllSerialObjsInSet(String redisKey) {
 		Set<Object> values = new HashSet<Object>();
@@ -874,7 +885,7 @@ class _Jedis implements _IJedis {
 		boolean isExist = false;
 		if(redisKey != null && object != null) {
 			Jedis jedis = _getJedis();
-			isExist = jedis.sismember(_transbyte(redisKey), 
+			isExist = jedis.sismember(_transbyte(redisKey),
 					ObjUtils.toSerializable(object));
 			_close(jedis);
 		}

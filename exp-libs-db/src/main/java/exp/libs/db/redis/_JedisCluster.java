@@ -9,7 +9,6 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -19,7 +18,7 @@ import java.util.*;
  * ----------------------------------
  * 注意：
  * 	经测试，对于利用redis-trib.rb构建的Redis Cluster，
- *  若节点的配置文件 redis.conf 中同时绑定了[内网IP]和[外网IP]， 
+ *  若节点的配置文件 redis.conf 中同时绑定了[内网IP]和[外网IP]，
  *  即使redis-trib.rb构建集群时使用的是[外网IP]，也无法通过JedisCluster[从外网]访问集群（报错为无法获取连接）
  *  但是[从内网]访问是可以的，具体原因不明。
  * </PRE>
@@ -33,46 +32,46 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 
 	/** 默认字符集编码 */
 	private final static String CHARSET = Charset.UTF8;
-	
+
 	/** Redis部分接口的返回值 */
 	private final static String OK = "OK";
 
 	protected _JedisCluster(HostAndPort... clusterNodes) {
 		this(null, DEFAULT_TIMEOUT, null, clusterNodes);
 	}
-	
+
 	protected _JedisCluster(int timeout, HostAndPort... clusterNodes) {
 		this(null, timeout, null, clusterNodes);
 	}
-	
+
 	protected _JedisCluster(String password, HostAndPort... clusterNodes) {
 		this(null, DEFAULT_TIMEOUT, password, clusterNodes);
 	}
-	
-	protected _JedisCluster(int timeout, String password, 
-			HostAndPort... clusterNodes) {
+
+	protected _JedisCluster(int timeout, String password,
+							HostAndPort... clusterNodes) {
 		this(null, timeout, password, clusterNodes);
 	}
-	
-	protected _JedisCluster(GenericObjectPoolConfig poolConfig, 
-			HostAndPort... clusterNodes) {
+
+	protected _JedisCluster(GenericObjectPoolConfig poolConfig,
+							HostAndPort... clusterNodes) {
 		this(poolConfig, DEFAULT_TIMEOUT, null, clusterNodes);
 	}
-	
-	protected _JedisCluster(GenericObjectPoolConfig poolConfig, 
-			int timeout, HostAndPort... clusterNodes) {
+
+	protected _JedisCluster(GenericObjectPoolConfig poolConfig,
+							int timeout, HostAndPort... clusterNodes) {
 		this(poolConfig, timeout, null, clusterNodes);
 	}
-	
-	protected _JedisCluster(GenericObjectPoolConfig poolConfig, 
-			String password, HostAndPort... clusterNodes) {
+
+	protected _JedisCluster(GenericObjectPoolConfig poolConfig,
+							String password, HostAndPort... clusterNodes) {
 		this(poolConfig, DEFAULT_TIMEOUT, password, clusterNodes);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	protected _JedisCluster(GenericObjectPoolConfig poolConfig, 
-			int timeout, String password, HostAndPort... clusterNodes) {
-		super(new HashSet<HostAndPort>(ListUtils.asList(clusterNodes)), timeout, 
+	protected _JedisCluster(GenericObjectPoolConfig poolConfig,
+							int timeout, String password, HostAndPort... clusterNodes) {
+		super(new HashSet<HostAndPort>(ListUtils.asList(clusterNodes)), timeout,
 				timeout, DEFAULT_MAX_ATTEMPTS,
 				(StrUtils.isEmpty(password) ? null : password),
 				(poolConfig == null ? new GenericObjectPoolConfig() : poolConfig));
@@ -80,7 +79,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 
 	/**
 	 * 对Redis键统一转码，使得Jedis的 String接口 和 byte[]接口 所产生的键值最终一致。
-	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同, 
+	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同,
 	 * 	但使用String接口与byte[]接口存储到Redis的是两个不同的哈希表)
 	 * @param redisKey redis键
 	 * @return 统一转码后的redis键
@@ -88,10 +87,10 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 	private String _transcode(String redisKey) {
 		return CharsetUtils.transcode(redisKey, CHARSET);
 	}
-	
+
 	/**
 	 * 对Redis键统一转码，使得Jedis的 String接口 和 byte[]接口 所产生的键值最终一致。
-	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同, 
+	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同,
 	 * 	但使用String接口与byte[]接口存储到Redis的是两个不同的哈希表)
 	 * @param redisKey redis键
 	 * @return 统一转码后的redis键(字节数组)
@@ -99,10 +98,10 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 	private byte[] _transbyte(String redisKey) {
 		return CharsetUtils.toBytes(redisKey, CHARSET);
 	}
-	
+
 	/**
 	 * 对Redis键统一转码，使得Jedis的 String接口 和 byte[]接口 所产生的键值最终一致。
-	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同, 
+	 * (若不转码, 在redis编码与程序编码不一致的情况下, 即使键值相同,
 	 * 	但使用String接口与byte[]接口存储到Redis的是两个不同的哈希表)
 	 * @param redisKey redis键(字节数组)
 	 * @return 统一转码后的redis键
@@ -110,13 +109,13 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 	private String _transstr(byte[] redisKey) {
 		return CharsetUtils.toStr(redisKey, CHARSET);
 	}
-	
+
 	@Deprecated
 	@Override
 	public boolean isVaild() {
 		return false;	// 集群模式不支持此操作
 	}
-	
+
 	@Deprecated
 	@Override
 	public void setAutoCommit(boolean autoCommit) {
@@ -133,14 +132,14 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 	public void commit() {
 		// Undo 集群模式不支持此操作
 	}
-	
+
 	@Override
 	public void destory() {
 		try {
 			super.close();
 		} catch (Exception e) {}
 	}
-	
+
 	@Override
 	public boolean clearAll() {
 		return false;	// 集群模式不支持此操作
@@ -171,9 +170,14 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 
 	@Override
 	public boolean addStrVal(String redisKey, String value) {
+		return addStrVal(redisKey, value, 0);
+	}
+
+	@Override
+	public boolean addStrVal(String redisKey, String value, int expire) {
 		boolean isOk = false;
 		if(redisKey != null && value != null) {
-			isOk = OK.equalsIgnoreCase(super.set(_transcode(redisKey), value));
+			isOk = OK.equalsIgnoreCase(super.setex(_transcode(redisKey), expire, value));
 		}
 		return isOk;
 	}
@@ -198,10 +202,16 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 
 	@Override
 	public boolean addSerialObj(String redisKey, Serializable object) {
+		return addSerialObj(redisKey, object, 0);
+	}
+
+	@Override
+	public boolean addSerialObj(String redisKey, Serializable object, int expire) {
 		boolean isOk = false;
 		if(redisKey != null && object != null) {
-			isOk = OK.equalsIgnoreCase(super.set(
-					_transbyte(redisKey), 
+			isOk = OK.equalsIgnoreCase(super.setex(
+					_transbyte(redisKey),
+					expire,
 					ObjUtils.toSerializable(object))
 			);
 		}
@@ -284,7 +294,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 			while(keys.hasNext()) {
 				String key = keys.next();
 				Serializable object = map.get(key);
-				isOk &= super.hset(byteKey, _transbyte(key), 
+				isOk &= super.hset(byteKey, _transbyte(key),
 						ObjUtils.toSerializable(object)) >= 0;
 			}
 		}
@@ -293,10 +303,10 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 
 	@Override
 	public boolean addSerialObjToMap(String redisKey, String key,
-			Serializable object) {
+									 Serializable object) {
 		boolean isOk = false;
 		if(redisKey != null && key != null && object != null) {
-			isOk = super.hset(_transbyte(redisKey), _transbyte(key), 
+			isOk = super.hset(_transbyte(redisKey), _transbyte(key),
 					ObjUtils.toSerializable(object)) >= 0;
 		}
 		return isOk;
@@ -339,7 +349,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 				List<byte[]> byteVals = super.hmget(byteKey, _transbyte(key));
 				if(ListUtils.isEmpty(byteVals)) {
 					values.add(null);
-					
+
 				} else {
 					values.add(ObjUtils.unSerializable(byteVals.get(0)));
 				}
@@ -392,7 +402,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 	public long getMapSize(String redisKey) {
 		long size = 0L;
 		if(redisKey != null) {
-			size = super.hlen(_transcode(redisKey)); 
+			size = super.hlen(_transcode(redisKey));
 		}
 		return size;
 	}
@@ -500,7 +510,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 
 	@Override
 	public long addSerialObjsToListHead(String redisKey,
-			Serializable... objects) {
+										Serializable... objects) {
 		long num = 0;
 		if(redisKey != null && objects != null) {
 			byte[] byteKey = _transbyte(redisKey);
@@ -516,7 +526,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 
 	@Override
 	public long addSerialObjsToListTail(String redisKey,
-			Serializable... objects) {
+										Serializable... objects) {
 		long num = 0;
 		if(redisKey != null && objects != null) {
 			num = addSerialList(redisKey, Arrays.asList(objects));
@@ -533,7 +543,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 	public long delSerialObjsInList(String redisKey, Serializable object, long count) {
 		long num = 0L;
 		if(redisKey != null && object != null) {
-			num = super.lrem(_transbyte(redisKey), count, 
+			num = super.lrem(_transbyte(redisKey), count,
 					ObjUtils.toSerializable(object));
 		}
 		return num;
@@ -572,7 +582,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 	public long getListSize(String redisKey) {
 		long size = 0L;
 		if(redisKey != null) {
-			size = super.llen(_transcode(redisKey)); 
+			size = super.llen(_transcode(redisKey));
 		}
 		return size;
 	}
@@ -611,7 +621,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 		}
 		return value;
 	}
-	
+
 	@Override
 	public Set<String> getAllStrValsInSet(String redisKey) {
 		Set<String> values = new HashSet<String>();
@@ -683,7 +693,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 		}
 		return value;
 	}
-	
+
 	@Override
 	public Set<Object> getAllSerialObjsInSet(String redisKey) {
 		Set<Object> values = new HashSet<Object>();
@@ -717,7 +727,7 @@ class _JedisCluster extends JedisCluster implements _IJedis {
 	public boolean existInSet(String redisKey, Serializable object) {
 		boolean isExist = false;
 		if(redisKey != null && object != null) {
-			isExist = super.sismember(_transbyte(redisKey), 
+			isExist = super.sismember(_transbyte(redisKey),
 					ObjUtils.toSerializable(object));
 		}
 		return isExist;
