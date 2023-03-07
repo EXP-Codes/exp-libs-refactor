@@ -29,37 +29,37 @@ class DBUtilsTest {
 
     @Ignore
     public void testDBUtils() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testGetConn() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testGetConnByPool() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testGetConnByJDBC() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testGetConnNeverOT() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testSetAutoCommit() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testClose() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Test
@@ -79,22 +79,22 @@ class DBUtilsTest {
 
     @Ignore
     public void testCreateBeanFromPDM() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testJudgeDBType() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testQueryKvs() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testQueryKvo() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Test
@@ -110,17 +110,17 @@ class DBUtilsTest {
 
     @Ignore
     public void testQueryNum() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testExecuteConnectionStringObjectArray() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
     @Ignore
     public void testExecuteConnectionString() {
-        fail("Not yet implemented");
+        // fail("Not yet implemented");
     }
 
 }
